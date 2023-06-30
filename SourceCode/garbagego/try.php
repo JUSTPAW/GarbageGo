@@ -64,7 +64,7 @@
 </html> -->
 
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -138,7 +138,7 @@
 
 </script>
 </body>
-</html>
+</html> -->
 
 
 
@@ -193,6 +193,87 @@
   </script>
 </body>
 </html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map Example</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css">
+  <style>
+    #map {
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Map Example</h1>
+    <div class="form-group">
+      <label for="start">Start Point:</label>
+      <input type="text" id="start" class="form-control" placeholder="Enter start point">
+    </div>
+    <div class="form-group">
+      <label for="end">End Point:</label>
+      <input type="text" id="end" class="form-control" placeholder="Enter end point">
+    </div>
+    <button id="submit" class="btn btn-primary">Get Route</button>
+    <div id="map"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+  <script>$(document).ready(function() {
+  var startInput = $('#start');
+  var endInput = $('#end');
+  var submitButton = $('#submit');
+  var map = L.map('map').setView([0, 0], 2);
+  var markersLayer = new L.LayerGroup().addTo(map);
+
+  // Add tile layer to the map
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+    maxZoom: 18,
+  }).addTo(map);
+
+  // Handle form submission
+  submitButton.click(function() {
+    var start = startInput.val();
+    var end = endInput.val();
+
+    // Clear previous markers and routes
+    markersLayer.clearLayers();
+
+    // Get route from start to end
+    var url = 'https://api.mapbox.com/directions/v5/mapbox/driving/' + start + ';' + end + '?access_token=YOUR_MAPBOX_ACCESS_TOKEN';
+    $.getJSON(url, function(data) {
+      var coordinates = data.routes[0].geometry.coordinates;
+
+      // Create markers for start and end points
+      var startMarker = L.marker([coordinates[0][1], coordinates[0][0]]).addTo(markersLayer);
+      var endMarker = L.marker([coordinates[coordinates.length - 1][1], coordinates[coordinates.length - 1][0]]).addTo(markersLayer);
+
+      // Create polyline for the route
+      var route = L.polyline(coordinates.map(function(coord) {
+        return [coord[1], coord[0]];
+      })).addTo(map);
+
+      // Fit the map to show all markers and the route
+      map.fitBounds(markersLayer.getBounds());
+    });
+
+    return false;
+  });
+});
+</script>
+</body>
+</html>
+
 
 
 

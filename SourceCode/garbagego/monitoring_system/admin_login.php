@@ -44,10 +44,10 @@ if (isset($_POST['uname']) && isset($_POST['password']) && isset($_POST['role'])
                     header("Location: admin/admin.php");
                     exit();
                 } else if ($role === 'staff') {
-                    header("Location: staff.php");
+                    header("Location: staff/staff.php");
                     exit();
                 } else if ($role === 'driver') {
-                    header("Location: driver.php");
+                    header("Location: driver/driver.php");
                     exit();
                 } else {
                     header("Location: login.php?error=Invalid role!");

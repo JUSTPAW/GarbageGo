@@ -9620,7 +9620,7 @@ a.text-success:hover, a.text-success:focus {
 }
 
 a.text-info:hover, a.text-info:focus {
-  color: #258391 !important;
+  color: #03A102 !important;
 }
 
 .text-warning {
@@ -9919,7 +9919,7 @@ a:focus {
 
 .bg-gradient-info {
   background-color: #026601;
-  background-image: linear-gradient(180deg, #026601 10%, #258391 100%);
+  background-image: linear-gradient(180deg, #026601 10%, #03A102 100%);
   background-size: cover;
 }
 

@@ -7,7 +7,7 @@ require 'db_conn.php';
 <!-- Sidebar - Brand -->
 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin.php">
     <div class="mb-1 mr-1">
-       <img src="images/icon.jpg" class="card-img-top img-fluid mx-auto d-block image-animated rounded" alt="..." style="max-width: 100%; height: 40px;">
+       <img src="../images/icon.jpg" class="card-img-top img-fluid mx-auto d-block image-animated rounded" alt="..." style="max-width: 100%; height: 40px;">
     </div>
     <div class="sidebar-brand-text text-white">
         MENRO LIAN
@@ -16,8 +16,6 @@ require 'db_conn.php';
        
     </div>
 </a>
-
-
 
 <!-- Divider -->
 <hr class="sidebar-divider my-0">
@@ -92,17 +90,29 @@ require 'db_conn.php';
     Others
 </div>
 
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Documents"
+        aria-expanded="true" aria-controls="Documents">
+        <i class="fas fa-fw fa-file"></i>
+        <span>Documents</span>
+    </a>
+    <div id="Documents" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Documents:</h6>
+            <a class="collapse-item text-truncate" href="staffs.php" data-toggle="tooltip" data-placement="top" title="Driver Trip Ticket">Driver Trip Ticket</a>
+            <a class="collapse-item text-truncate" href="drivers.php" data-toggle="tooltip" data-placement="top" title="Waste Collection Monitoring Report">Waste Collection Monitoring Report</a>
+            <a class="collapse-item text-truncate" href="crew_members.php" data-toggle="tooltip" data-placement="top" title="Maintenance Work Order Form">Maintenance Work Order Form</a>
+            <a class="collapse-item text-truncate" href="crew_members.php" data-toggle="tooltip" data-placement="top" title="Request For Repair/Servicing">Request For Repair/Servicing</a>
+        </div>
+    </div>
+</li>
 <!-- Nav Messages - Tables -->
 <li class="nav-item">
     <a class="nav-link" href="chats.php">
         <i class="fas fa-fw fa-folder"></i>
         <span>Reports</span></a>
 </li>
-<li class="nav-item">
-    <a class="nav-link" href="chats.php">
-        <i class="fas fa-fw fa-file"></i>
-        <span>Documents</span></a>
-</li>
+
 
 <!-- Sidebar Toggler (Sidebar) -->
 <div class="text-center d-none d-md-inline">
@@ -295,9 +305,9 @@ require 'db_conn.php';
 
                 <?php
                     if (isset($row['image']) && !empty($row['image'])) {
-                        $profile_picture = "uploads/" . $row['image'];
+                        $profile_picture = "../uploads/" . $row['image'];
                     } else {
-                        $profile_picture = "img/woman.png";
+                        $profile_picture = "../images/admin.png";
                     }
                 ?>
                 <img src="<?= $profile_picture ?>" alt="Profile Picture" class="img-profile rounded-circle">

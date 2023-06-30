@@ -2,7 +2,7 @@
 session_start();
 if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
 include('../includes/header.php');
-include('../includes/navbar.php');
+include('../includes/navbar_admin.php');
 require '../db_conn.php';
 ?>
 

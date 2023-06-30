@@ -2,17 +2,9 @@
 session_start();
 if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
 include('../includes/header.php');
-include('../includes/navbar.php');
+include('../includes/navbar_admin.php');
 require '../db_conn.php';
 ?>
- 
-<!-- to not back when logout-->
-<!-- <script type="text/javascript">
-    window.history.forward();
-    function noBack() {
-        window.history.forward();
-    }
-</script> -->
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -26,7 +18,7 @@ require '../db_conn.php';
                     <div class="col-xl-3 col-md-6">
                         <img id="slideshow" class="card-img-top img-fluid mx-auto d-none d-md-block" alt="..." style="max-width: 50%; height: 100px;">
                         <script>
-                            var images = ["images/image1.jpg", "images/image2.jpg"];
+                            var images = ["../images/image1.jpg", "../images/image2.jpg"];
                             var currentIndex = 0;
                             var slideshowElement = document.getElementById("slideshow");
 
@@ -98,7 +90,7 @@ require '../db_conn.php';
                             <div class="h5 mb-0 font-weight-bold text-gray-800">50 liters</div>
                         </div>
                         <div class="col-auto">
-                            <img src="images/gas.png" class="card-img-top img-fluid mx-auto d-block image-animated" alt="..." style="max-width: 100%; height: 40px;">
+                            <img src="../images/gas.png" class="card-img-top img-fluid mx-auto d-block image-animated" alt="..." style="max-width: 100%; height: 40px;">
                         </div>
                     </div>
                 </div>
@@ -116,7 +108,7 @@ require '../db_conn.php';
                             <div class="h5 mb-0 font-weight-bold text-gray-800">10, 000 kilos</div>
                         </div>
                         <div class="col-auto">
-                            <img src="images/waste.png" class="card-img-top img-fluid mx-auto d-block image-animated" alt="..." style="max-width: 100%; height: 40px;">
+                            <img src="../images/waste.png" class="card-img-top img-fluid mx-auto d-block image-animated" alt="..." style="max-width: 100%; height: 40px;">
                         </div>
                     </div>
                 </div>
@@ -135,7 +127,7 @@ require '../db_conn.php';
                             <div class="h5 mb-0 font-weight-bold text-gray-800">10 trips</div>
                         </div>
                         <div class="col-auto">
-                            <img src="images/map.png" class="card-img-top img-fluid mx-auto d-block image-animated" alt="..." style="max-width: 100%; height: 40px;">
+                            <img src="../images/map.png" class="card-img-top img-fluid mx-auto d-block image-animated" alt="..." style="max-width: 100%; height: 40px;">
                         </div>
                     </div>
                 </div>
@@ -153,7 +145,7 @@ require '../db_conn.php';
                             <div class="h5 mb-0 font-weight-bold text-gray-800">09:37:50</div>
                         </div>
                         <div class="col-auto">
-                            <img src="images/time.png" class="card-img-top img-fluid mx-auto d-block image-animated" alt="..." style="max-width: 100%; height: 40px;">
+                            <img src="../images/time.png" class="card-img-top img-fluid mx-auto d-block image-animated" alt="..." style="max-width: 100%; height: 40px;">
                         </div>
                     </div>
                 </div>

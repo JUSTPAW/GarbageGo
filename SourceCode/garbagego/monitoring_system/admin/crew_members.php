@@ -2,17 +2,11 @@
 session_start();
 if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
 include('../includes/header.php');
-include('../includes/navbar.php');
+include('../includes/navbar_admin.php');
 require '../db_conn.php';
 ?>
 
-<!-- to not back when logout-->
-<script type="text/javascript">
-    window.history.forward();
-    function noBack() {
-        window.history.forward();
-    }
-</script>
+
 
  <!-- Begin Page Content -->
  <div class="container-fluid">
@@ -40,9 +34,9 @@ require '../db_conn.php';
         </div>
     </div>
     <div class="card-body">
-        <div class="table-responsive text-info">
-            <table class="table-sm table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
-                <thead class='thead-light'>
+        <div class="table-responsive">
+            <table id="example" class="display nowrap table-hover" style="width:100%">
+                <thead class='thead-light text-gray-700'>
                     <tr style="text-align:center">
                         <!-- <th>ID</th> -->
                         <th>No.</th>
@@ -52,10 +46,10 @@ require '../db_conn.php';
                         <th>Phone Number</th>
                         <th>Email</th>
                         <th>Address</th>
-                        <th width="12%">Options</th>
+                        <th class="no-export" width="12%">Options</th>
                     </tr>
                 </thead>
-                <tfoot class='thead-light'>
+                <tfoot class='thead-light text-gray-700'>
                     <tr style="text-align:center">
                         <!-- <th>ID</th> -->
                         <th>No.</th>
@@ -65,13 +59,14 @@ require '../db_conn.php';
                         <th>Phone Number</th>
                         <th>Email</th>
                         <th>Address</th>
-                        <th width="12%">Options</th>
+                        <th class="no-export" width="12%">Options</th>
+
                     </tr>
                 </tfoot>
                 <tbody>
                 <?php 
                 $no=1;
-                $query = "SELECT * FROM drivers";
+                $query = "SELECT * FROM crew_members";
                 $query_run = mysqli_query($conn, $query);
 
                 if(mysqli_num_rows($query_run) > 0)
@@ -82,31 +77,15 @@ require '../db_conn.php';
                         <tr style="text-align:center">  
                             <!-- <td></td> -->
                             <td><?php echo $no; ?></td>
-                            <td >Dr. <?= $row['firstname']; ?> <?= $row['middlename']; ?>. <?= $row['lastname']; ?></td>
-                            <td ><?= date('M d, Y', strtotime($row['app_date'])) ?></td>
-                            <td class="small"><?= date('h:i', strtotime($row['start_time'])) ?>-<?= date('h:i A', strtotime($row['end_time'])) ?></td>
-                            <td ><?= $row['purpose']; ?></td>
-                            <td ><?= $row['message']; ?></td>
-                           <?php
-                                // Example PHP code
-                                $status = $row['status'];
-                                $badgeClass = '';
-                                if ($status == 'Ongoing') {
-                                    $badgeClass = 'dark';
-                                } else if ($status == 'Completed') {
-                                    $badgeClass = 'success';
-                                } else if ($status == 'Cancelled') {
-                                    $badgeClass = 'danger';
-                                } else if ($status == 'Scheduled') {
-                                    $badgeClass = 'primary';
-                                }
-                            ?>
-
-                            <!-- Example HTML code -->
-                            <td><span class="badge badge-<?= $badgeClass ?>"><?= $row['status'] ?></span></td>
+                            <td ><?= $row['firstName']; ?> <?= $row['middleName']; ?>. <?= $row['lastName']; ?></td>
+                            <td ><?= $row['birthday']; ?></td>
+                            <td ><?= $row['gender']; ?></td>
+                            <td ><?= $row['phone']; ?></td>
+                            <td ><?= $row['email']; ?></td>
+                            <td ><?= $row['street']; ?> <?= $row['barangay']; ?> <?= $row['city']; ?> <?= $row['province']; ?></td>
                             <td>
-                                        <a class="btn btn-sm btn-outline-success" href="appointments_edit.php?id=<?= $row['id']; ?>"
-                                        data-toggle="tooltip" title="Edit appointment to Dr. <?= $row['lastname']; ?>!" data-placement="top">
+                                        <a class="btn btn-sm btn-outline-success" href=".php?id=<?= $row['id']; ?>"
+                                        data-toggle="tooltip" title="Edit appointment to Dr. <?= $row['lastName']; ?>!" data-placement="top">
                                         <i class="fa fa-edit fw-fa" aria-hidden="true"></i>
                                         <!-- Edit -->
                                         </a>
@@ -114,7 +93,7 @@ require '../db_conn.php';
 
                                         <form action="code.php" method="POST" class="d-inline">
                                             <button type="submit" name="delete_appointment" value="<?=$row['id'];?>" class="btn btn-sm btn-outline-danger" onclick="msg()" 
-                                            data-toggle="tooltip" title="Delete appointment to Dr. <?= $row['lastname']; ?>!" data-placement="top">
+                                            data-toggle="tooltip" title="Delete appointment to Dr. <?= $row['lastName']; ?>!" data-placement="top">
                                             <i class="fa fa-trash fw-fa" aria-hidden="true"></i>
                                             <!-- Delete -->
                                             </button>
