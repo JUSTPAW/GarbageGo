@@ -37,6 +37,20 @@ require 'db_conn.php';
 </div>
 
 <li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Accounts"
+        aria-expanded="true" aria-controls="Accounts">
+        <i class="fas fa-fw fa-user"></i>
+        <span>Accounts</span>
+    </a>
+    <div id="Accounts" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Accounts:</h6>
+            <a class="collapse-item" href="staff_accounts.php">Office Staffs</a>
+            <a class="collapse-item" href="driver_accounts.php">Drivers</a>
+        </div>
+    </div>
+</li>
+<li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Employees"
         aria-expanded="true" aria-controls="Employees">
         <i class="fas fa-fw fa-users"></i>
@@ -99,8 +113,8 @@ require 'db_conn.php';
     <div id="Documents" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Documents:</h6>
-            <a class="collapse-item text-truncate" href="staffs.php" data-toggle="tooltip" data-placement="top" title="Driver Trip Ticket">Driver Trip Ticket</a>
-            <a class="collapse-item text-truncate" href="drivers.php" data-toggle="tooltip" data-placement="top" title="Waste Collection Monitoring Report">Waste Collection Monitoring Report</a>
+            <a class="collapse-item text-truncate" href="trip_ticket.php" data-toggle="tooltip" data-placement="top" title="Driver Trip Ticket">Driver Trip Ticket</a>
+            <a class="collapse-item text-truncate" href="monitoring_report.php" data-toggle="tooltip" data-placement="top" title="Waste Collection Monitoring Report">Waste Collection Monitoring Report</a>
             <a class="collapse-item text-truncate" href="crew_members.php" data-toggle="tooltip" data-placement="top" title="Maintenance Work Order Form">Maintenance Work Order Form</a>
             <a class="collapse-item text-truncate" href="crew_members.php" data-toggle="tooltip" data-placement="top" title="Request For Repair/Servicing">Request For Repair/Servicing</a>
         </div>

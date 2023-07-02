@@ -14,10 +14,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent" style="margin-top: 5px; padding-left: 0;">
                     <li class="breadcrumb-item"><a href="admin.php" class="text-info h5" style="text-decoration: none;">Dashboard</a></li>
-                    <li class="breadcrumb-item active text-dark h5" aria-current="page">Garbage Trucks</li>
+                    <li class="breadcrumb-item active text-dark h5" aria-current="page">Office Staff Accounts</li>
                 </ol>
             </nav>
-            <a href="" class="btn btn-sm btn-info shadow-sm mb-3"><i class="fas fa-download fa-sm text-white"></i> Generate Report</a>
+            <a href="" class="btn btn-sm btn-info shadow-sm mb-3"><i class="fas fa-download fa-sm text-white"></i>Generate Report</a>
         </div>
 
         <?php include('message.php'); ?>
@@ -28,7 +28,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title font-weight-bold text-gray-800" id="addTruckModalLabel">Add New Garbage Truck</h5>
+                        <h5 class="modal-title font-weight-bold text-gray-800" id="addTruckModalLabel">Add New Office Staff Account</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -61,6 +61,69 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
             </div>
         </div>
 
+        <!-- Add Staff Account Modal -->
+          <div class="modal fade" id="add_staff_acc" tabindex="-1" role="dialog" aria-labelledby="registrationModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title font-weight-bold text-gray-800" id="registrationModalLabel">Account Registration</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-row">
+                      <div class="form-group col-md-4">
+                        <label for="firstName" class="small text-info">First Name</label>
+                        <input type="text" class="small form-control" id="firstName" placeholder="Enter your first name">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="middleName" class="small text-info">Middle Name</label>
+                        <input type="text" class="form-control" id="middleName" placeholder="Enter your middle name">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="lastName" class="small text-info">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="Enter your last name">
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="email" class="small text-info">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email address">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="phone" class="small text-info">Phone</label>
+                        <input type="text" class="form-control" id="phone" placeholder="Enter your phone number">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="userName" class="small text-info">Username</label>
+                      <input type="text" class="form-control" id="userName" placeholder="Enter a username">
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                       <label for="password" class="small text-info">Password</label>
+                       <input type="password" class="form-control" id="password" placeholder="Enter a password" onkeyup="checkPasswordStrength()">
+                       <div id="password-strength" class="password-strength"></div>
+                       <div id="password-suggestions" class="password-suggestions"></div>
+
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="repeatPassword" class="small text-info">Repeat Password</label>
+                       <input type="password" class="form-control" id="repeatPassword" placeholder="Repeat your password">
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-info">Register</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
 
 
         <!-- Edit Truck Modal -->
@@ -68,7 +131,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title font-weight-bold text-gray-800" id="editTruckModalLabel">Edit Garbage Truck</h5>
+                        <h5 class="modal-title font-weight-bold text-gray-800" id="editTruckModalLabel">Edit ffice Staff Account</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -108,7 +171,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title font-weight-bold text-gray-800" id="deleteTruckModalLabel">Delete Garbage Truck</h5>
+                        <h5 class="modal-title font-weight-bold text-gray-800" id="deleteTruckModalLabel">Delete Office Staff Accounts</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -116,6 +179,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                     <form id="delete_truck_form" action="crud.php" method="POST">
                         <div class="modal-body">
                             <p>Are you sure you want to delete <span class="text-info font-weight-bold mx-auto" id="delete_truck_brand"></span> garbage truck?</p>
+                            
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -131,8 +195,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class="d-sm-flex align-items-center justify-content-between py-2">
-                    <h6 class="m-0 font-weight-bold text-info">List of Garbage Truck(s)</h6>
-                    <a href="#add_truck" data-toggle="modal" class="btn btn-sm btn-info shadow-sm"><i class="fa fa-plus fa-sm text-white mr-1"></i>Add Garbage Truck</a>
+                    <h6 class="m-0 font-weight-bold text-info">List of Office Staff(s)</h6>
+                    <a href="#add_staff_acc" data-toggle="modal" class="btn btn-sm btn-info shadow-sm"><i class="fa fa-plus fa-sm text-white mr-1"></i>Add
+                     Staff Account</a>
                 </div>
             </div>
             <div class="card-body">
@@ -141,27 +206,27 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                         <thead class='thead-light text-gray-900'>
                           <tr style="text-align:center">
                             <th style="text-align: center;">No.</th>
-                            <th style="text-align: center;">Brand</th>
-                            <th style="text-align: center;">Model</th>
-                            <th style="text-align: center;">Capacity</th>
-                            <th style="text-align: center;">Plate Number</th>
+                            <th style="text-align: center;">Name</th>
+                            <th style="text-align: center;">Username</th>
+                            <th style="text-align: center;">Role</th>
+                            <th style="text-align: center;">Date Created</th>
                             <th class="no-export" width="12%" style="text-align: center;">Actions</th>
                           </tr>
                         </thead>
                         <tfoot class='thead-light text-gray-700'>
                           <tr style="text-align:center">
                             <th style="text-align: center;">No.</th>
-                            <th style="text-align: center;">Brand</th>
-                            <th style="text-align: center;">Model</th>
-                            <th style="text-align: center;">Capacity</th>
-                            <th style="text-align: center;">Plate Number</th>
+                            <th style="text-align: center;">Name</th>
+                            <th style="text-align: center;">Username</th>
+                            <th style="text-align: center;">Role</th>
+                            <th style="text-align: center;">Date Created</th>
                             <th class="no-export" width="12%" style="text-align: center;">Actions</th>
                           </tr>
                         </tfoot>
                         <tbody>
                             <?php
                             $no = 1;
-                            $query = "SELECT * FROM garbage_trucks";
+                            $query = "SELECT * FROM staffs";
                             $query_run = mysqli_query($conn, $query);
 
                             if (mysqli_num_rows($query_run) > 0) {
@@ -169,10 +234,18 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                                     ?>
                                     <tr style="text-align:center">
                                         <td><?php echo $no; ?></td>
-                                        <td><?= $row['brand']; ?></td>
-                                        <td><?= $row['model']; ?></td>
-                                        <td><?= $row['capacity']; ?></td>
-                                        <td><?= $row['plateNumber']; ?></td>
+                                        <?php
+                                        $firstName = $row['firstName'];
+                                        $middleName = $row['middleName'];
+                                        $lastName = $row['lastName'];
+
+                                        $formattedName = ucwords($firstName) . ' ' . strtoupper(substr($middleName, 0, 1)) . '.' . ' ' . ucwords($lastName);
+                                        ?>
+
+                                        <td><?= $formattedName; ?></td>
+                                        <td><?= $row['user_name']; ?></td>
+                                        <td><?= $row['role']; ?></td>
+                                        <td><?= $row['dateCreated']; ?></td>
                                         <td>
                                         <div class="dropdown">
                                           <button class="btn btn-sm btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -239,29 +312,75 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
         });
 
         $('#delete_truck_form').submit(function(e) {
-                    e.preventDefault();
-                    var truckId = $('#delete_truck_id').val();
-                    $.ajax({
-                        type: "POST",
-                        url: "crud.php",
-                        data: {
-                            delete_truck_id: truckId
-                        },
-                        success: function(response) {
-                            // Reload the page to see the message
-                            location.reload();
-                        }
-                    });
-                });
+            e.preventDefault(); // Prevent form submission
+            var truckId = $('#delete_truck_id').val();
+
+            $.post($(this).attr('action'), { delete_truck_id: truckId }, function(response) {
+                location.reload(); // Reload the page after deletion
             });
+        });
+    });
 </script>
 
-        <!-- End of Page Content -->
-        <?php
-        include('../includes/scripts.php');
-        include('../includes/footer.php');
+
+<!-- password strength -->
+<style>
+  .password-strength {
+    margin-top: 5px;
+    font-size: 12px;
+  }
+  .weak {
+    color: red;
+  }
+  .medium {
+    color: orange;
+  }
+  .strong {
+    color: green;
+  }
+  .password-suggestions {
+    margin-top: 8px;
+    font-size: 13px;
+  }
+</style>
+<script>
+  function checkPasswordStrength() {
+    var password = document.getElementById("password").value;
+    var passwordStrength = document.getElementById("password-strength");
+    var passwordSuggestions = document.getElementById("password-suggestions");
+
+    // Define the criteria for weak, medium, and strong passwords
+    var weakRegex = /^.{0,5}$/; // Less than 6 characters
+    var mediumRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/; // At least 6 characters with lowercase, uppercase, and numeric characters
+    var strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_#^+=(){}[\]|\\:;"'<>,.~`]).{8,}$/;
+
+    if (strongRegex.test(password)) {
+      passwordStrength.textContent = "Strong password";
+      passwordStrength.className = "password-strength strong";
+      passwordSuggestions.innerHTML = ""; // Clear previous suggestions
+    } else if (mediumRegex.test(password)) {
+      passwordStrength.textContent = "Medium password";
+      passwordStrength.className = "password-strength medium";
+      passwordSuggestions.innerHTML = "<ul><li>Add special characters</li><li>Use both uppercase and lowercase letters</li></ul>";
+    } else if (weakRegex.test(password)) {
+      passwordStrength.textContent = "Weak password";
+      passwordStrength.className = "password-strength weak";
+      passwordSuggestions.innerHTML = "<ul><li>Make it longer</li><li>Include numbers</li><li>Add uppercase and lowercase letters</li><li>Add special characters</li></ul>";
     } else {
-        header("Location: ../index.php");
-        exit();
+      passwordStrength.textContent = "Password is too short";
+      passwordStrength.className = "password-strength";
+      passwordSuggestions.innerHTML = "<ul><li>Make it at least 8 characters long</li><li>Include uppercase and lowercase letters</li><li>Add numbers and special characters</li></ul>";
     }
-    ?>
+  }
+</script>
+
+
+    <!-- End of Page Content -->
+    <?php
+    include('../includes/scripts.php');
+    include('../includes/footer.php');
+} else {
+    header("Location: ../index.php");
+    exit();
+}
+?>
