@@ -2,17 +2,9 @@
 session_start();
 if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
 include('../includes/header.php');
-include('../includes/navbar.php');
+include('../includes/navbar_admin.php');
 require '../db_conn.php';
 ?>
- 
-<!-- to not back when logout-->
-<!-- <script type="text/javascript">
-    window.history.forward();
-    function noBack() {
-        window.history.forward();
-    }
-</script> -->
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -26,7 +18,7 @@ require '../db_conn.php';
                     <div class="col-xl-3 col-md-6">
                         <img id="slideshow" class="card-img-top img-fluid mx-auto d-none d-md-block" alt="..." style="max-width: 50%; height: 100px;">
                         <script>
-                            var images = ["images/image1.jpg", "images/image2.jpg"];
+                            var images = ["../images/image1.jpg", "../images/image2.jpg"];
                             var currentIndex = 0;
                             var slideshowElement = document.getElementById("slideshow");
 
@@ -98,7 +90,7 @@ require '../db_conn.php';
                             <div class="h5 mb-0 font-weight-bold text-gray-800">50 liters</div>
                         </div>
                         <div class="col-auto">
-                            <img src="images/gas.png" class="card-img-top img-fluid mx-auto d-block image-animated" alt="..." style="max-width: 100%; height: 40px;">
+                            <img src="../images/gas.png" class="card-img-top img-fluid mx-auto d-block image-animated" alt="..." style="max-width: 100%; height: 40px;">
                         </div>
                     </div>
                 </div>
@@ -116,7 +108,7 @@ require '../db_conn.php';
                             <div class="h5 mb-0 font-weight-bold text-gray-800">10, 000 kilos</div>
                         </div>
                         <div class="col-auto">
-                            <img src="images/waste.png" class="card-img-top img-fluid mx-auto d-block image-animated" alt="..." style="max-width: 100%; height: 40px;">
+                            <img src="../images/waste.png" class="card-img-top img-fluid mx-auto d-block image-animated" alt="..." style="max-width: 100%; height: 40px;">
                         </div>
                     </div>
                 </div>
@@ -135,7 +127,7 @@ require '../db_conn.php';
                             <div class="h5 mb-0 font-weight-bold text-gray-800">10 trips</div>
                         </div>
                         <div class="col-auto">
-                            <img src="images/map.png" class="card-img-top img-fluid mx-auto d-block image-animated" alt="..." style="max-width: 100%; height: 40px;">
+                            <img src="../images/map.png" class="card-img-top img-fluid mx-auto d-block image-animated" alt="..." style="max-width: 100%; height: 40px;">
                         </div>
                     </div>
                 </div>
@@ -153,7 +145,7 @@ require '../db_conn.php';
                             <div class="h5 mb-0 font-weight-bold text-gray-800">09:37:50</div>
                         </div>
                         <div class="col-auto">
-                            <img src="images/time.png" class="card-img-top img-fluid mx-auto d-block image-animated" alt="..." style="max-width: 100%; height: 40px;">
+                            <img src="../images/time.png" class="card-img-top img-fluid mx-auto d-block image-animated" alt="..." style="max-width: 100%; height: 40px;">
                         </div>
                     </div>
                 </div>
@@ -163,12 +155,81 @@ require '../db_conn.php';
 
 </div>
 
+<!-- 
+<div class="row">
+    <div class="col-xl-8 col-lg-7">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                        aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header">Dropdown Header:</div>
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="chart-area">
+                    <canvas id="myAreaChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-4 col-lg-5">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                        aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header">Dropdown Header:</div>
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="chart-pie pt-4 pb-2">
+                    <canvas id="myPieChart"></canvas>
+                </div>
+                <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-primary"></i> Direct
+                    </span>
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-success"></i> Social
+                    </span>
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-info"></i> Referral
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
 <style>
 @keyframes press {
   0% { transform: translate(0, 0) scale(1); }
   25% { transform: translate(-4px, 0) scale(0.70); }
   50% { transform: translate(4px, 0) scale(1.05); }
-  75% { transform: translate(-2px, 0) scale(0.97); }
+  75% { transform: translate(-2px, </div>0) scale(0.97); }
   100% { transform: translate(0, 0) scale(1); }
 }
 

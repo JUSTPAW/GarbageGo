@@ -2,17 +2,10 @@
 session_start();
 if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
 include('../includes/header.php');
-include('../includes/navbar.php');
+include('../includes/navbar_admin.php');
 require '../db_conn.php';
 ?>
 
-<!-- to not back when logout-->
-<!-- <script type="text/javascript">
-    window.history.forward();
-    function noBack() {
-        window.history.forward();
-    }
-</script> -->
 
  <!-- Begin Page Content -->
  <div class="container-fluid">
@@ -40,30 +33,33 @@ require '../db_conn.php';
         </div>
     </div>
     <div class="card-body">
-        <div class="table-responsive text-info">
-            <table class="table-sm table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
-                <thead class='thead-light'>
+        <div class="table-responsive">
+            <table id="example" class="display nowrap table-hover" style="width:100%">
+                <thead class='thead-light text-gray-700'>
                     <tr style="text-align:center">
                         <!-- <th>ID</th> -->
                         <th>No.</th>
-                        <th>Image</th>
                         <th>Name</th>
-                        <th>Position</th>
+                        <th>Birthday</th>
+                        <th>Gender</th>
                         <th>Phone Number</th>
                         <th>Email</th>
-                        <th width="12%">Options</th>
+                        <th>Address</th>
+                        <th class="no-export" width="12%">Options</th>
                     </tr>
                 </thead>
-                <tfoot class='thead-light'>
+                <tfoot class='thead-light text-gray-700'>
                     <tr style="text-align:center">
                         <!-- <th>ID</th> -->
                         <th>No.</th>
-                        <th>Image</th>
                         <th>Name</th>
-                        <th>Position</th>
+                        <th>Birthday</th>
+                        <th>Gender</th>
                         <th>Phone Number</th>
                         <th>Email</th>
-                        <th width="12%">Options</th>
+                        <th>Address</th>
+                        <th class="no-export" width="12%">Options</th>
+
                     </tr>
                 </tfoot>
                 <tbody>
@@ -77,68 +73,41 @@ require '../db_conn.php';
                     foreach($query_run as $row)
                     {
                         ?>
-                        <tr style="text-align:center">
-                          <!-- <td></td> -->
-                          <td><?php echo $no; ?></td>
-                          <td><img src="images/2.jpg" class="img-fluid mx-auto" alt="..." style="max-width: 100%; height: 50px;"></td>
-                          <td>Dr. <?= $row['firstname']; ?> <?= $row['middlename']; ?>. <?= $row['lastname']; ?></td>
-                          <td><?= date('M d, Y', strtotime($row['app_date'])) ?></td>
-                          <td class="small"><?= date('h:i', strtotime($row['start_time'])) ?>-<?= date('h:i A', strtotime($row['end_time'])) ?></td>
-                          <td><?= $row['purpose']; ?></td>
-                          <td>
-                            <style>
-                              .custom-control-info .custom-control-input:checked ~ .custom-control-label::before {
-                                background-color: #026601 ; /* Set your desired info color here */
-                              }
-                            </style>
+                        <tr style="text-align:center">  
+                            <!-- <td></td> -->
+                            <td><?php echo $no; ?></td>
+                            <td ><?= $row['firstName']; ?> <?= $row['middleName']; ?>. <?= $row['lastName']; ?></td>
+                            <td ><?= $row['birthday']; ?></td>
+                            <td ><?= $row['gender']; ?></td>
+                            <td ><?= $row['phone']; ?></td>
+                            <td ><?= $row['email']; ?></td>
+                            <td ><?= $row['street']; ?> <?= $row['barangay']; ?> <?= $row['city']; ?> <?= $row['province']; ?></td>
+                            <td>
+                                        <a class="btn btn-sm btn-outline-success" href=".php?id=<?= $row['id']; ?>"
+                                        data-toggle="tooltip" title="Edit appointment to Dr. <?= $row['lastName']; ?>!" data-placement="top">
+                                        <i class="fa fa-edit fw-fa" aria-hidden="true"></i>
+                                        <!-- Edit -->
+                                        </a>
 
-                            <div class="custom-control custom-switch custom-control-info">
-                              <input type="checkbox" class="custom-control-input" id="toggleSwitch<?= $row['id']; ?>">
-                              <label class="custom-control-label" for="toggleSwitch<?= $row['id']; ?>"></label>
-                            </div>
-                                                      </td>
-                          <?php
-                            // Example PHP code
-                            $status = $row['status'];
-                            $badgeClass = '';
-                            if ($status == 'Ongoing') {
-                                $badgeClass = 'dark';
-                            } else if ($status == 'Completed') {
-                                $badgeClass = 'success';
-                            } else if ($status == 'Cancelled') {
-                                $badgeClass = 'danger';
-                            } else if ($status == 'Scheduled') {
-                                $badgeClass = 'primary';
-                            }
-                          ?>
 
-                          <!-- Example HTML code -->
-                          <td><span class="badge badge-<?= $badgeClass ?>"><?= $row['status'] ?></span></td>
-                          <td>
-                            <a class="btn btn-sm btn-outline-success" href="appointments_edit.php?id=<?= $row['id']; ?>"
-                              data-toggle="tooltip" title="Edit appointment to Dr. <?= $row['lastname']; ?>!" data-placement="top">
-                              <i class="fa fa-edit fw-fa" aria-hidden="true"></i>
-                              <!-- Edit -->
-                            </a>
-
-                            <form action="code.php" method="POST" class="d-inline">
-                              <button type="submit" name="delete_appointment" value="<?=$row['id'];?>" class="btn btn-sm btn-outline-danger" onclick="msg()" 
-                                data-toggle="tooltip" title="Delete appointment to Dr. <?= $row['lastname']; ?>!" data-placement="top">
-                                <i class="fa fa-trash fw-fa" aria-hidden="true"></i>
-                                <!-- Delete -->
-                              </button>
-                              <script>
-                                function msg(){
-                                  var result = confirm('Are you sure you want to delete this Appointments?');
-                                  if(result == false){
-                                    event.preventDefault();
-                                  }
-                                }
-                              </script>
-                            </form>
-                          </td>
+                                        <form action="code.php" method="POST" class="d-inline">
+                                            <button type="submit" name="delete_appointment" value="<?=$row['id'];?>" class="btn btn-sm btn-outline-danger" onclick="msg()" 
+                                            data-toggle="tooltip" title="Delete appointment to Dr. <?= $row['lastName']; ?>!" data-placement="top">
+                                            <i class="fa fa-trash fw-fa" aria-hidden="true"></i>
+                                            <!-- Delete -->
+                                            </button>
+                                            <script>
+                                                function msg(){
+                                                    var result = confirm ('Are you sure you want to delete this Appointments?');
+                                                    if(result==false){
+                                                        event.preventDefault();
+                                                    }
+                                                }
+                                            </script>
+                                        </form>
+                                   
+                            </td>
                         </tr>
-
                         <?php
                         $no++;
                     }
