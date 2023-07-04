@@ -9,9 +9,12 @@ class StatelessApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyStatelessWidget(),
+      initialRoute: '/',
       routes: {
-        '/secondPage': (context) => SecondPage(), // Add the route for the second page
+        '/': (context) => MyStatelessWidget(),
+        '/secondPage': (context) => SecondPage(),
+        '/residentPage': (context) => ResidentPage(),
+        '/driverPage': (context) => DriverPage(), // Add the route for the driver page
       },
     );
   }
@@ -19,28 +22,28 @@ class StatelessApp extends StatelessWidget {
 
 class MyStatelessWidget extends StatelessWidget {
   void handleClick(BuildContext context) {
-    Navigator.pushNamed(context, '/secondPage'); // Navigate to the second page
+    Navigator.pushNamed(context, '/secondPage');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green[700],
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image.asset(
-              'image/logo.png', // Update with the correct image path
+              'image/logo.png',
               width: 200,
               height: 200,
             ),
-            SizedBox(height: 10.0), // Add some spacing between the image and the button
+            SizedBox(height: 10.0),
             ElevatedButton(
-              onPressed: () => handleClick(context), // Pass the current context to the handleClick function
+              onPressed: () => handleClick(context),
               child: Text('Start'),
               style: ElevatedButton.styleFrom(
-                primary: Colors.green, // Set the button color to green
+                primary: Colors.green,
               ),
             ),
           ],
@@ -51,34 +54,45 @@ class MyStatelessWidget extends StatelessWidget {
 }
 
 class SecondPage extends StatelessWidget {
-  String selectedRole = ''; // Variable to store the selected role
+  String selectedRole = '';
+
+  void handleResident(BuildContext context) {
+    Navigator.pushNamed(context, '/residentPage');
+  }
+
+  void handleDriver(BuildContext context) {
+    Navigator.pushNamed(context, '/driverPage');
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.green[500],
         flexibleSpace: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Align(
               alignment: Alignment.bottomLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+              ),
             ),
           ],
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            SizedBox(height: 70.0),
+            SizedBox(height: 50.0),
             Image.asset(
-              'image/logo.png', // Update with the correct image path
+              'image/logo.png',
               width: 200,
               height: 200,
-            ), // Add some spacing between the image and the form fields
+            ),
             Container(
               padding: EdgeInsets.all(30.0),
               decoration: BoxDecoration(
@@ -87,34 +101,68 @@ class SecondPage extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.grey,
-                        width: 1.0,
-                      ),
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
-                    child: ListTile(
-                      title: const Text('Resident'),
-                      leading: CircleAvatar(
-                        backgroundImage: AssetImage('image/logo.png'), // Update with the correct image path for residents
+                  SizedBox(height: 10.0),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10.0),
+                      child: Text(
+                        'Select a Role:',
+                        style: TextStyle(
+                          color: Colors.grey[500],
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
                   SizedBox(height: 10.0),
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.grey,
+                  RaisedButton(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Colors.green,
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(4.0),
                     ),
+                    onPressed: () => handleResident(context),
                     child: ListTile(
-                      title: const Text('Driver'),
+                      textColor: Colors.green,
+                      title: const Text(
+                          'Resident',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                          ),
+                      ),
                       leading: CircleAvatar(
-                        backgroundImage: AssetImage('image/logo.png'), // Update with the correct image path for drivers
+                        backgroundColor: Colors.white,
+                        backgroundImage: AssetImage('image/resident1.png'),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
+                  RaisedButton(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Colors.green,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(4.0),
+                    ),
+                    onPressed: () => handleDriver(context),
+                    child: ListTile(
+                      textColor: Colors.green,
+                      title: const Text(
+                          'Driver',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                          ),
+                      ),
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        backgroundImage: AssetImage('image/driver.png'),
                       ),
                     ),
                   ),
@@ -127,5 +175,92 @@ class SecondPage extends StatelessWidget {
     );
   }
 }
+
+
+class ResidentPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.green,
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        title: Text('Resident Page'),
+      ),
+      body: Center(
+        child: Text(
+          'This is the Resident Page',
+          style: TextStyle(color: Colors.white, fontSize: 24),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+class DriverPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.green,
+      appBar: AppBar(
+        backgroundColor: Colors.green[500],
+        flexibleSpace: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+              ),
+            ),
+          ],
+        ),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(height: 50.0),
+            Container(
+              padding: EdgeInsets.all(30.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: Column(
+                children: [
+                  Image.asset(
+                    'image/logo.png',
+                    width: 200,
+                    height: 200,
+                  ),
+                  SizedBox(height: 10.0),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10.0),
+                      child: Text(
+                        'Select a Role:',
+                        style: TextStyle(
+                          color: Colors.grey[500],
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 
 
