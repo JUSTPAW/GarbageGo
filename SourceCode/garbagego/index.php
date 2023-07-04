@@ -48,27 +48,15 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <a href="index.html" class="logo me-auto"><img src="assets/img/menro-logo.png" alt="MENRO-Lian GARBAGEGO logo"></a>
+      <a href="index.php" class="logo me-auto"><img src="assets/img/menro-logo.png" alt="MENRO-Lian GARBAGEGO logo"></a>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <h1 class="logo me-auto"><a href="index.html">MENRO - Lian</a></h1> -->
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a class="nav-link scrollto" href="#hero">Home</a></li>
-          <li class="dropdown"><a href="#"><span>About</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a class="nav-link scrollto" href="#history">History</a></li>
-              <li><a class="nav-link scrollto" href="#staff">Staff Members</a></li>
-              <li><a class="nav-link scrollto" href="#">Programs and Projects</a></li>
-            </ul>
-          </li>
-          <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a class="nav-link scrollto" href="#collection">Collection Schedules</a></li>
-              <li><a class="nav-link scrollto" href="#">Environmental Laws and Regulations</a></li>
-              <li><a class="nav-link scrollto" href="#">Publications and Reports  </a></li>
-            </ul>
-          </li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="#services">Services</a></li>
           <li class="dropdown"><a href="#"><span>Resources</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <!-- <li><a href="#">Drop Down 1</a></li>
@@ -82,8 +70,7 @@
                 </ul>
               </li> -->
               <li><a class="nav-link scrollto" href="#collection">Collection Schedules</a></li>
-              <li><a class="nav-link scrollto" href="#">Environmental Laws and Regulations</a></li>
-              <li><a class="nav-link scrollto" href="#">Publications and Reports  </a></li>
+              <li><a class="nav-link scrollto" href="#location">Garbage Truck Location</a></li>
             </ul>
           </li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
@@ -105,7 +92,7 @@
       <div class="carousel-inner" role="listbox">
 
         <!-- Slide 1 -->
-        <div class="carousel-item active" style="background-image: url(assets/img/slide/slide-1.jpg)">
+        <div class="carousel-item active" style="background-image: url(assets/img/slide/slide-01.jpg)">
           <div class="container">
             <h2>Welcome to <span>MENRO LIAN</span></h2>
             <p>At MENRO LIAN, we're dedicated to preserving our planet's beauty and creating a greener future. With sustainable innovation, community engagement, and unwavering commitment, we lead in environmental conservation. Join us in building a harmonious world for humans and nature. Together, towards a greener tomorrow.</p>
@@ -114,7 +101,7 @@
         </div>
 
         <!-- Slide 2 -->
-        <div class="carousel-item" style="background-image: url(assets/img/slide/slide-1.jpg)">
+        <div class="carousel-item" style="background-image: url(assets/img/slide/slide-2.jpg)">
           <div class="container">
             <h2>MISSION</h2>
             <p>At MENRO LIAN, our mission is to protect and conserve the environment through sustainable practices, education, and community engagement. We are committed to preserving the natural beauty of our surroundings, mitigating environmental impacts, and fostering a sense of responsibility towards the planet.</p>
@@ -123,7 +110,7 @@
         </div>
 
         <!-- Slide 3 -->
-        <div class="carousel-item" style="background-image: url(assets/img/slide/slide-1.jpg)">
+        <div class="carousel-item" style="background-image: url(assets/img/slide/slide-3.jpg)">
           <div class="container">
             <h2>VISION</h2>
             <p>Our vision is to create a future where humans and nature coexist harmoniously. We strive to be a leading force in environmental conservation, promoting sustainable development, and inspiring individuals and communities to adopt eco-friendly lifestyles. Through innovation, collaboration, and advocacy, we envision a world where every action contributes to the well-being of our planet, ensuring a vibrant and sustainable future for all.</p>
@@ -146,384 +133,7 @@
 
   <main id="main">
 
-    <!-- ======= Featured Services Section ======= -->
-    <section id="featured-services" class="featured-services">
-      <div class="container" data-aos="fade-up">
-
-        <div class="row">
-          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-              <div class="icon"><i class="fas fa-leaf"></i></div>
-              <h4 class="title"><a href="">Conservation</a></h4>
-              <p class="description">Safeguarding nature's treasures, ensuring a thriving legacy for generations to come.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-              <div class="icon"><i class="fas fa-seedling"></i></div>
-              <h4 class="title"><a href="">Sustainable Practices</a></h4>
-              <p class="description">Embracing eco-friendly solutions, paving the way towards a greener footprint.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
-              <div class="icon"><i class="fas fa-book-open"></i></div>
-              <h4 class="title"><a href="">Education & Awareness</a></h4>
-              <p class="description">Inspiring minds, empowering actions for a planet in need.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="row mt-3">
-          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-              <div class="icon"><i class="fas fa-hands-helping"></i></div>
-              <h4 class="title"><a href="">Community Engagement</a></h4>
-              <p class="description">Uniting communities, igniting the power of collaboration for impactful change.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-              <div class="icon"><i class="fas fa-heart"></i></div>
-              <h4 class="title"><a href="">Advocacy</a></h4>
-              <p class="description">Shaping policies, championing sustainability on a global scale.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
-              <div class="icon"><i class="fas fa-lightbulb"></i></div>
-              <h4 class="title"><a href="">Innovation</a></h4>
-              <p class="description">Pioneering new frontiers, revolutionizing environmental solutions for a brighter future.</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Featured Services Section -->
-
-    <!-- ======= Cta Section ======= -->
-    <section id="cta" class="cta">
-      <div class="container" data-aos="zoom-in">
-
-        <div class="text-center">
-          <h3>In an emergency? Need help now?</h3>
-          <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <a class="cta-btn scrollto" href="#appointment">Make an Make an Appointment</a>
-        </div>
-
-      </div>
-    </section><!-- End Cta Section -->
-
-    <!-- ======= About Us Section ======= -->
-    <section id="about" class="about">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>About Us</h2>
-          <p>Welcome to MENRO Lian, where we strive to harmonize progress and environmental preservation. Our dedicated team works towards sustainable development, protecting nature's wonders for generations to come.</p>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-6" data-aos="fade-right">
-            <img src="assets/img/icon.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left">
-            <h3>Welcome to Municipal Environment and Natural Resources Office of Lian, Batangas</h3>
-            <p class="fst-italic">
-              Where passion for the planet meets sustainable innovation. As a team of dedicated environmental enthusiasts, we are on a mission to preserve our natural wonders and create a greener future. Through our unwavering commitment to conservation, education, and innovative solutions, we are driving positive change and shaping a sustainable world for generations to come. Join us in our journey towards a thriving planet, where harmony between humans and nature is not just a dream, but a remarkable reality.
-            </p>
-            <ul>
-              <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-              <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-              <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-            </ul>
-            <!-- <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum
-            </p> -->
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End About Us Section -->
-
-    <!-- ======= History Section ======= -->
-    <section id="history" class="about">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>History</h2>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-12" data-aos="fade-right">
-           <div class="row">
-            <div class="col-lg-12" data-aos="zoom-out" data-aos-delay="100">
-              <div class="card shadow" style="border-color: #026601;">
-                <div class="card-body">
-                  <h3 class="text-center mb-3">Municipal Environment and Natural Resources Office of Lian, Batangas</h3>
-                  <div class="scrollable-content" style="max-height: 300px; overflow-y: auto;">
-                    <p style="text-indent: 2em; text-align: justify;">
-                      The Municipal Environment and Natural Resources Office (MENRO) of Lian has a rich history rooted in the town's commitment to environmental conservation and sustainable development. Lian, a municipality located in the province of Batangas, Philippines, is blessed with abundant natural resources, including pristine beaches, lush forests, and diverse marine ecosystems. Recognizing the importance of preserving and protecting these valuable assets, the local government established the MENRO to spearhead environmental initiatives and promote responsible resource management.
-                    </p>
-                    <p style="text-indent: 2em; text-align: justify;">
-                      Since its inception, the MENRO has played a pivotal role in implementing various environmental programs and initiatives aimed at conserving natural resources, preserving biodiversity, and promoting sustainable practices within the community. The office has been involved in initiatives such as coastal clean-ups, reforestation projects, and the establishment of protected areas to safeguard critical habitats.
-                    </p>
-                    <p style="text-indent: 2em; text-align: justify;">
-                      Over the years, the MENRO of Lian has collaborated with various stakeholders, including local communities, non-governmental organizations, and government agencies, to achieve its environmental objectives. These partnerships have been instrumental in creating awareness, fostering community engagement, and mobilizing resources for environmental conservation projects.
-                    </p>
-                    <p style="text-indent: 2em; text-align: justify;">
-                      One of the notable achievements of the MENRO is its focus on coastal resource management. Given Lian's proximity to the sea and its reliance on marine resources, the office has implemented programs to promote sustainable fishing practices, protect coral reefs, and manage coastal ecosystems. These efforts have not only contributed to the preservation of marine biodiversity but also supported the livelihoods of local fisherfolk.
-                    </p>
-                    <p style="text-indent: 2em; text-align: justify;">
-                      In recent years, the MENRO has also embraced the integration of climate change adaptation and mitigation strategies into its work. Recognizing the vulnerability of Lian to the impacts of climate change, the office has actively promoted initiatives such as the adoption of renewable energy sources, the implementation of waste management programs, and the establishment of climate-resilient infrastructure.
-                    </p>
-                    <p style="text-indent: 2em; text-align: justify;">
-                      The MENRO of Lian continues to evolve and adapt to emerging environmental challenges. With the ever-increasing threats posed by climate change, unsustainable development, and environmental degradation, the office remains committed to its mandate of safeguarding Lian's natural resources for present and future generations. Through its dedicated efforts and collaborations, the MENRO strives to create a sustainable and resilient community that cherishes its environment and thrives in harmony with nature.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <script>
-          document.addEventListener("DOMContentLoaded", function() {
-            var scrollableContent = document.querySelector(".scrollable-content");
-            
-            scrollableContent.addEventListener("mouseenter", function() {
-              this.style.overflowY = "auto";
-            });
-            
-            scrollableContent.addEventListener("mouseleave", function() {
-              this.style.overflowY = "hidden";
-            });
-          });
-          </script>
-
-    </section><!-- End History Section -->
-
-    <!-- ======= Staff Members Section ======= -->
-    <section id="staff" class="staff section-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Staff Members</h2>
-          <p>Meet our exceptional team of dedicated individuals at MENRO Lian, working passionately towards environmental preservation and sustainable development. Together, we strive to make a positive impact, inspiring change and nurturing a greener future for our community.</p>
-        </div>
-
-<div class="row">
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="100">
-              <div class="member-img">
-                <img src="assets/img/doctors/doctors-1.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Walter White</h4>
-                <span>Chief Medical Officer</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="200">
-              <div class="member-img">
-                <img src="assets/img/doctors/doctors-2.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Sarah Jhonson</h4>
-                <span>Anesthesiologist</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="300">
-              <div class="member-img">
-                <img src="assets/img/doctors/doctors-3.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>William Anderson</h4>
-                <span>Cardiology</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="400">
-              <div class="member-img">
-                <img src="assets/img/doctors/doctors-4.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Amanda Jepson</h4>
-                <span>Neurosurgeon</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-         
-
-      </div>
-    </section><!-- End Staff Members Section -->
-
-    <!-- ======= Counts Section ======= -->
-    <section id="counts" class="counts">
-      <div class="container" data-aos="fade-up">
-
-        <div class="row no-gutters">
-
-          <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-            <div class="count-box">
-              <i class="fas fa-user-md"></i>
-              <span data-purecounter-start="0" data-purecounter-end="85" data-purecounter-duration="1" class="purecounter"></span>
-
-              <p><strong>Doctors</strong> consequuntur quae qui deca rode</p>
-              <a href="#">Find out more &raquo;</a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-            <div class="count-box">
-              <i class="far fa-hospital"></i>
-              <span data-purecounter-start="0" data-purecounter-end="26" data-purecounter-duration="1" class="purecounter"></span>
-              <p><strong>Departments</strong> adipisci atque cum quia aut numquam delectus</p>
-              <a href="#">Find out more &raquo;</a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-            <div class="count-box">
-              <i class="fas fa-flask"></i>
-              <span data-purecounter-start="0" data-purecounter-end="14" data-purecounter-duration="1" class="purecounter"></span>
-              <p><strong>Research Lab</strong> aut commodi quaerat. Aliquam ratione</p>
-              <a href="#">Find out more &raquo;</a>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-md-flex align-items-md-stretch">
-            <div class="count-box">
-              <i class="fas fa-award"></i>
-              <span data-purecounter-start="0" data-purecounter-end="150" data-purecounter-duration="1" class="purecounter"></span>
-              <p><strong>Awards</strong> rerum asperiores dolor molestiae doloribu</p>
-              <a href="#">Find out more &raquo;</a>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Counts Section -->
-
-    <!-- ======= Features Section ======= -->
-    <section id="features" class="features">
-      <div class="container" data-aos="fade-up">
-
-        <div class="row">
-          <div class="col-lg-6 order-2 order-lg-1" data-aos="fade-right">
-            <div class="icon-box mt-5 mt-lg-0">
-              <i class="bx bx-receipt"></i>
-              <h4>Est labore ad</h4>
-              <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
-            </div>
-            <div class="icon-box mt-5">
-              <i class="bx bx-cube-alt"></i>
-              <h4>Harum esse qui</h4>
-              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
-            </div>
-            <div class="icon-box mt-5">
-              <i class="bx bx-images"></i>
-              <h4>Aut occaecati</h4>
-              <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
-            </div>
-            <div class="icon-box mt-5">
-              <i class="bx bx-shield"></i>
-              <h4>Beatae veritatis</h4>
-              <p>Expedita veritatis consequuntur nihil tempore laudantium vitae denat pacta</p>
-            </div>
-          </div>
-          <div class="image col-lg-6 order-1 order-lg-2" style='background-image: url("assets/img/features.jpg");' data-aos="zoom-in"></div>
-        </div>
-
-      </div>
-    </section><!-- End Features Section -->
-
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services services">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Services</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon"><i class="fas fa-heartbeat"></i></div>
-            <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-          </div>
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon"><i class="fas fa-pills"></i></div>
-            <h4 class="title"><a href="">Dolor Sitema</a></h4>
-            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
-          </div>
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon"><i class="fas fa-hospital-user"></i></div>
-            <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-          </div>
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon"><i class="fas fa-dna"></i></div>
-            <h4 class="title"><a href="">Magni Dolores</a></h4>
-            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-          </div>
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon"><i class="fas fa-wheelchair"></i></div>
-            <h4 class="title"><a href="">Nemo Enim</a></h4>
-            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-          </div>
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon"><i class="fas fa-notes-medical"></i></div>
-            <h4 class="title"><a href="">Eiusmod Tempor</a></h4>
-            <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Services Section -->
-
-    <!-- ======= Appointment Section ======= -->
+     <!-- ======= Collection Section ======= -->
     <section id="collection" class="collection section-bg">
       <div class="container" data-aos="fade-up">
 
@@ -680,7 +290,295 @@
     </div>
 
       </div>
-    </section><!-- End Appointment Section -->
+    </section><!-- End Collection Section -->
+
+    <!-- ======= Cta Section ======= -->
+    <section id="cta" class="cta">
+      <div class="container" data-aos="zoom-in">
+        <div class="text-center">
+          <h3>Do you have any questions or concerns?</h3>
+          <p>If you have any questions or need assistance, we are here to help. Please don't hesitate to reach out to us.</p>
+          <a class="cta-btn scrollto" href="#contact-form">Send a message</a>
+        </div>
+      </div>
+    </section><!-- End Cta Section -->
+
+    
+
+    <!-- ======= About Us Section ======= -->
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>About Us</h2>
+          <p>Welcome to MENRO Lian, where we strive to harmonize progress and environmental preservation. Our dedicated team works towards sustainable development, protecting nature's wonders for generations to come.</p>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-lg-6" data-aos="fade-right">
+            <div style="display: flex; justify-content: center;">
+              <img src="assets/img/icon.jpg" class="img-fluid" alt="" style="max-width: 100%; height: 250px; margin-left: auto; margin-right: auto;">
+            </div>
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left">
+            <h3>Welcome to Municipal Environment and Natural Resources Office of Lian, Batangas</h3>
+            <p class="fst-italic">
+              Where passion for the planet meets sustainable innovation. As a team of dedicated environmental enthusiasts, we are on a mission to preserve our natural wonders and create a greener future. Through our unwavering commitment to conservation, education, and innovative solutions, we are driving positive change and shaping a sustainable world for generations to come. Join us in our journey towards a thriving planet, where harmony between humans and nature is not just a dream, but a remarkable reality.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Us Section -->
+
+    <!-- ======= Featured Services Section ======= -->
+    <section id="featured-services" class="featured-services">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+              <div class="icon"><i class="fas fa-leaf"></i></div>
+              <h4 class="title"><a href="">Conservation</a></h4>
+              <p class="description">Safeguarding nature's treasures, ensuring a thriving legacy for generations to come.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+              <div class="icon"><i class="fas fa-seedling"></i></div>
+              <h4 class="title"><a href="">Sustainable Practices</a></h4>
+              <p class="description">Embracing eco-friendly solutions, paving the way towards a greener footprint.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+              <div class="icon"><i class="fas fa-book-open"></i></div>
+              <h4 class="title"><a href="">Education & Awareness</a></h4>
+              <p class="description">Inspiring minds, empowering actions for a planet in need.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+              <div class="icon"><i class="fas fa-hands-helping"></i></div>
+              <h4 class="title"><a href="">Community Engagement</a></h4>
+              <p class="description">Uniting communities, igniting the power of collaboration for impactful change.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+              <div class="icon"><i class="fas fa-heart"></i></div>
+              <h4 class="title"><a href="">Advocacy</a></h4>
+              <p class="description">Shaping policies, championing sustainability on a global scale.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+              <div class="icon"><i class="fas fa-lightbulb"></i></div>
+              <h4 class="title"><a href="">Innovation</a></h4>
+              <p class="description">Pioneering new frontiers, revolutionizing environmental solutions for a brighter future.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Featured Services Section -->
+
+    <!-- ======= Staff Members Section ======= -->
+    <section id="staff" class="staff section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Staff Members</h2>
+          <p>Meet our exceptional team of dedicated individuals at MENRO Lian, working passionately towards environmental preservation and sustainable development. Together, we strive to make a positive impact, inspiring change and nurturing a greener future for our community.</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member" data-aos="fade-up" data-aos-delay="100">
+              <div class="member-img">
+                <img src="assets/img/doctors/doctors-1.jpg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Walter White</h4>
+                <span>Chief Medical Officer</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member" data-aos="fade-up" data-aos-delay="200">
+              <div class="member-img">
+                <img src="assets/img/doctors/doctors-2.jpg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Sarah Jhonson</h4>
+                <span>Anesthesiologist</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member" data-aos="fade-up" data-aos-delay="300">
+              <div class="member-img">
+                <img src="assets/img/doctors/doctors-3.jpg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>William Anderson</h4>
+                <span>Cardiology</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+            <div class="member" data-aos="fade-up" data-aos-delay="400">
+              <div class="member-img">
+                <img src="assets/img/doctors/doctors-4.jpg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Amanda Jepson</h4>
+                <span>Neurosurgeon</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+         
+
+      </div>
+    </section><!-- End Staff Members Section -->
+
+    <!-- ======= History Section ======= -->
+    <section id="history" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>History</h2>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12" data-aos="fade-right">
+           <div class="row">
+            <div class="col-lg-12" data-aos="zoom-out" data-aos-delay="100">
+              <div class="card shadow" style="border-color: #026601;">
+                <div class="card-body">
+                  <h3 class="text-center mb-3">Municipal Environment and Natural Resources Office of Lian, Batangas</h3>
+                  <div class="scrollable-content" style="max-height: 300px; overflow-y: auto;">
+                    <p style="text-indent: 2em; text-align: justify;">
+                      The Municipal Environment and Natural Resources Office (MENRO) of Lian has a rich history rooted in the town's commitment to environmental conservation and sustainable development. Lian, a municipality located in the province of Batangas, Philippines, is blessed with abundant natural resources, including pristine beaches, lush forests, and diverse marine ecosystems. Recognizing the importance of preserving and protecting these valuable assets, the local government established the MENRO to spearhead environmental initiatives and promote responsible resource management.
+                    </p>
+                    <p style="text-indent: 2em; text-align: justify;">
+                      Since its inception, the MENRO has played a pivotal role in implementing various environmental programs and initiatives aimed at conserving natural resources, preserving biodiversity, and promoting sustainable practices within the community. The office has been involved in initiatives such as coastal clean-ups, reforestation projects, and the establishment of protected areas to safeguard critical habitats.
+                    </p>
+                    <p style="text-indent: 2em; text-align: justify;">
+                      Over the years, the MENRO of Lian has collaborated with various stakeholders, including local communities, non-governmental organizations, and government agencies, to achieve its environmental objectives. These partnerships have been instrumental in creating awareness, fostering community engagement, and mobilizing resources for environmental conservation projects.
+                    </p>
+                    <p style="text-indent: 2em; text-align: justify;">
+                      One of the notable achievements of the MENRO is its focus on coastal resource management. Given Lian's proximity to the sea and its reliance on marine resources, the office has implemented programs to promote sustainable fishing practices, protect coral reefs, and manage coastal ecosystems. These efforts have not only contributed to the preservation of marine biodiversity but also supported the livelihoods of local fisherfolk.
+                    </p>
+                    <p style="text-indent: 2em; text-align: justify;">
+                      In recent years, the MENRO has also embraced the integration of climate change adaptation and mitigation strategies into its work. Recognizing the vulnerability of Lian to the impacts of climate change, the office has actively promoted initiatives such as the adoption of renewable energy sources, the implementation of waste management programs, and the establishment of climate-resilient infrastructure.
+                    </p>
+                    <p style="text-indent: 2em; text-align: justify;">
+                      The MENRO of Lian continues to evolve and adapt to emerging environmental challenges. With the ever-increasing threats posed by climate change, unsustainable development, and environmental degradation, the office remains committed to its mandate of safeguarding Lian's natural resources for present and future generations. Through its dedicated efforts and collaborations, the MENRO strives to create a sustainable and resilient community that cherishes its environment and thrives in harmony with nature.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            var scrollableContent = document.querySelector(".scrollable-content");
+            
+            scrollableContent.addEventListener("mouseenter", function() {
+              this.style.overflowY = "auto";
+            });
+            
+            scrollableContent.addEventListener("mouseleave", function() {
+              this.style.overflowY = "hidden";
+            });
+          });
+          </script>
+
+    </section><!-- End History Section -->
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services services">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Services</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon"><i class="fas fa-heartbeat"></i></div>
+            <h4 class="title"><a href="">Lorem Ipsum</a></h4>
+            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+          </div>
+          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="200">
+            <div class="icon"><i class="fas fa-pills"></i></div>
+            <h4 class="title"><a href="">Dolor Sitema</a></h4>
+            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+          </div>
+          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon"><i class="fas fa-hospital-user"></i></div>
+            <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
+            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+          </div>
+          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="100">
+            <div class="icon"><i class="fas fa-dna"></i></div>
+            <h4 class="title"><a href="">Magni Dolores</a></h4>
+            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+          </div>
+          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="200">
+            <div class="icon"><i class="fas fa-wheelchair"></i></div>
+            <h4 class="title"><a href="">Nemo Enim</a></h4>
+            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+          </div>
+          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="300">
+            <div class="icon"><i class="fas fa-notes-medical"></i></div>
+            <h4 class="title"><a href="">Eiusmod Tempor</a></h4>
+            <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
 
     <!-- ======= Departments Section ======= -->
     <section id="departments" class="departments">
@@ -837,93 +735,7 @@
       </div>
     </section><!-- End Testimonials Section -->
 
-    <!-- ======= Doctors Section ======= -->
-    <section id="doctors" class="doctors section-bg">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Doctors</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
-
-        <div class="row">
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="100">
-              <div class="member-img">
-                <img src="assets/img/doctors/doctors-1.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Walter White</h4>
-                <span>Chief Medical Officer</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="200">
-              <div class="member-img">
-                <img src="assets/img/doctors/doctors-2.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Sarah Jhonson</h4>
-                <span>Anesthesiologist</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="300">
-              <div class="member-img">
-                <img src="assets/img/doctors/doctors-3.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>William Anderson</h4>
-                <span>Cardiology</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-            <div class="member" data-aos="fade-up" data-aos-delay="400">
-              <div class="member-img">
-                <img src="assets/img/doctors/doctors-4.jpg" class="img-fluid" alt="">
-                <div class="social">
-                  <a href=""><i class="bi bi-twitter"></i></a>
-                  <a href=""><i class="bi bi-facebook"></i></a>
-                  <a href=""><i class="bi bi-instagram"></i></a>
-                  <a href=""><i class="bi bi-linkedin"></i></a>
-                </div>
-              </div>
-              <div class="member-info">
-                <h4>Amanda Jepson</h4>
-                <span>Neurosurgeon</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Doctors Section -->
+    
 
     <!-- ======= Gallery Section ======= -->
     <section id="gallery" class="gallery">
@@ -1042,65 +854,63 @@
 
         <div class="section-title">
           <h2>Frequently Asked Questioins</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>Our team of experts has compiled a list of common queries to provide guidance on various environmental and natural resources topics. Find answers to all your questions related to the environment, conservation, and sustainable practices.</p>
         </div>
 
         <ul class="faq-list">
 
           <li>
-            <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">Non consectetur a erat nam at lectus urna duis? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">How can I report illegal logging activities or deforestation in Lian, Batangas?<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
             <div id="faq1" class="collapse" data-bs-parent=".faq-list">
               <p>
-                Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+                To report illegal logging activities or deforestation, you can contact the MENRO office directly at <a href="URL#collection">Contacts Section</a> or visit our office in person. Please provide as much information as possible, such as the location, date, and any relevant details, to help us take appropriate action.
               </p>
             </div>
           </li>
 
           <li>
-            <div data-bs-toggle="collapse" href="#faq2" class="collapsed question">Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div data-bs-toggle="collapse" href="#faq2" class="collapsed question">What permits or clearances do I need for tree cutting or land development projects in Lian, Batangas?<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
             <div id="faq2" class="collapse" data-bs-parent=".faq-list">
               <p>
-                Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                Prior to tree cutting or land development projects, you are required to secure the necessary permits and clearances. Please visit the MENRO office to inquire about the specific requirements and application process. Our staff will guide you through the necessary steps to ensure compliance with environmental regulations.
               </p>
             </div>
           </li>
 
           <li>
-            <div data-bs-toggle="collapse" href="#faq3" class="collapsed question">Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div data-bs-toggle="collapse" href="#faq3" class="collapsed question">How can I apply for a permit to operate a business that may have an impact on the environment in Lian, Batangas?<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
             <div id="faq3" class="collapse" data-bs-parent=".faq-list">
               <p>
-                Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                To apply for a permit to operate a business that may have an impact on the environment, you must submit an application to the MENRO office. The application should include relevant details about your business operations, potential environmental impacts, and mitigation measures. Our team will review your application and guide you through the necessary procedures.
               </p>
             </div>
           </li>
 
           <li>
-            <div data-bs-toggle="collapse" href="#faq4" class="collapsed question">Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div data-bs-toggle="collapse" href="#faq4" class="collapsed question">What are the regulations for waste management in Lian, Batangas?<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
             <div id="faq4" class="collapse" data-bs-parent=".faq-list">
               <p>
-                Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                Waste management regulations in Lian, Batangas require proper segregation, disposal, and treatment of waste. You should separate your waste into recyclable, biodegradable, and non-biodegradable categories. The MENRO office can provide you with guidelines on waste segregation and collection schedules. It is important to follow these regulations to promote a clean and sustainable environment.
               </p>
             </div>
           </li>
 
           <li>
-            <div data-bs-toggle="collapse" href="#faq5" class="collapsed question">Tempus quam pellentesque nec nam aliquam sem et tortor consequat? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div data-bs-toggle="collapse" href="#faq5" class="collapsed question">How can I participate in environmental conservation activities or join programs organized by MENRO in Lian, Batangas? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
             <div id="faq5" class="collapse" data-bs-parent=".faq-list">
               <p>
-                Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
+                MENRO regularly organizes environmental conservation activities and programs. You can express your interest in participating by contacting our office or checking our website for upcoming events. We welcome volunteers and community involvement in our initiatives. Stay updated on our announcements and join us in protecting and preserving the environment of Lian, Batangas.
               </p>
             </div>
           </li>
-
           <li>
-            <div data-bs-toggle="collapse" href="#faq6" class="collapsed question">Tortor vitae purus faucibus ornare. Varius vel pharetra vel turpis nunc eget lorem dolor? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+            <div data-bs-toggle="collapse" href="#faq6" class="collapsed question">What is the waste collection schedule in Lian, Batangas, and how can I ensure proper waste disposal?<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
             <div id="faq6" class="collapse" data-bs-parent=".faq-list">
               <p>
-                Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Nibh tellus molestie nunc non blandit massa enim nec.
+                Waste collection in Lian, Batangas follows a specific schedule that varies depending on your barangay (neighborhood). To find out the exact collection days for your area, you can click on this page section <a href="URL#collection">Collection Schedules Section</a>. On this page, you will find the waste collection schedules for each barangay in Lian, Batangas. It is recommended to regularly check this section for any updates or changes to the collection schedule. Additionally, you can also visit the MENRO office or get in touch with your barangay officials for more information regarding waste collection in your specific area.
               </p>
             </div>
           </li>
-
         </ul>
 
       </div>
@@ -1125,58 +935,64 @@
 
         <div class="row mt-5">
 
-          <div class="col-lg-6">
+          <div class="col-lg-12">
 
-            <div class="row">
-              <div class="col-md-12">
-                <div class="info-box">
-                  <i class="bx bx-map"></i>
-                  <h3>Our Address</h3>
-                  <p>J. P. Rizal St, Lian, Batangas</p>
-                </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="info-box">
+                <i class="bx bx-map"></i>
+                <h3>Our Address</h3>
+                <p>J. P. Rizal St, Lian, Batangas</p>
+                <br>
               </div>
-              <div class="col-md-6">
-                <div class="info-box mt-4">
-                  <i class="bx bx-envelope"></i>
-                  <h3>Email Us</h3>
-                  <p>info@example.com<br>contact@example.com</p>
-                </div>
+            </div>
+            <div class="col-md-4">
+              <div class="info-box">
+                <i class="bx bx-envelope"></i>
+                <h3>Email Us</h3>
+                <p>info@example.com<br>contact@example.com</p>
               </div>
-              <div class="col-md-6">
-                <div class="info-box mt-4">
-                  <i class="bx bx-phone-call"></i>
-                  <h3>Call Us</h3>
-                  <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+            </div>
+            <div class="col-md-4">
+              <div class="info-box">
+                <i class="bx bx-phone-call"></i>
+                <h3>Call Us</h3>
+                <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+              </div>
+            </div>
+          </div>
+          <!-- Contact Form Section -->
+          <section id="contact-form">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-12">
+                  <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                    <div class="row">
+                      <div class="col-md-6 form-group">
+                        <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required="">
+                      </div>
+                      <div class="col-md-6 form-group mt-3 mt-md-0">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required="">
+                      </div>
+                    </div>
+                    <div class="form-group mt-3">
+                      <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required="">
+                    </div>
+                    <div class="form-group mt-3">
+                      <textarea class="form-control" name="message" rows="7" placeholder="Message" required=""></textarea>
+                    </div>
+                    <div class="my-3">
+                      <div class="loading">Loading</div>
+                      <div class="error-message"></div>
+                      <div class="sent-message">Your message has been sent. Thank you!</div>
+                    </div>
+                    <div class="text-center"><button type="submit">Send Message</button></div>
+                  </form>
                 </div>
               </div>
             </div>
+          </section><!-- End Contact Form Section -->
 
-          </div>
-
-          <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-              <div class="row">
-                <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required="">
-                </div>
-                <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required="">
-                </div>
-              </div>
-              <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required="">
-              </div>
-              <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="7" placeholder="Message" required=""></textarea>
-              </div>
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
-            </form>
-          </div>
 
         </div>
 
@@ -1195,8 +1011,8 @@
             <div class="footer-info">
               <h3>MENRO LIAN</h3>
               <p>
-                A108 Adam Street <br>
-                NY 535022, USA<br><br>
+                J. P. Rizal St <br>
+                Lian, Batangas<br><br>
                 <strong>Phone:</strong> +1 5589 55488 55<br>
                 <strong>Email:</strong> info@example.com<br>
               </p>
@@ -1216,17 +1032,17 @@
               <li><i class="bx bx-chevron-right"></i> <a class="scrollto" href="#hero">Home</a></li>
               <li><i class="bx bx-chevron-right"></i> <a class="scrollto" href="#about">About us</a></li>
               <li><i class="bx bx-chevron-right"></i> <a class="scrollto" href="#services">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a class="scrollto" href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a class="scrollto" href="#">Privacy policy</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a class="scrollto" href="#collection">Collection Schedules</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a class="scrollto" href="#location">Garbage Truck Location</a></li>
             </ul>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Our Services</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Office Staffs</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Environmental Conservation</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Waste Management</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
             </ul>

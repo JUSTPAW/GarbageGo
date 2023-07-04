@@ -1,9 +1,15 @@
-<?php 
+<?php
 session_start();
+// Check if the necessary session variables are set and the user role is 'admin'
 if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
-include('../includes/header.php');
-include('../includes/navbar_admin.php');
-require '../db_conn.php';
+
+  // Regenerate the session ID
+  session_regenerate_id();
+
+  // Include the necessary files and establish database connection
+  include('../includes/header.php');
+  include('../includes/navbar_admin.php');
+  require '../db_conn.php';
 ?>
 
 <!-- Begin Page Content -->

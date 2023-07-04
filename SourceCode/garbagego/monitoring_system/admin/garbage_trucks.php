@@ -12,9 +12,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-1 mt-1">
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb bg-transparent" style="margin-top: 5px; padding-left: 0;">
-                    <li class="breadcrumb-item"><a href="admin.php" class="text-info h5" style="text-decoration: none;">Dashboard</a></li>
-                    <li class="breadcrumb-item active text-dark h5" aria-current="page">Garbage Trucks</li>
+                <ol class="breadcrumb bg-transparent p-0">
+                    <li class="breadcrumb-item"><a href="admin.php" class="text-secondary" style="color: #026601; text-decoration: none;">Dashboard</a></li>
+                    <li class="breadcrumb-item"><span class="text-gray-700">Waste Collection</span></li>
+                    <li class="breadcrumb-item active text-gray-900" aria-current="page">Garbage Trucks</li>
                 </ol>
             </nav>
             <a href="" class="btn btn-sm btn-info shadow-sm mb-3"><i class="fas fa-download fa-sm text-white"></i> Generate Report</a>
@@ -34,7 +35,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="crud.php" method="POST">
+                        <form action="crud_truck.php" method="POST">
                             <div class="form-group">
                                 <label for="brand" class="small text-info">Brand</label>
                                 <input type="text" class="form-control" id="brand" name="brand" placeholder="Enter brand" required>
@@ -54,7 +55,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" name="add_truck" class="btn btn-info">Save changes</button>
+                        <button type="submit" name="add_truck" class="btn btn-info">Save</button>
                         </form>
                     </div>
                 </div>
@@ -74,7 +75,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="crud.php" method="POST">
+                        <form action="crud_truck.php" method="POST">
                             <div class="form-group">
                                 <label for="edit_brand" class="small text-info">Brand</label>
                                 <input type="text" class="form-control" id="edit_brand" name="edit_brand" placeholder="Enter brand" required>
@@ -95,7 +96,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" name="edit_truck" class="btn btn-info">Save changes</button>
+                        <button type="submit" name="edit_truck" class="btn btn-info">Update</button>
                         </form>
                     </div>
                 </div>
@@ -113,7 +114,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form id="delete_truck_form" action="crud.php" method="POST">
+                    <form id="delete_truck_form" action="crud_truck.php" method="POST">
                         <div class="modal-body">
                             <p>Are you sure you want to delete <span class="text-info font-weight-bold mx-auto" id="delete_truck_brand"></span> garbage truck?</p>
                         </div>
@@ -179,10 +180,25 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                                             Actions
                                           </button>
                                           <div class="dropdown-menu text-info pr-0" aria-labelledby="dropdownMenuButton">
-                                            <button class="dropdown-item edit-truck-btn" data-toggle="modal" data-target="#edit_truck" data-id="<?= $row['id']; ?>" data-brand="<?= $row['brand']; ?>" data-model="<?= $row['model']; ?>" data-capacity="<?= $row['capacity']; ?>" data-platenumber="<?= $row['plateNumber']; ?>" data-toggle="tooltip" title="Edit <?= $row['brand']; ?>!" data-placement="top">
+                                            <button class="dropdown-item edit-truck-btn" data-toggle="modal" 
+                                            data-target="#edit_truck" 
+                                            data-id="<?= $row['id']; ?>" 
+                                            data-brand="<?= $row['brand']; ?>" 
+                                            data-model="<?= $row['model']; ?>" 
+                                            data-capacity="<?= $row['capacity']; ?>" 
+                                            data-platenumber="<?= $row['plateNumber']; ?>" 
+                                            data-toggle="tooltip" 
+                                            title="Edit <?= $row['brand']; ?>!" 
+                                            data-placement="top">
                                               <i class="fa fa-edit fw-fa text-primary" aria-hidden="true"></i> Edit
                                             </button>
-                                            <button class="dropdown-item delete-truck-btn" data-toggle="modal" data-target="#delete_truck" data-id="<?= $row['id']; ?>" data-brand="<?= $row['brand']; ?>" data-toggle="tooltip" title="Delete <?= $row['brand']; ?>!" data-placement="top">
+                                            <button class="dropdown-item delete-truck-btn" data-toggle="modal" 
+                                            data-target="#delete_truck" 
+                                            data-id="<?= $row['id']; ?>" 
+                                            data-brand="<?= $row['brand']; ?>" 
+                                            data-toggle="tooltip" 
+                                            title="Delete <?= $row['brand']; ?>!" 
+                                            data-placement="top">
                                               <i class="fa fa-trash fw-fa text-danger" aria-hidden="true"></i> Delete
                                             </button>
                                           </div>
@@ -243,7 +259,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                     var truckId = $('#delete_truck_id').val();
                     $.ajax({
                         type: "POST",
-                        url: "crud.php",
+                        url: "crud_truck.php",
                         data: {
                             delete_truck_id: truckId
                         },

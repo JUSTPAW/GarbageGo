@@ -5,6 +5,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
 
     if (isset($_POST['delete_truck_id'])) {
         $truckId = $_POST['delete_truck_id'];
+        $truckId = mysqli_real_escape_string($conn, $truckId);
 
         // Perform the necessary delete operation using the $truckId
         $deleteQuery = "DELETE FROM garbage_trucks WHERE id = $truckId";
@@ -27,6 +28,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
         $capacity = $_POST['capacity'];
         $plateNumber = $_POST['plateNumber'];
 
+        // Escape special characters in variables
+        $brand = mysqli_real_escape_string($conn, $brand);
+        $model = mysqli_real_escape_string($conn, $model);
+        $capacity = mysqli_real_escape_string($conn, $capacity);
+        $plateNumber = mysqli_real_escape_string($conn, $plateNumber);
+
         // Perform the database insertion
         $query = "INSERT INTO garbage_trucks (brand, model, capacity, plateNumber) VALUES ('$brand', '$model', '$capacity', '$plateNumber')";
         $result = mysqli_query($conn, $query);
@@ -40,18 +47,22 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
             $_SESSION['message_danger'] = "Error occurred while adding the garbage truck.";
             header('Location: garbage_trucks.php');
         }
-    } else {
-        // Invalid access, redirect to the dashboard
-        header('Location: garbage_trucks.php');
     }
+    
 
-
-   if (isset($_POST['edit_truck'])) {
+    if (isset($_POST['edit_truck'])) {
         $truck_id = $_POST['edit_truck_id'];
         $brand = $_POST['edit_brand'];
         $model = $_POST['edit_model'];
-        $capacity = $_POST['edit_capacity']; // Fix the variable name here
+        $capacity = $_POST['edit_capacity'];
         $plateNumber = $_POST['edit_plateNumber'];
+
+        // Escape special characters in variables
+        $truck_id = mysqli_real_escape_string($conn, $truck_id);
+        $brand = mysqli_real_escape_string($conn, $brand);
+        $model = mysqli_real_escape_string($conn, $model);
+        $capacity = mysqli_real_escape_string($conn, $capacity);
+        $plateNumber = mysqli_real_escape_string($conn, $plateNumber);
 
         // Perform the database update
         $query = "UPDATE garbage_trucks SET brand='$brand', model='$model', capacity='$capacity', plateNumber='$plateNumber' WHERE id='$truck_id'";
@@ -73,17 +84,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
     }
 
 
-
 } else {
     // Redirect to the login page if not logged in as an admin
     header("Location: ../login.php");
     exit();
 }
 ?>
-
-
-
-
-    
-
-

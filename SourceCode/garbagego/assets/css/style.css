@@ -20,7 +20,7 @@ a {
 }
 
 a:hover {
-  color: #65c9cd;
+  color: #03A102;
   text-decoration: none;
 }
 
@@ -716,7 +716,7 @@ section {
 .featured-services .icon-box::before {
   content: "";
   position: absolute;
-  background: #d9f1f2;
+  background: rgba(2, 102, 1, 0.2);
   right: 0;
   left: 0;
   bottom: 0;
@@ -1353,7 +1353,7 @@ section {
 }
 
 .pricing .btn-buy:hover {
-  background: #65c9cd;
+  background: #03A102;
 }
 
 .pricing .featured h3 {
@@ -1387,7 +1387,7 @@ section {
 }
 
 .faq .faq-list li {
-  border-bottom: 1px solid #d9f1f2;
+  border-bottom: 1px solid rgba(2, 102, 1, 0.2);
   margin-bottom: 20px;
   padding-bottom: 20px;
 }
@@ -1401,7 +1401,7 @@ section {
   font-weight: 400;
   padding-left: 25px;
   cursor: pointer;
-  color: #32969a;
+  color: #026601;
   transition: 0.3s;
 }
 
@@ -1610,7 +1610,7 @@ section {
 }
 
 #footer .footer-top .social-links a:hover {
-  background: #65c9cd;
+  background: #03A102;
   text-decoration: none;
 }
 
@@ -1690,7 +1690,7 @@ section {
 }
 
 #footer .footer-top .footer-newsletter form input[type=submit]:hover {
-  background: #65c9cd;
+  background: #03A102;
 }
 
 #footer .copyright {

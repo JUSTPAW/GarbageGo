@@ -1,0 +1,26 @@
+{
+    "admins": [
+        {
+            "id": "1",
+            "firstName": "John Paulo",
+            "middleName": "Arquiza",
+            "lastName": "Bascuguin",
+            "position": "Officer In Charge",
+            "birthday": "0000-00-00",
+            "gender": "Male",
+            "phone": "09395424305",
+            "email": "johnpauloarquizabascuguin@gmail.com",
+            "province": "Kapito Lian, Batangas",
+            "city": "",
+            "barangay": "",
+            "street": "",
+            "user_name": "admin",
+            "password": "21232f297a57a5a743894a0e4a801fc3",
+            "role": "admin",
+            "image": "d41d8cd98f00b204e9800998ecf8427e1686916117.jpg",
+            "dateCreated": "2023-06-24 20:07:17"
+        }
+    ],
+    "staffs": [],
+    "drivers": []
+}

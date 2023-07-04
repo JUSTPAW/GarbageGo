@@ -1,98 +1,73 @@
 <?php
-// Start session and include database connection file
 session_start();
-include "db_conn.php";
+require '../db_conn.php';
 
-// Validate and sanitize input data
-function validate($data){
-   $data = trim($data);
-   $data = stripslashes($data);
-   $data = htmlspecialchars($data);
-   return $data;
-}
+if (isset($_POST['add_account'])) {
+    $firstName = $_POST['firstName'];
+    $middleName = $_POST['middleName'];
+    $lastName = $_POST['lastName'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $username = $_POST['uname'];
+    $role = $_POST['role'];
+    $password = $_POST['password'];
+    $repassword = $_POST['re_password'];
 
-// Check if all required fields are set
-if (isset($_POST['uname']) 
-    && isset($_POST['password'])
-    && isset($_POST['firstname'])
-    && isset($_POST['lastname'])
-    && isset($_POST['middlename']) 
-    && isset($_POST['age'])
-    && isset($_POST['address'])
-    && isset($_POST['phone'])
-    && isset($_POST['email'])
-    && isset($_POST['re_password'])) {
+    // Add any necessary validation and sanitization of the input values
 
-    // Get input data and validate/sanitize it
-    $uname = validate($_POST['uname']);
-    $pass = validate($_POST['password']);
-    $re_pass = validate($_POST['re_password']);
-    $firstname = validate($_POST['firstname']);
-    $lastname = validate($_POST['lastname']);
-    $middlename = validate($_POST['middlename']);
-    $age = validate($_POST['age']);
-    $address = validate($_POST['address']);
-    $phone = validate($_POST['phone']);
-    $email = validate($_POST['email']);
+    // Check if the username already exists
+    $checkQuery = "SELECT * FROM staffs WHERE user_name = '$username'";
+    $checkResult = mysqli_query($conn, $checkQuery);
+    if (mysqli_num_rows($checkResult) > 0) {
+        $_SESSION['message_danger'] = "Username already exists!";
+        header("Location: accounts.php");
+        exit();
+    }
 
-    // Set up a user_data string for error messages
-    $user_data = 'uname='. $uname. '&firstname='. $firstname . '&lastname='. $lastname . '&middlename='. $middlename;
+    // Validate the password
+    $pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_#^+=(){}[\]|\\:;"\'<>,.~`_]).{8,}$/';
+    if (!preg_match($pattern, $password)) {
+        $_SESSION['message_danger'] = "Invalid password! Password must contain at least one lowercase letter, one uppercase letter, one digit, one special character, and be at least 8 characters long.";
+        header("Location: accounts.php");
+        exit();
+    }
 
-    // Check for missing input data and redirect with error message if necessary
-    if(empty($firstname)){
-        header("Location: register.php?error=First Name is required&$user_data");
+    // Check if the password and re-entered password match
+    if ($password !== $repassword) {
+        $_SESSION['message_danger'] = "Passwords do not match!";
+        header("Location: accounts.php");
         exit();
-    } else if(empty($middlename)){
-        header("Location: register.php?error=Midddle Initial is required&$user_data");
+    }
+
+    // Hash the password
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    // Insert the new account into the appropriate table based on the selected role
+    if ($role === 'staff') {
+        $insertQuery = "INSERT INTO staffs (firstName, middleName, lastName, email, phone, user_name, role, password)
+                        VALUES ('$firstName', '$middleName', '$lastName', '$email', '$phone', '$username', '$role', '$hashedPassword')";
+    } elseif ($role === 'driver') {
+        $insertQuery = "INSERT INTO drivers (firstName, middleName, lastName, email, phone, user_name, role, password)
+                        VALUES ('$firstName', '$middleName', '$lastName', '$email', '$phone', '$username', '$role', '$hashedPassword')";
+    } else {
+        $_SESSION['message_danger'] = "Invalid role selected!";
+        header("Location: account.php");
         exit();
-    } else if(empty($lastname)){
-        header("Location: register.php?error=Last Name is required&$user_data");
-        exit();
-    } else if (empty($uname)) {
-        header("Location: register.php?error=User Name is required&$user_data");
-        exit();
-    } else if(empty($pass)){
-        header("Location: register.php?error=Password is required&$user_data");
-        exit();
-    } else if(empty($re_pass)){
-        header("Location: register.php?error=Re Password is required&$user_data");
-        exit();
-    } else if($pass !== $re_pass){
-        header("Location: register.php?error=The confirmation password  does not match&$user_data");
-        exit();
-    } else if(!preg_match('@[A-Z]@', $pass) || !preg_match('@[a-z]@', $pass) || !preg_match('@[0-9]@', $pass) || !preg_match('@[_\-#]@', $pass) || strlen($pass) < 8) {
-        // Check password strength and redirect with error message if necessary
-        header("Location: register.php?error=Password should be at least 8 characters in length and should include at least one upper case letter, one number, one special character.&$user_data");
+    }
+
+    $insertResult = mysqli_query($conn, $insertQuery);
+
+    if ($insertResult) {
+        $_SESSION['message'] = "Account added successfully!";
+        header("Location: accounts.php");
         exit();
     } else {
-        // Hash the password and sanitize the remaining input data
-        $pass = md5($pass);
-
-		$age = mysqli_real_escape_string($conn, $_POST['age']);
-		$address = mysqli_real_escape_string($conn, $_POST['address']);
-		$phone = mysqli_real_escape_string($conn, $_POST['phone']);
-		$email = mysqli_real_escape_string($conn, $_POST['email']);
-
-	    $sql = "SELECT * FROM users WHERE user_name='$uname' ";
-		$result = mysqli_query($conn, $sql);
-
-		if (mysqli_num_rows($result) > 0) {
-			header("Location: register.php?error=The username is taken try another&$user_data");
-	        exit();
-		}else {
-           $sql2 = "INSERT INTO users(firstname,lastname,middlename,user_name,password,age,address,	phone,email) VALUES('$firstname', '$lastname', '$middlename', '$uname', '$pass', '$age', '$address', '$phone', '$email')";
-           $result2 = mysqli_query($conn, $sql2);
-           if ($result2) {
-           	 header("Location: login.php?success=Your account has been created successfully");
-	         exit();
-           }else {
-	           	header("Location: register.php?error=unknown error occurred&$user_data");
-		        exit();
-           }
-		}
-	}
-	
-}else{
-	header("Location: register.php");
-	exit();
+        $_SESSION['message_danger'] = "Failed to add account!";
+        header("Location: accounts.php");
+        exit();
+    }
+} else {
+    header("Location: admin.php");
+    exit();
 }
+?>

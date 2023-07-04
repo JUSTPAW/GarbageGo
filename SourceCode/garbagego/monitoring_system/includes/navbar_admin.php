@@ -37,18 +37,9 @@ require 'db_conn.php';
 </div>
 
 <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Accounts"
-        aria-expanded="true" aria-controls="Accounts">
+    <a class="nav-link" href="accounts.php">
         <i class="fas fa-fw fa-user"></i>
-        <span>Accounts</span>
-    </a>
-    <div id="Accounts" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Accounts:</h6>
-            <a class="collapse-item" href="staff_accounts.php">Office Staffs</a>
-            <a class="collapse-item" href="driver_accounts.php">Drivers</a>
-        </div>
-    </div>
+        <span>Accounts</span></a>
 </li>
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Employees"
@@ -301,19 +292,21 @@ require 'db_conn.php';
 
             <span class="mr-2 mt-2 d-none d-lg-inline text-info small text-uppercase">
                 <?php
-                    require 'db_conn.php';
-                    $user_name = mysqli_real_escape_string($conn, $_SESSION['user_name']); // sanitize the input
-                    $sql = "SELECT firstName, middlename, lastName, image FROM admins WHERE user_name = ?";
-                    $stmt = mysqli_prepare($conn, $sql); // prepare the statement
-                    mysqli_stmt_bind_param($stmt, "s", $user_name); // bind the parameter
-                    mysqli_stmt_execute($stmt); // execute the statement
-                    $result = mysqli_stmt_get_result($stmt); // get the result set
-                    if (mysqli_num_rows($result) > 0) { // use a loop to iterate over the result set
-                        $row = mysqli_fetch_assoc($result);
-                        echo $row['firstName'] . ' ' . $row['middlename'] . '. ' . $row['lastName'];
-                    } else {
-                        echo "User not found";
-                    }
+                require 'db_conn.php';
+                $user_name = mysqli_real_escape_string($conn, $_SESSION['user_name']); // sanitize the input
+                $sql = "SELECT firstName, middlename, lastName, image FROM admins WHERE user_name = '$user_name'";
+                $result = mysqli_query($conn, $sql); // execute the query
+
+                if (mysqli_num_rows($result) > 0) {
+                    $row = mysqli_fetch_assoc($result);
+                    $firstName = $row['firstName'];
+                    $middleName = $row['middlename']; // Corrected column name
+                    $lastName = $row['lastName'];
+                    $formattedName = ($firstName) . ' ' . strtoupper(substr($middleName, 0, 1)) . '.' . ' ' . ($lastName);
+                    echo $formattedName;
+                } else {
+                    echo "User not found";
+                }
                 ?>
             </span>
 

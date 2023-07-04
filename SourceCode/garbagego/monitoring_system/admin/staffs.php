@@ -12,13 +12,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-1 mt-1">
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb bg-transparent" style="margin-top: 5px; padding-left: 0;">
-                    <li class="breadcrumb-item"><a href="admin.php" class="text-info h5" style="text-decoration: none;">Dashboard</a></li>
-                    <li class="breadcrumb-item active text-dark h5" aria-current="page">Office Sttafs</li>
+                <ol class="breadcrumb bg-transparent p-0">
+                    <li class="breadcrumb-item"><a href="admin.php" class="text-secondary" style="color: #026601; text-decoration: none;">Dashboard</a></li>
+                    <li class="breadcrumb-item"><span class="text-gray-700">Employees</span></li>
+                    <li class="breadcrumb-item active text-gray-900" aria-current="page">Office Staffs</li>
                 </ol>
             </nav>
-            <a href="" class="btn btn-sm btn-info shadow-sm mb-3"><i class="fas fa-download fa-sm text-white"></i>Generate Report</a>
+            <a href="" class="btn btn-sm btn-info shadow-sm mb-3"><i class="fas fa-download fa-sm text-white"></i> Generate Report</a>
         </div>
+
 
         <?php include('message.php'); ?>
         <?php include('message_danger.php'); ?>
@@ -28,7 +30,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title font-weight-bold text-gray-800" id="addTruckModalLabel">Add New Office Sttaf</h5>
+                        <h5 class="modal-title font-weight-bold text-gray-800" id="addTruckModalLabel">Add New Office Staff</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -68,7 +70,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title font-weight-bold text-gray-800" id="editTruckModalLabel">Edit ffice Sttaf</h5>
+                        <h5 class="modal-title font-weight-bold text-gray-800" id="editTruckModalLabel">Edit Office Staff</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -108,15 +110,14 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title font-weight-bold text-gray-800" id="deleteTruckModalLabel">Delete Office Sttaf</h5>
+                        <h5 class="modal-title font-weight-bold text-gray-800" id="deleteTruckModalLabel">Delete Office Staff</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <form id="delete_truck_form" action="crud.php" method="POST">
                         <div class="modal-body">
-                            <p>Are you sure you want to delete <span class="text-info font-weight-bold mx-auto" id="delete_truck_brand"></span> garbage truck?</p>
-                            
+                            <p>Are you sure you want to delete <span class="text-info font-weight-bold mx-auto" id="delete_truck_brand"></span> office staff?</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -132,8 +133,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class="d-sm-flex align-items-center justify-content-between py-2">
-                    <h6 class="m-0 font-weight-bold text-info">List of Office Sttaf(s)</h6>
-                    <a href="#add_truck" data-toggle="modal" class="btn btn-sm btn-info shadow-sm"><i class="fa fa-plus fa-sm text-white mr-1"></i>Add Office Sttaf</a>
+                    <h6 class="m-0 font-weight-bold text-info">List of Office Staff(s)</h6>
+                    <a href="#add_truck" data-toggle="modal" class="btn btn-sm btn-info shadow-sm"><i class="fa fa-plus fa-sm text-white mr-1"></i>Add Office Staff</a>
                 </div>
             </div>
             <div class="card-body">
@@ -142,27 +143,31 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                         <thead class='thead-light text-gray-900'>
                           <tr style="text-align:center">
                             <th style="text-align: center;">No.</th>
-                            <th style="text-align: center;">Brand</th>
-                            <th style="text-align: center;">Model</th>
-                            <th style="text-align: center;">Capacity</th>
-                            <th style="text-align: center;">Plate Number</th>
+                            <th style="text-align: center;">Name</th>
+                            <th style="text-align: center;">Age</th>
+                            <th style="text-align: center;">Gender</th>
+                            <th style="text-align: center;">Contact Number</th>
+                            <th style="text-align: center;">Email</th>
+                            <th style="text-align: center;">Address</th>
                             <th class="no-export" width="12%" style="text-align: center;">Actions</th>
                           </tr>
                         </thead>
                         <tfoot class='thead-light text-gray-700'>
                           <tr style="text-align:center">
                             <th style="text-align: center;">No.</th>
-                            <th style="text-align: center;">Brand</th>
-                            <th style="text-align: center;">Model</th>
-                            <th style="text-align: center;">Capacity</th>
-                            <th style="text-align: center;">Plate Number</th>
+                            <th style="text-align: center;">Name</th>
+                            <th style="text-align: center;">Age</th>
+                            <th style="text-align: center;">Gender</th>
+                            <th style="text-align: center;">Contact Number</th>
+                            <th style="text-align: center;">Email</th>
+                            <th style="text-align: center;">Address</th>
                             <th class="no-export" width="12%" style="text-align: center;">Actions</th>
                           </tr>
                         </tfoot>
                         <tbody>
                             <?php
                             $no = 1;
-                            $query = "SELECT * FROM garbage_trucks";
+                            $query = "SELECT * FROM staffs";
                             $query_run = mysqli_query($conn, $query);
 
                             if (mysqli_num_rows($query_run) > 0) {
@@ -170,20 +175,42 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                                     ?>
                                     <tr style="text-align:center">
                                         <td><?php echo $no; ?></td>
-                                        <td><?= $row['brand']; ?></td>
-                                        <td><?= $row['model']; ?></td>
-                                        <td><?= $row['capacity']; ?></td>
-                                        <td><?= $row['plateNumber']; ?></td>
+                                        <?php
+                                        $firstName = $row['firstName'];
+                                        $middleName = $row['middleName'];
+                                        $lastName = $row['lastName'];
+                                        $formattedName = ucwords($firstName) . ' ' . strtoupper(substr($middleName, 0, 1)) . '.' . ' ' . ucwords($lastName);
+                                        ?>
+                                        <td><?= $formattedName; ?></td>                                        
+                                        <td><?= $row['birthday']; ?></td>
+                                        <td><?= $row['gender']; ?></td>
+                                        <td><?= $row['phone']; ?></td>
+                                        <td><?= $row['email']; ?></td>
+                                        <td><?= $row['street']; ?><?= $row['barangay']; ?><?= $row['city']; ?><?= $row['province']; ?></td>
                                         <td>
                                         <div class="dropdown">
                                           <button class="btn btn-sm btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Actions
                                           </button>
                                           <div class="dropdown-menu text-info pr-0" aria-labelledby="dropdownMenuButton">
-                                            <button class="dropdown-item edit-truck-btn" data-toggle="modal" data-target="#edit_truck" data-id="<?= $row['id']; ?>" data-brand="<?= $row['brand']; ?>" data-model="<?= $row['model']; ?>" data-capacity="<?= $row['capacity']; ?>" data-platenumber="<?= $row['plateNumber']; ?>" data-toggle="tooltip" title="Edit <?= $row['brand']; ?>!" data-placement="top">
+                                            <button class="dropdown-item edit-truck-btn" data-toggle="modal" 
+                                            data-target="#edit_truck" 
+                                            data-id="<?= $row['id']; ?>" 
+                                            data-brand="<?= $row['brand']; ?>" 
+                                            data-model="<?= $row['model']; ?>" 
+                                            data-capacity="<?= $row['capacity']; ?>" 
+                                            data-platenumber="<?= $row['plateNumber']; ?>" 
+                                            data-toggle="tooltip" 
+                                            title="Edit <?= $row['brand']; ?>!" 
+                                            data-placement="top">
                                               <i class="fa fa-edit fw-fa text-primary" aria-hidden="true"></i> Edit
                                             </button>
-                                            <button class="dropdown-item delete-truck-btn" data-toggle="modal" data-target="#delete_truck" data-id="<?= $row['id']; ?>" data-brand="<?= $row['brand']; ?>" data-toggle="tooltip" title="Delete <?= $row['brand']; ?>!" data-placement="top">
+                                            <button class="dropdown-item delete-truck-btn" data-toggle="modal" 
+                                            data-target="#delete_truck" data-id="<?= $row['id']; ?>" 
+                                            data-brand="<?= $row['brand']; ?>" 
+                                            data-toggle="tooltip" 
+                                            title="Delete <?= $row['brand']; ?>!" 
+                                            data-placement="top">
                                               <i class="fa fa-trash fw-fa text-danger" aria-hidden="true"></i> Delete
                                             </button>
                                           </div>
@@ -197,7 +224,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                                                 <i class="fa fa-trash fw-fa" aria-hidden="true"></i>
                                             </a> -->
 
-                                        </td>
+                                       <!--  </td> -->
                                     </tr>
                             <?php
                                     $no++;
@@ -212,6 +239,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
             </div>
         </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- edit truck function -->
 <script>
     $(document).ready(function() {
         $('.edit-truck-btn').click(function() {
@@ -229,6 +257,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
         });
     });
 </script>
+<!-- delete truck function -->
 <script>
     $(document).ready(function() {
         $('.delete-truck-btn').click(function() {
@@ -240,14 +269,21 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
         });
 
         $('#delete_truck_form').submit(function(e) {
-            e.preventDefault(); // Prevent form submission
-            var truckId = $('#delete_truck_id').val();
-
-            $.post($(this).attr('action'), { delete_truck_id: truckId }, function(response) {
-                location.reload(); // Reload the page after deletion
+                    e.preventDefault();
+                    var truckId = $('#delete_truck_id').val();
+                    $.ajax({
+                        type: "POST",
+                        url: "crud.php",
+                        data: {
+                            delete_truck_id: truckId
+                        },
+                        success: function(response) {
+                            // Reload the page to see the message
+                            location.reload();
+                        }
+                    });
+                });
             });
-        });
-    });
 </script>
 
     <!-- End of Page Content -->
