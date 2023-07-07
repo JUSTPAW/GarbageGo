@@ -13,11 +13,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
 
         if ($deleteResult) {
             $_SESSION['message'] = "Crew member deleted successfully.";
-            header('Location: garbage_trucks.php');
+            header('Location: crew_members.php');
             exit();
         } else {
             $_SESSION['message_danger'] = "Error deleting crew member.";
-            header('Location: garbage_trucks.php');
+            header('Location: crew_members.php');
             exit();
         }
     }
