@@ -1,12 +1,12 @@
 <?php
 session_start();
-if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
+if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'driver') {
     // Regenerate the session ID
     session_regenerate_id(true);
 
     // Include the necessary files and establish database connection
     include('../includes/header.php');
-    include('../includes/navbar_admin.php');
+    include('../includes/navbar_driver.php');
     require '../db_conn.php';
 ?>
 
@@ -72,7 +72,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
 
     <div class="d-flex align-items-center justify-content-between mb-4">
         <h1 class="h5 mb-0 text-gray-800">
-            <i class="fa fa-tachometeralt fa-1x text-gray-600 mr-1"></i>
+            <i class="fa fa-tachometer-alt fa-1x text-gray-600 mr-1"></i>
             Dashboard
         </h1>
         <div>
@@ -165,7 +165,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
     include('../includes/footer.php');
     include('../includes/scripts.php');
 } else {
-    header("Location: ../admin_login.php");
+    header("Location: ../login.php");
     exit();
 }
 ?>

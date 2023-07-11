@@ -1,12 +1,12 @@
 <?php
 session_start();
-if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
+if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'driver') {
     // Regenerate the session ID
     session_regenerate_id(true);
 
     // Include the necessary files and establish database connection
     include('../includes/header.php');
-    include('../includes/navbar_admin.php');
+    include('../includes/navbar_driver.php');
     require '../db_conn.php';
     ?>
 
@@ -39,33 +39,33 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                                 <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
                             </div>
                         </div>
+                        <div class="container">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 offset-md-3">
+                                    <div class="btn-group d-flex justify-content-between">
+                                        <!-- Edit Profile Button -->
+                                        <button class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="Change Profile Picture">
+                                            <i class="fa fa-camera"></i>
+                                        </button>
 
-                        <div class="row align-items-center">
-                            <div class="col-md-12"> <!-- Added inline CSS for padding -->
-                                <div class="btn-group d-flex justify-content-between">
-                                    <!-- Edit Profile Button -->
-                                    <button class="btn btn-outline-primary" data-toggle="tooltip" data-placement="top" title="Change Profile Picture">
-                                        <i class="fa fa-camera"></i>
-                                    </button>
+                                        <!-- Change Password Button -->
+                                        <button class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="top" title="Change Password">
+                                            <i class="fa fa-key"></i>
+                                        </button>
 
-                                    <!-- Change Password Button -->
-                                    <button class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="top" title="Change Password">
-                                        <i class="fa fa-key"></i>
-                                    </button>
+                                        <!-- Edit Info Button -->
+                                        <button class="btn btn-outline-success" data-toggle="tooltip" data-placement="top" title="Edit Info">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
 
-                                    <!-- Edit Info Button -->
-                                    <button class="btn btn-outline-success" data-toggle="tooltip" data-placement="top" title="Edit Info">
-                                        <i class="fa fa-edit"></i>
-                                    </button>
-
-                                    <!-- Delete Account Button -->
-                                    <button class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Delete Account">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
+                                        <!-- Delete Account Button -->
+                                        <button class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Delete Account">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -143,7 +143,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
     include('../includes/scripts.php');
     include('../includes/footer.php');
 } else {
-    header("Location: ../admin_login.php");
+    header("Location: ../login.php");
     exit();
 }
 ?>

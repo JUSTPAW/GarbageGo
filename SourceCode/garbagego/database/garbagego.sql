@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2023 at 10:15 AM
+-- Generation Time: Jul 10, 2023 at 02:14 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -79,6 +79,14 @@ CREATE TABLE `crew_members` (
   `dateCreated` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `crew_members`
+--
+
+INSERT INTO `crew_members` (`id`, `firstName`, `middleName`, `lastName`, `position`, `birthday`, `gender`, `phone`, `email`, `province`, `city`, `barangay`, `street`, `image`, `dateCreated`) VALUES
+(2, 'Arnold', 'Andulan', 'Mendoza', 'Crew Member', '1999-06-29', 'Female', '09395424305', 'Arnold@gmail.com', 'Batangas', 'Lian', 'Bungahan', 'Molino', '', '2023-07-03 15:33:30'),
+(4, 'John Paulo', 'Arquiza', 'Bascuguin', 'Crew Member', '2023-07-04', 'Female', '5465454645', 'johnpauloarquizabascuguin@gmail.com', 'Batangas', 'Lian', 'Kapito', 'Molino', '', '2023-07-04 11:59:12');
+
 -- --------------------------------------------------------
 
 --
@@ -106,6 +114,14 @@ CREATE TABLE `drivers` (
   `dateCreated` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `drivers`
+--
+
+INSERT INTO `drivers` (`id`, `firstName`, `middleName`, `lastName`, `position`, `birthday`, `gender`, `phone`, `email`, `province`, `city`, `barangay`, `street`, `user_name`, `password`, `role`, `image`, `dateCreated`) VALUES
+(3, 'Cedrick', 'Bautista', 'Andulan', '', '2011-07-09', 'Male', '09395424305', 'Arnold@gmail.com', 'Batangas', 'Lian', 'Kapito', 'Molino', 'angelo', 'db5f129ea96443734426b116276a1766', 'driver', '', '2023-07-07 23:39:16'),
+(4, 'Marian', 'Arquiza', 'Bascuguin', 'Driver', '1999-03-27', 'Female', '09267755223', 'Marian@gmail.com', 'Cavite', 'Alfonzo', 'Kapito', 'Alatires', '', '', '', '', '2023-07-09 19:49:05');
+
 -- --------------------------------------------------------
 
 --
@@ -119,6 +135,14 @@ CREATE TABLE `garbage_trucks` (
   `capacity` varchar(50) NOT NULL,
   `plateNumber` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `garbage_trucks`
+--
+
+INSERT INTO `garbage_trucks` (`id`, `brand`, `model`, `capacity`, `plateNumber`) VALUES
+(21, 'Volvo', 'VHD', '15', 'ABC123'),
+(22, 'Mercedes', 'Econic', '20', 'DEF456');
 
 -- --------------------------------------------------------
 
@@ -159,6 +183,15 @@ CREATE TABLE `staffs` (
   `image` varchar(100) NOT NULL,
   `dateCreated` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `staffs`
+--
+
+INSERT INTO `staffs` (`id`, `firstName`, `middleName`, `lastName`, `position`, `birthday`, `gender`, `phone`, `email`, `province`, `city`, `barangay`, `street`, `user_name`, `password`, `role`, `image`, `dateCreated`) VALUES
+(6, 'Layka', 'Arquiza', 'Bascuguin', '', '0000-00-00', '', '09395424305', '20-71291@g.batstate-u.edu.ph', '', '', '', '', '', '', '', '', '2023-07-07 23:24:53'),
+(7, 'Carlo', 'Arquiza', 'Bascuguin', '', '0000-00-00', '', '09395424305', '20-71291@g.batstate-u.edu.ph', '', '', '', '', 'carlo', 'db5f129ea96443734426b116276a1766', 'staff', '', '2023-07-08 00:26:20'),
+(8, 'John Paulo', 'Arquiza', 'Bascuguin', '', '0000-00-00', '', '09395424305', '20-71291@g.batstate-u.edu.ph', '', '', '', '', 'johnpaulo', 'db5f129ea96443734426b116276a1766', 'staff', '', '2023-07-08 00:58:10');
 
 --
 -- Indexes for dumped tables
@@ -214,19 +247,19 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `crew_members`
 --
 ALTER TABLE `crew_members`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `drivers`
 --
 ALTER TABLE `drivers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `garbage_trucks`
 --
 ALTER TABLE `garbage_trucks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `locations`
@@ -238,7 +271,7 @@ ALTER TABLE `locations`
 -- AUTO_INCREMENT for table `staffs`
 --
 ALTER TABLE `staffs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

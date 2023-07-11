@@ -1,11 +1,23 @@
 <?php
 session_start();
 if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
+    // Regenerate the session ID
+    session_regenerate_id(true);
+
+    // Include the necessary files and establish database connection
     include('../includes/header.php');
     include('../includes/navbar_admin.php');
     require '../db_conn.php';
-    ?>
+?>
 
+<?php
+function calculateAge($birthday) {
+    $birthDate = new DateTime($birthday);
+    $today = new DateTime();
+    $age = $today->diff($birthDate)->y;
+    return $age;
+}
+?>
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
@@ -13,7 +25,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
         <div class="d-sm-flex align-items-center justify-content-between mb-1 mt-1">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent p-0">
-                    <li class="breadcrumb-item"><a href="admin.php" class="text-secondary" style="color: #026601; text-decoration: none;">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="admin_dashboard.php" class="text-secondary" style="color: #026601; text-decoration: none;">Dashboard</a></li>
                     <li class="breadcrumb-item"><span class="text-gray-700">Employees</span></li>
                     <li class="breadcrumb-item active text-gray-900" aria-current="page">Office Staffs</li>
                 </ol>
@@ -21,108 +33,192 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
             <a href="" class="btn btn-sm btn-info shadow-sm mb-3"><i class="fas fa-download fa-sm text-white"></i> Generate Report</a>
         </div>
 
-
         <?php include('message.php'); ?>
         <?php include('message_danger.php'); ?>
 
-        <!-- Add Truck Modal -->
-        <div class="modal fade" id="add_truck" tabindex="-1" role="dialog" aria-labelledby="addTruckModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+        <!-- Add Staff Modal -->
+        <div class="modal fade" id="add_staff" tabindex="-1" role="dialog" aria-labelledby="addStaffModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title font-weight-bold text-gray-800" id="addTruckModalLabel">Add New Office Staff</h5>
+                        <h5 class="modal-title font-weight-bold text-gray-800" id="addStaffModalLabel">Add New Office Staff</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="crud.php" method="POST">
-                            <div class="form-group">
-                                <label for="brand" class="small text-info">Brand</label>
-                                <input type="text" class="form-control" id="brand" name="brand" placeholder="Enter brand" required>
+                        <form action="crud_staff.php" method="POST">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="firstName" class="small text-info">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter first name" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="middleName" class="small text-info">Middle Name</label>
+                                    <input type="text" class="form-control" id="middleName" name="middleName" placeholder="Enter middle name">
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="lastName" class="small text-info">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter last name" required>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="model" class="small text-info">Model</label>
-                                <input type="text" class="form-control" id="model" name="model" placeholder="Enter model" required>
+                            <div class="form-row">
+                                 <div class="form-group col-md-4">
+                                    <label for="position" class="small text-info">Position</label>
+                                    <input type="text" class="form-control" id="position" name="position" placeholder="Enter position" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="birthday" class="small text-info">Date Of Birth</label>
+                                    <input type="date" class="form-control" id="birthday" name="birthday" placeholder="Enter birthday" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="gender" class="small text-info">Gender</label>
+                                    <select class="form-control" id="gender" name="gender" required>
+                                        <option value="">Select gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="capacity" class="small text-info">Capacity</label>
-                                <input type="number" class="form-control" id="capacity" name="capacity" placeholder="Enter capacity" required>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="phone" class="small text-info">Contact Number</label>
+                                    <input type="number" class="form-control" id="phone" name="phone" placeholder="Enter phone" required>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <label for="email" class="small text-info">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="plateNumber" class="small text-info">Plate Number</label>
-                                <input type="text" class="form-control" id="plateNumber" name="plateNumber" placeholder="Enter plate number" required>
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label for="province" class="small text-info">Province</label>
+                                    <input type="text" class="form-control" id="province" name="province" placeholder="Enter province" required>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="city" class="small text-info">City/Municipality</label>
+                                    <input type="text" class="form-control" id="city" name="city" placeholder="Enter city" required>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="barangay" class="small text-info">Barangay</label>
+                                    <input type="text" class="form-control" id="barangay" name="barangay" placeholder="Enter barangay" required>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="street" class="small text-info">Street/Sitio</label>
+                                    <input type="text" class="form-control" id="street" name="street" placeholder="Enter street/sitio">
+                                </div>
                             </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" name="add_truck" class="btn btn-info">Save changes</button>
-                        </form>
+                        <button type="submit" name="add_staff" class="btn btn-info">Save</button>
+                    </form>
                     </div>
                 </div>
             </div>
         </div>
 
-
-
-        <!-- Edit Truck Modal -->
-        <div class="modal fade" id="edit_truck" tabindex="-1" role="dialog" aria-labelledby="editTruckModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title font-weight-bold text-gray-800" id="editTruckModalLabel">Edit Office Staff</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+        <!-- Edit Staff Member -->
+        <div class="modal fade" id="edit_staff" tabindex="-1" role="dialog" aria-labelledby="editStaffModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title font-weight-bold text-gray-800" id="editStaffModalLabel">Edit Staff</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form action="crud_staff.php" method="POST">
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label for="edit_firstName" class="small text-info">First Name</label>
+                      <input type="text" class="form-control" id="edit_firstName" name="edit_firstName" placeholder="Enter first name" required>
                     </div>
-                    <div class="modal-body">
-                        <form action="crud.php" method="POST">
-                            <div class="form-group">
-                                <label for="edit_brand" class="small text-info">Brand</label>
-                                <input type="text" class="form-control" id="edit_brand" name="edit_brand" placeholder="Enter brand" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="edit_model" class="small text-info">Model</label>
-                                <input type="text" class="form-control" id="edit_model" name="edit_model" placeholder="Enter model" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="edit_capacity" class="small text-info">Capacity</label>
-                                <input type="number" class="form-control" id="edit_capacity" name="edit_capacity" placeholder="Enter capacity" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="edit_plateNumber" class="small text-info">Plate Number</label>
-                                <input type="text" class="form-control" id="edit_plateNumber" name="edit_plateNumber" placeholder="Enter plate number" required>
-                            </div>
-                            <input type="hidden" id="edit_truck_id" name="edit_truck_id">
+                    <div class="form-group col-md-4">
+                      <label for="edit_middleName" class="small text-info">Middle Name</label>
+                      <input type="text" class="form-control" id="edit_middleName" name="edit_middleName" placeholder="Enter middle name">
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" name="edit_truck" class="btn btn-info">Save changes</button>
-                        </form>
+                    <div class="form-group col-md-4">
+                      <label for="edit_lastName" class="small text-info">Last Name</label>
+                      <input type="text" class="form-control" id="edit_lastName" name="edit_lastName" placeholder="Enter last name" required>
                     </div>
-                </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label for="edit_position" class="small text-info">Position</label>
+                      <input type="text" class="form-control" id="edit_position" name="edit_position" placeholder="Enter position" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="edit_birthday" class="small text-info">Date Of Birth</label>
+                      <input type="date" class="form-control" id="edit_birthday" name="edit_birthday" placeholder="Enter birthday" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="edit_gender" class="small text-info">Gender</label>
+                      <select class="form-control" id="edit_gender" name="edit_gender" required>
+                        <option value="">Select gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label for="edit_phone" class="small text-info">Contact Number</label>
+                      <input type="number" class="form-control" id="edit_phone" name="edit_phone" placeholder="Enter phone" required>
+                    </div>
+                    <div class="form-group col-md-8">
+                      <label for="edit_email" class="small text-info">Email</label>
+                      <input type="email" class="form-control" id="edit_email" name="edit_email" placeholder="Enter Email">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-3">
+                      <label for="edit_province" class="small text-info">Province</label>
+                      <input type="text" class="form-control" id="edit_province" name="edit_province" placeholder="Enter province" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="edit_city" class="small text-info">City/Municipality</label>
+                      <input type="text" class="form-control" id="edit_city" name="edit_city" placeholder="Enter city" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="edit_barangay" class="small text-info">Barangay</label>
+                      <input type="text" class="form-control" id="edit_barangay" name="edit_barangay" placeholder="Enter barangay" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="edit_street" class="small text-info">Street/Sitio</label>
+                      <input type="text" class="form-control" id="edit_street" name="edit_street" placeholder="Enter street/sitio">
+                    </div>
+                  </div>
+                  <input type="hidden" id="edit_staff_id" name="edit_staff_id">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" name="edit_staff" class="btn btn-info">Update</button>
+              </form>
+              </div>
             </div>
+          </div>
         </div>
 
-
-        <!-- Delete Truck Modal -->
-        <div class="modal fade" id="delete_truck" tabindex="-1" role="dialog" aria-labelledby="deleteTruckModalLabel" aria-hidden="true">
+        <!-- Delete Staff Member Modal -->
+        <div class="modal fade" id="delete_staff" tabindex="-1" role="dialog" aria-labelledby="deleteStaffModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title font-weight-bold text-gray-800" id="deleteTruckModalLabel">Delete Office Staff</h5>
+                        <h5 class="modal-title font-weight-bold text-gray-800" id="deleteStaffModalLabel">Delete Staff</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form id="delete_truck_form" action="crud.php" method="POST">
-                        <div class="modal-body">
-                            <p>Are you sure you want to delete <span class="text-info font-weight-bold mx-auto" id="delete_truck_brand"></span> office staff?</p>
-                        </div>
+                    <form id="delete_staff_form" action="crud_staff.php" method="POST">
+                      <div class="modal-body">
+                        <span class="text-danger font-weight-bold">Warning! </span><span>Deleting the staff <span class="text-info font-weight-bold" id="delete_staff_fullname"></span> will result in the loss of associated data and cannot be undone. Proceed with caution.</p>
+                    </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                             <button type="submit" id="confirm_delete_btn" class="btn btn-danger">Delete</button>
-                            <input type="hidden" id="delete_truck_id" name="delete_truck_id">
+                            <input type="hidden" id="delete_staff_id" name="delete_staff_id">
                         </div>
                     </form>
                 </div>
@@ -134,7 +230,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
             <div class="card-header py-3">
                 <div class="d-sm-flex align-items-center justify-content-between py-2">
                     <h6 class="m-0 font-weight-bold text-info">List of Office Staff(s)</h6>
-                    <a href="#add_truck" data-toggle="modal" class="btn btn-sm btn-info shadow-sm"><i class="fa fa-plus fa-sm text-white mr-1"></i>Add Office Staff</a>
+                    <a href="#add_staff" data-toggle="modal" class="btn btn-sm btn-info shadow-sm"><i class="fa fa-plus fa-sm text-white mr-1"></i>Add Office Staff</a>
                 </div>
             </div>
             <div class="card-body">
@@ -144,11 +240,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                           <tr style="text-align:center">
                             <th style="text-align: center;">No.</th>
                             <th style="text-align: center;">Name</th>
+                            <th style="text-align: center;">Birthday</th>
                             <th style="text-align: center;">Age</th>
                             <th style="text-align: center;">Gender</th>
                             <th style="text-align: center;">Contact Number</th>
                             <th style="text-align: center;">Email</th>
                             <th style="text-align: center;">Address</th>
+                            <th style="text-align: center;">Date Created</th>
                             <th class="no-export" width="12%" style="text-align: center;">Actions</th>
                           </tr>
                         </thead>
@@ -156,11 +254,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                           <tr style="text-align:center">
                             <th style="text-align: center;">No.</th>
                             <th style="text-align: center;">Name</th>
+                            <th style="text-align: center;">Birthday</th>
                             <th style="text-align: center;">Age</th>
                             <th style="text-align: center;">Gender</th>
                             <th style="text-align: center;">Contact Number</th>
                             <th style="text-align: center;">Email</th>
                             <th style="text-align: center;">Address</th>
+                            <th style="text-align: center;">Date Created</th>
                             <th class="no-export" width="12%" style="text-align: center;">Actions</th>
                           </tr>
                         </tfoot>
@@ -181,50 +281,69 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                                         $lastName = $row['lastName'];
                                         $formattedName = ucwords($firstName) . ' ' . strtoupper(substr($middleName, 0, 1)) . '.' . ' ' . ucwords($lastName);
                                         ?>
-                                        <td><?= $formattedName; ?></td>                                        
-                                        <td><?= $row['birthday']; ?></td>
-                                        <td><?= $row['gender']; ?></td>
-                                        <td><?= $row['phone']; ?></td>
-                                        <td><?= $row['email']; ?></td>
-                                        <td><?= $row['street']; ?><?= $row['barangay']; ?><?= $row['city']; ?><?= $row['province']; ?></td>
+                                        <td><?= $formattedName; ?></td>
+                                        <?php
+                                        $birthday = $row['birthday'];
+                                        $formattedBirthday = ($birthday != '0000-00-00') ? date('m/d/Y', strtotime($birthday)) : '-';
+                                        ?>
+                                        <td><?= $formattedBirthday; ?></td>
+                                        <?php
+                                        $age = ($birthday != '0000-00-00') ? calculateAge($birthday) : '-';
+                                        ?>
+                                        <td><?= $age; ?></td>
+                                        <td><?= $row['gender'] ?: '-'; ?></td>
+                                        <td><?= $row['phone'] ?: '-'; ?></td>
+                                        <td><?= $row['email'] ?: '-'; ?></td>
+                                        <?php
+                                        $address = $row['street'] . ', ' . $row['barangay'] . ', ' . $row['city'] . ', ' . $row['province'];
+                                        $formattedAddress = !empty(trim($address)) ? $address : '-';
+                                        ?>
+                                        <td><?= $formattedAddress; ?></td>
+                                        <?php
+                                        $dateCreated = $row['dateCreated'];
+                                        $formattedDateCreated = !empty(trim($dateCreated)) ? date('m/d/Y h:i A', strtotime($dateCreated)) : '-';
+                                        ?>
+                                        <td><?= $formattedDateCreated; ?></td>
                                         <td>
                                         <div class="dropdown">
                                           <button class="btn btn-sm btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Actions
                                           </button>
                                           <div class="dropdown-menu text-info pr-0" aria-labelledby="dropdownMenuButton">
-                                            <button class="dropdown-item edit-truck-btn" data-toggle="modal" 
-                                            data-target="#edit_truck" 
+                                            <button class="dropdown-item edit-staff-btn" data-toggle="modal" 
+                                            data-target="#edit_staff" 
                                             data-id="<?= $row['id']; ?>" 
-                                            data-brand="<?= $row['brand']; ?>" 
-                                            data-model="<?= $row['model']; ?>" 
-                                            data-capacity="<?= $row['capacity']; ?>" 
-                                            data-platenumber="<?= $row['plateNumber']; ?>" 
+                                            data-firstName="<?= $row['firstName']; ?>" 
+                                            data-lastName="<?= $row['lastName']; ?>" 
+                                            data-middleName="<?= $row['middleName']; ?>" 
+                                            data-position="<?= $row['position']; ?>" 
+                                            data-birthday="<?= $row['birthday']; ?>" 
+                                            data-gender="<?= $row['gender']; ?>" 
+                                            data-phone="<?= $row['phone']; ?>" 
+                                            data-email="<?= $row['email']; ?>" 
+                                            data-province="<?= $row['province']; ?>" 
+                                            data-city="<?= $row['city']; ?>" 
+                                            data-barangay="<?= $row['barangay']; ?>" 
+                                            data-street="<?= $row['street']; ?>" 
                                             data-toggle="tooltip" 
-                                            title="Edit <?= $row['brand']; ?>!" 
+                                            title="Edit <?= $row['firstName']; ?> <?= $row['lastName']; ?>!" 
                                             data-placement="top">
                                               <i class="fa fa-edit fw-fa text-primary" aria-hidden="true"></i> Edit
                                             </button>
-                                            <button class="dropdown-item delete-truck-btn" data-toggle="modal" 
-                                            data-target="#delete_truck" data-id="<?= $row['id']; ?>" 
-                                            data-brand="<?= $row['brand']; ?>" 
+
+                                            <button class="dropdown-item delete-staff-btn" data-toggle="modal" 
+                                            data-target="#delete_staff" 
+                                            data-id="<?= $row['id']; ?>" 
+                                            data-firstName="<?= $row['firstName']; ?>"
+                                            data-lastName="<?= $row['lastName']; ?>"
+                                            data-middleName="<?= $row['middleName']; ?>" 
                                             data-toggle="tooltip" 
-                                            title="Delete <?= $row['brand']; ?>!" 
+                                            title="Delete <?= $row['firstName']; ?> <?= $row['lastName']; ?>!" 
                                             data-placement="top">
-                                              <i class="fa fa-trash fw-fa text-danger" aria-hidden="true"></i> Delete
+                                                <i class="fa fa-trash fw-fa text-danger" aria-hidden="true"></i> Delete
                                             </button>
                                           </div>
                                         </div>
-
-                                            <!-- <a class="btn btn-sm btn-outline-success edit-truck-btn" href="#edit_truck" data-toggle="modal" data-id="<?= $row['id']; ?>" data-brand="<?= $row['brand']; ?>" data-model="<?= $row['model']; ?>" data-capacity="<?= $row['capacity']; ?>" data-platenumber="<?= $row['plateNumber']; ?>" data-toggle="tooltip" title="Edit <?= $row['brand']; ?>!" data-placement="top">
-                                                <i class="fa fa-edit fw-fa" aria-hidden="true"></i>
-                                            </a>
-
-                                            <a class="btn btn-sm btn-outline-danger delete-truck-btn" href="#delete_truck" data-toggle="modal" data-id="<?= $row['id']; ?>" data-brand="<?= $row['brand']; ?>" data-toggle="tooltip" title="Delete <?= $row['brand']; ?>!" data-placement="top">
-                                                <i class="fa fa-trash fw-fa" aria-hidden="true"></i>
-                                            </a> -->
-
-                                       <!--  </td> -->
                                     </tr>
                             <?php
                                     $no++;
@@ -238,52 +357,72 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                 </div>
             </div>
         </div>
+    </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- edit truck function -->
 <script>
-    $(document).ready(function() {
-        $('.edit-truck-btn').click(function() {
-            var truckId = $(this).data('id');
-            var brand = $(this).data('brand');
-            var model = $(this).data('model');
-            var capacity = $(this).data('capacity');
-            var plateNumber = $(this).data('platenumber');
+  $(document).ready(function() {
+    $('.edit-staff-btn').click(function() {
+      var staff_id = $(this).data('id');
+      var firstName = $(this).data('firstname');
+      var middleName = $(this).data('middlename');
+      var lastName = $(this).data('lastname');
+      var position = $(this).data('position');
+      var birthday = $(this).data('birthday');
+      var gender = $(this).data('gender');
+      var phone = $(this).data('phone');
+      var email = $(this).data('email');
+      var province = $(this).data('province');
+      var city = $(this).data('city');
+      var barangay = $(this).data('barangay');
+      var street = $(this).data('street');
 
-            $('#edit_truck_id').val(truckId);
-            $('#edit_brand').val(brand);
-            $('#edit_model').val(model);
-            $('#edit_capacity').val(capacity);
-            $('#edit_plateNumber').val(plateNumber);
-        });
+      $('#edit_staff_id').val(staff_id);
+      $('#edit_firstName').val(firstName);
+      $('#edit_middleName').val(middleName);
+      $('#edit_lastName').val(lastName);
+      $('#edit_position').val(position);
+      $('#edit_birthday').val(birthday);
+      $('#edit_gender').val(gender);
+      $('#edit_phone').val(phone);
+      $('#edit_email').val(email);
+      $('#edit_province').val(province);
+      $('#edit_city').val(city);
+      $('#edit_barangay').val(barangay);
+      $('#edit_street').val(street);
     });
+  });
 </script>
 <!-- delete truck function -->
 <script>
     $(document).ready(function() {
-        $('.delete-truck-btn').click(function() {
-            var truckId = $(this).data('id');
-            var brand = $(this).data('brand');
-            
-            $('#delete_truck_id').val(truckId);
-            $('#delete_truck_brand').text(brand);
+        $('.delete-staff-btn').click(function() {
+            var staffId = $(this).data('id');
+            var firstName = $(this).data('firstname');
+            var middleName = $(this).data('middlename');
+            var lastName = $(this).data('lastname');
+           
+            $('#delete_staff_id').val(staffId);
+            $('#delete_staff_fullname').text(firstName + ' ' + middleName + ' ' + lastName);
         });
 
-        $('#delete_truck_form').submit(function(e) {
-                    e.preventDefault();
-                    var truckId = $('#delete_truck_id').val();
-                    $.ajax({
-                        type: "POST",
-                        url: "crud.php",
-                        data: {
-                            delete_truck_id: truckId
-                        },
-                        success: function(response) {
-                            // Reload the page to see the message
-                            location.reload();
-                        }
-                    });
-                });
+        $('#delete_staff_form').submit(function(e) {
+            e.preventDefault();
+            var staffId = $('#delete_staff_id').val();
+            $.ajax({
+                type: "POST",
+                url: "crud_staff.php",
+                data: {
+                    delete_staff_id: staffId
+                },
+                success: function(response) {
+                    // Reload the page to see the message
+                    location.reload();
+                }
             });
+        });
+    });
 </script>
 
     <!-- End of Page Content -->
@@ -291,7 +430,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
     include('../includes/scripts.php');
     include('../includes/footer.php');
 } else {
-    header("Location: ../index.php");
+    header("Location: ../admin_login.php");
     exit();
 }
 ?>

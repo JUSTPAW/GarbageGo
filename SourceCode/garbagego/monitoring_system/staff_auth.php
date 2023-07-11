@@ -2,7 +2,7 @@
 session_start();
 include("db_conn.php");
 
-if (isset($_POST['uname']) && isset($_POST['password']) && isset($_POST['role'])) {
+if (isset($_POST['uname']) && isset($_POST['password'])) {
 
     function validate($data)
     {
@@ -14,63 +14,54 @@ if (isset($_POST['uname']) && isset($_POST['password']) && isset($_POST['role'])
 
     $uname = validate($_POST['uname']);
     $pass = validate($_POST['password']);
-    $role = validate($_POST['role']);
 
     if (empty($uname)) {
-        header("Location: admin_login.php?error=Username is required!");
+        header("Location: login.php?error=Username is required!");
         exit();
     } else if (empty($pass)) {
-        header("Location: admin_login.php?error=Password is required!");
+        header("Location: login.php?error=Password is required!");
         exit();
     } else {
 
         // hashing the password
         $pass = md5($pass);
 
-        $sql = "SELECT * FROM admins WHERE user_name='$uname' AND password='$pass'";
+        $sql = "SELECT * FROM staffs WHERE user_name='$uname' AND password='$pass' UNION SELECT * FROM drivers WHERE user_name='$uname' AND password='$pass'";
 
         $result = mysqli_query($conn, $sql);
 
         if (mysqli_num_rows($result) === 1) {
             $row = mysqli_fetch_assoc($result);
-            if ($row['role'] === $role) {
-                $_SESSION['user_data'] = $row; // Store all data in session
+            $role = $row['role'];
 
-                // Remember Me functionality
-                if (isset($_POST['remember_me']) && $_POST['remember_me'] === 'on') {
-                    // Set a cookie to store the username for 30 days
-                    setcookie("remembered_user", $uname, time() + (30 * 24 * 60 * 60));
-                } else {
-                    // If the Remember Me checkbox is unchecked, remove the stored cookie if it exists
-                    if (isset($_COOKIE['remembered_user'])) {
-                        setcookie("remembered_user", "", time() - 3600);
-                    }
-                }
+            // Check if the role is valid or allowed
+            // You can add your own logic here to validate the role
 
-                // Perform role-specific actions
-                if ($role === 'staff') {
-                    header("Location: staff/staff.php");
-                    exit();
-                } else if ($role === 'driver') {
-                    header("Location: driver/driver.php");
-                    exit();
-                } else {
-                    header("Location: login.php?error=Invalid role!");
-                    exit();
-                }
-
+            if ($role === 'staff') {
+                $_SESSION['id'] = $row['id'];
+                $_SESSION['user_name'] = $row['user_name'];
+                $_SESSION['role'] = $role;
+                $successMessage = "Login successful as staff.";
+                header("Location: staff/staff_dashboard.php?success=" . urlencode($successMessage));
+                exit();
+            } else if ($role === 'driver') {
+                $_SESSION['id'] = $row['id'];
+                $_SESSION['user_name'] = $row['user_name'];
+                $_SESSION['role'] = $role;
+                $successMessage = "Login successful as driver.";
+                header("Location: driver/driver_dashboard.php?success=" . urlencode($successMessage));
+                exit();
             } else {
-                header("Location: admin_login.php?error=Incorrect username, password, or role!");
+                header("Location: login.php?error=Invalid role!");
                 exit();
             }
         } else {
-            header("Location: admin_login.php?error=Incorrect username, password, or role!");
+            header("Location: login.php?error=Incorrect username or password!");
             exit();
         }
     }
 } else {
-    header("Location: admin_login.php?error");
+    header("Location: login.php?error");
     exit();
 }
 ?>
-

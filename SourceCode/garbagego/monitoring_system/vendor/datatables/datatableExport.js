@@ -89,3 +89,5 @@ $(document).ready(function() {
     collectionButton.attr('title', 'Click to see options for export and column visibility');
     collectionButton.tooltip();
 });
+
+

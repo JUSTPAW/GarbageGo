@@ -7,7 +7,7 @@
 
     <title>MENRO LIAN - GARBAGEGO</title>
 
-    <!-- Favicon -->
+     <!-- Favicon -->
     <link href="images/icon.jpg" rel="icon">
     <link href="images/icon.jpg" rel="apple-touch-icon">
     <link rel="icon" type="image/x-icon" href="images/favicon.jpg">
@@ -20,8 +20,8 @@
     <link href="css/style2.css" rel="stylesheet">
     <link href="css/style1.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 <body id="page-top" >
@@ -131,15 +131,7 @@ if (isset($_GET['error'])) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <form class="user" method="post" id="login-form">
-                                            <?php if (isset($_GET['error'])) { ?>
-                                                <p class="error"><?php echo $_GET['error']; ?></p>
-                                            <?php } ?>
-
-                                            <?php if (isset($_GET['success'])) { ?>
-                                                <p class="success"><?php echo $_GET['success']; ?></p>
-                                            <?php } ?>
-
+                                        <form class="user" action="staff_auth.php" method="post" id="login-form">
                                             <div class="form-group mt-5">
                                                 <input type="text" name="uname" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Username">
                                             </div>
@@ -187,6 +179,8 @@ if (isset($_GET['error'])) {
 
     <!-- Custom scripts -->
     <script src="js/sb-admin-2.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
 
 </body>
 
