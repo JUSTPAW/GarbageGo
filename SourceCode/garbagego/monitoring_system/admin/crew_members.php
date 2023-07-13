@@ -1,11 +1,23 @@
 <?php
 session_start();
 if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
+    // Regenerate the session ID
+    session_regenerate_id(true);
+
+    // Include the necessary files and establish database connection
     include('../includes/header.php');
     include('../includes/navbar_admin.php');
     require '../db_conn.php';
-    ?>
+?>
 
+<?php
+function calculateAge($birthday) {
+    $birthDate = new DateTime($birthday);
+    $today = new DateTime();
+    $age = $today->diff($birthDate)->y;
+    return $age;
+}
+?>
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
@@ -13,7 +25,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
         <div class="d-sm-flex align-items-center justify-content-between mb-1 mt-1">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent p-0">
-                    <li class="breadcrumb-item"><a href="admin.php" class="text-secondary" style="color: #026601; text-decoration: none;">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="admin_dashboard.php" class="text-secondary" style="color: #026601; text-decoration: none;">Dashboard</a></li>
                     <li class="breadcrumb-item"><span class="text-gray-700">Employees</span></li>
                     <li class="breadcrumb-item active text-gray-900" aria-current="page">Crew Members</li>
                 </ol>
@@ -226,11 +238,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                           <tr style="text-align:center">
                             <th style="text-align: center;">No.</th>
                             <th style="text-align: center;">Name</th>
+                            <th style="text-align: center;">Birthday</th>
                             <th style="text-align: center;">Age</th>
                             <th style="text-align: center;">Gender</th>
                             <th style="text-align: center;">Contact Number</th>
                             <th style="text-align: center;">Email</th>
                             <th style="text-align: center;">Address</th>
+                            <th style="text-align: center;">Date Created</th>
                             <th class="no-export" width="12%" style="text-align: center;">Actions</th>
                           </tr>
                         </thead>
@@ -238,12 +252,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                           <tr style="text-align:center">
                             <th style="text-align: center;">No.</th>
                             <th style="text-align: center;">Name</th>
+                            <th style="text-align: center;">Birthday</th>
                             <th style="text-align: center;">Age</th>
                             <th style="text-align: center;">Gender</th>
                             <th style="text-align: center;">Contact Number</th>
                             <th style="text-align: center;">Email</th>
                             <th style="text-align: center;">Address</th>
-                            <th class="no-export" width="12%" style="text-align: center;">Actions</th>
+                            <th style="text-align: center;">Date Created</th>
                           </tr>
                         </tfoot>
                         <tbody>
@@ -263,12 +278,29 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                                         $lastName = $row['lastName'];
                                         $formattedName = ucwords($firstName) . ' ' . strtoupper(substr($middleName, 0, 1)) . '.' . ' ' . ucwords($lastName);
                                         ?>
-                                        <td><?= $formattedName; ?></td>                                        
-                                        <td><?= $row['birthday']; ?></td>
-                                        <td><?= $row['gender']; ?></td>
-                                        <td><?= $row['phone']; ?></td>
-                                        <td><?= $row['email']; ?></td>
-                                        <td><?= $row['street']; ?>, <?= $row['barangay']; ?>, <?= $row['city']; ?>, <?= $row['province']; ?></td>
+                                        <td><?= $formattedName; ?></td>
+                                        <?php
+                                        $birthday = $row['birthday'];
+                                        $formattedBirthday = ($birthday != '0000-00-00') ? date('m/d/Y', strtotime($birthday)) : '-';
+                                        ?>
+                                        <td><?= $formattedBirthday; ?></td>
+                                        <?php
+                                        $age = ($birthday != '0000-00-00') ? calculateAge($birthday) : '-';
+                                        ?>
+                                        <td><?= $age; ?></td>
+                                        <td><?= $row['gender'] ?: '-'; ?></td>
+                                        <td><?= $row['phone'] ?: '-'; ?></td>
+                                        <td><?= $row['email'] ?: '-'; ?></td>
+                                        <?php
+                                        $address = $row['street'] . ', ' . $row['barangay'] . ', ' . $row['city'] . ', ' . $row['province'];
+                                        $formattedAddress = !empty(trim($address)) ? $address : '-';
+                                        ?>
+                                        <td><?= $formattedAddress; ?></td>
+                                        <?php
+                                        $dateCreated = $row['dateCreated'];
+                                        $formattedDateCreated = !empty(trim($dateCreated)) ? date('m/d/Y h:i A', strtotime($dateCreated)) : '-';
+                                        ?>
+                                        <td><?= $formattedDateCreated; ?></td>
                                         <td>
                                         <div class="dropdown">
                                           <button class="btn btn-sm btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -322,6 +354,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                 </div>
             </div>
         </div>
+    </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- edit truck function -->
 <script>

@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,33 +10,22 @@
 
     <title>MENRO LIAN - GARBAGEGO</title>
 
-    <!-- for FF, Chrome, Opera -->
+     <!-- Favicon -->
     <link href="images/icon.jpg" rel="icon">
     <link href="images/icon.jpg" rel="apple-touch-icon">
-
-    <!-- for IE -->
-    <link rel="icon" type="image/x-icon" href="images/favicon.jpg" >
+    <link rel="icon" type="image/x-icon" href="images/favicon.jpg">
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.jpg"/>
 
-    <!-- Custom fonts for this template -->
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-
+    <!-- Custom fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    <!-- Custom styles -->
     <link href="css/style2.css" rel="stylesheet">
     <link href="css/style1.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    
-    <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <script src=”//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js”></script>
-
-    
-    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body id="page-top" >
 
@@ -125,6 +113,24 @@ if (isset($_GET['error'])) {
                 });
             };
         </script>';
+} else if (isset($_GET['success_message'])) {
+    $successMessage = $_GET['success_message'];
+    echo '<script>
+            window.onload = function() {
+                Swal.fire({
+                    icon: "success",
+                    title: "Success",
+                    text: "' . $successMessage . '",
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "admin/admin_dashboard.php";
+                    }
+                });
+            };
+        </script>';
+    unset($_SESSION['success_message']); // Clear the session variable
 }
 ?>
     <div class="container">

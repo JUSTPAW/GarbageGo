@@ -1,10 +1,14 @@
 <?php
 session_start();
 if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
+    // Regenerate the session ID
+    session_regenerate_id(true);
+
+    // Include the necessary files and establish database connection
     include('../includes/header.php');
     include('../includes/navbar_admin.php');
     require '../db_conn.php';
-    ?>
+?>
 
     <!-- Begin Page Content -->
     <div class="container-fluid">
@@ -13,7 +17,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
     <div class="d-sm-flex align-items-center justify-content-between mb-1 mt-1">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent p-0">
-                <li class="breadcrumb-item"><a href="admin.php" class="text-secondary" style="color: #026601; text-decoration: none;">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="admin_dashboard.php" class="text-secondary" style="color: #026601; text-decoration: none;">Dashboard</a></li>
                 <li class="breadcrumb-item active text-gray-900" aria-current="page">Accounts</li>
             </ol>
         </nav>
@@ -233,7 +237,14 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                         <tbody>
                             <?php
                             $no = 1;
-                            $query = "SELECT *, 'staff' AS type FROM staffs UNION SELECT *, 'driver' AS type FROM drivers";
+                            $query = "SELECT *, 'staff' AS type
+                                    FROM staffs
+                                    WHERE user_name IS NOT NULL AND user_name <> '' AND password IS NOT NULL AND password <> '' AND role IS NOT NULL AND role <> ''
+                                    UNION
+                                    SELECT *, 'driver' AS type
+                                    FROM drivers
+                                    WHERE user_name IS NOT NULL AND user_name <> '' AND password IS NOT NULL AND password <> '' AND role IS NOT NULL AND role <> '';
+                                    ";
                             $query_run = mysqli_query($conn, $query);
 
                             if (mysqli_num_rows($query_run) > 0) {
@@ -250,11 +261,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                                         <td><?= $formattedName; ?></td>
                                         <td><?= $row['user_name']; ?></td>
                                         <?php
-                                            $role = $row['role'];
-                                            $color = ($role == 'staff') ? 'primary' : 'danger';
+                                        $role = $row['role'];
+                                        $color = ($role == 'staff') ? 'primary' : 'danger';
                                         ?>
-                                        <td class="text-<?php echo ($role === 'staff') ? 'primary' : 'danger'; ?>">
-                                            <?php echo ucwords($role); ?>
+                                        <td>
+                                            <span class="badge bg-<?php echo $color; ?> text-white">
+                                                <?php echo ucwords($role); ?>
+                                            </span>
                                         </td>
                                         <td><?= date('m/d/Y h:i A', strtotime($row['dateCreated'])); ?></td>
                                         <td>
@@ -451,12 +464,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
   }
 </script>
 
-    <!-- End of Page Content -->
-    <?php
-    include('../includes/scripts.php');
+
+<?php
+    // Include the necessary files and establish database connection
     include('../includes/footer.php');
+    include('../includes/scripts.php');
 } else {
-    header("Location: ../index.php");
+    header("Location: ../admin_login.php");
     exit();
 }
 ?>

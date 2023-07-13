@@ -1,10 +1,14 @@
 <?php
 session_start();
 if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
+    // Regenerate the session ID
+    session_regenerate_id(true);
+
+    // Include the necessary files and establish database connection
     include('../includes/header.php');
     include('../includes/navbar_admin.php');
     require '../db_conn.php';
-    ?>
+?>
 
     <!-- Begin Page Content -->
     <div class="container-fluid">
@@ -13,7 +17,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
         <div class="d-sm-flex align-items-center justify-content-between mb-1 mt-1">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent p-0">
-                    <li class="breadcrumb-item"><a href="admin.php" class="text-secondary" style="color: #026601; text-decoration: none;">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="admin_dashboard.php" class="text-secondary" style="color: #026601; text-decoration: none;">Dashboard</a></li>
                     <li class="breadcrumb-item"><span class="text-gray-700">Waste Collection</span></li>
                     <li class="breadcrumb-item active text-gray-900" aria-current="page">Garbage Trucks</li>
                 </ol>
@@ -226,6 +230,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                 </div>
             </div>
         </div>
+    </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {

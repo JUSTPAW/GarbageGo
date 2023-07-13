@@ -6,27 +6,27 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
 
     require '../db_conn.php';
 
-    if (isset($_POST['delete_crew_id'])) {
-        $crewId = $_POST['delete_crew_id'];
+    if (isset($_POST['delete_staff_id'])) {
+        $crewId = $_POST['delete_staff_id'];
         $crewId = mysqli_real_escape_string($conn, $crewId);
 
         // Perform the necessary delete operation using the $crewId
-        $deleteQuery = "DELETE FROM crew_members WHERE id = $crewId";
+        $deleteQuery = "DELETE FROM staffs WHERE id = $crewId";
         $deleteResult = mysqli_query($conn, $deleteQuery);
 
         if ($deleteResult) {
-            $_SESSION['message'] = "Crew member deleted successfully.";
-            header('Location: crew_members.php');
+            $_SESSION['message'] = "Staffs deleted successfully.";
+            header('Location: staffs.php');
             exit();
         } else {
-            $_SESSION['message_danger'] = "Error deleting crew member.";
-            header('Location: crew_members.php');
+            $_SESSION['message_danger'] = "Error deleting staffs.";
+            header('Location: staffs.php');
             exit();
         }
     }
 
-    // Add crew member
-    if (isset($_POST['add_crew_member'])) {
+    // Add staff
+    if (isset($_POST['add_staff'])) {
         // Retrieve form data
         $firstName = $_POST['firstName'];
         $middleName = $_POST['middleName'];
@@ -56,26 +56,26 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
         $street = mysqli_real_escape_string($conn, $street);
 
         // Perform the database insertion
-        $query = "INSERT INTO crew_members (firstName, middleName, lastName, position, birthday, gender, phone, email, province, city, barangay, street) 
+        $query = "INSERT INTO staffs (firstName, middleName, lastName, position, birthday, gender, phone, email, province, city, barangay, street) 
                   VALUES ('$firstName', '$middleName', '$lastName', '$position', '$birthday', '$gender', '$phone', '$email', '$province', '$city', '$barangay', '$street')";
         $result = mysqli_query($conn, $query);
 
         if ($result) {
             // Success message
-            $_SESSION['message'] = "Crew Member added successfully.";
-            header('Location: crew_members.php');
+            $_SESSION['message'] = "Staff added successfully.";
+            header('Location: staffs.php');
             exit();
         } else {
             // Error message
-            $_SESSION['message_danger'] = "Error occurred while adding the crew member.";
-            header('Location: crew_members.php');
+            $_SESSION['message_danger'] = "Error occurred while adding the staff.";
+            header('Location: staffs.php');
             exit();
         }
     }
     
-// edit crew member
-    if (isset($_POST['edit_crew_member'])) {
-        $crewId = $_POST['edit_crew_id'];
+// edit staff
+    if (isset($_POST['edit_staff'])) {
+        $staffId = $_POST['edit_staff_id'];
         $firstName = $_POST['edit_firstName'];
         $middleName = $_POST['edit_middleName'];
         $lastName = $_POST['edit_lastName'];
@@ -90,7 +90,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
         $street = $_POST['edit_street'];
 
         // Escape special characters in variables
-        $crewId = mysqli_real_escape_string($conn, $crewId);
+        $staffId = mysqli_real_escape_string($conn, $staffId);
         $firstName = mysqli_real_escape_string($conn, $firstName);
         $middleName = mysqli_real_escape_string($conn, $middleName);
         $lastName = mysqli_real_escape_string($conn, $lastName);
@@ -105,7 +105,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
         $street = mysqli_real_escape_string($conn, $street);
 
         // Perform the database update
-        $query = "UPDATE crew_members SET 
+        $query = "UPDATE staffs SET 
                     firstName='$firstName', 
                     middleName='$middleName', 
                     lastName='$lastName', 
@@ -118,26 +118,25 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                     city='$city', 
                     barangay='$barangay', 
                     street='$street' 
-                  WHERE id='$crewId'";
+                  WHERE id='$staffId'";
         $result = mysqli_query($conn, $query);
 
         if ($result) {
             // Success message
-            $_SESSION['message'] = "Crew member updated successfully.";
-            header('Location: crew_members.php');
+            $_SESSION['message'] = "Staff updated successfully.";
+            header('Location: staffs.php');
             exit();
         } else {
             // Error message
-            $_SESSION['message_danger'] = "Failed to update crew member.";
-            header('Location: crew_members.php');
+            $_SESSION['message_danger'] = "Failed to update staff.";
+            header('Location: staffs.php');
             exit();
         }
     } else {
         // Redirect to the appropriate page if the form is not submitted
-        header("Location: crew_members.php");
+        header("Location: staffs.php");
         exit();
     }
-
 
 } else {
     // Redirect to the login page if not logged in as an admin

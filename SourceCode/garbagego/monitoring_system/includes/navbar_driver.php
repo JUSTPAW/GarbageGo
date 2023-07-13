@@ -1,11 +1,11 @@
 <?php
-require 'db_conn.php';
+require '../db_conn.php';
 ?>
 <!-- Sidebar -->
 <ul class="navbar-nav bg-info sidebar sidebar-dark accordion" id="accordionSidebar">
 
 <!-- Sidebar - Brand -->
-<a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin_dashboard.php">
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="driver_dashboard.php">
     <div class="mb-1 mr-1">
        <img src="../images/icon.jpg" class="card-img-top img-fluid mx-auto d-block image-animated rounded" alt="..." style="max-width: 100%; height: 40px;">
     </div>
@@ -22,7 +22,7 @@ require 'db_conn.php';
 
 <!-- Nav Item - Dashboard -->
 <li class="nav-item active">
-    <a class="nav-link" href="admin_dashboard.php">
+    <a class="nav-link" href="driver_dashboard.php">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
 </li>
@@ -35,21 +35,7 @@ require 'db_conn.php';
     Main Menu
     
 </div>
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Employees"
-        aria-expanded="true" aria-controls="Employees">
-        <i class="fas fa-fw fa-users"></i>
-        <span>Employees</span>
-    </a>
-    <div id="Employees" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Employees:</h6>
-            <a class="collapse-item" href="staffs.php">Office Staffs</a>
-            <a class="collapse-item" href="drivers.php">Drivers</a>
-            <a class="collapse-item" href="crew_members.php">Crew Members</a>
-        </div>
-    </div>
-</li>
+
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Collections"
         aria-expanded="true" aria-controls="Collections">
@@ -60,7 +46,7 @@ require 'db_conn.php';
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Waste Collections</h6>
             <a class="collapse-item" href="map.php">Map</a>
-            <a class="collapse-item" href="schedule.php">Schedule</a>
+            <a class="collapse-item" href="garbage_trucks.php">Schedule</a>
             <a class="collapse-item" href="locations.php">Locations</a>
         </div>
     </div>
@@ -69,13 +55,13 @@ require 'db_conn.php';
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Trucks"
         aria-expanded="true" aria-controls="Trucks">
         <i class="fas fa-fw fa-truck"></i>
-        <span>Vehicles</span>
+        <span>Garbage Trucks</span>
     </a>
     <div id="Trucks" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Vehicles</h6>
+            <h6 class="collapse-header">Garbage Trucks</h6>
             <a class="collapse-item" href="garbage_trucks.php">Garbage Trucks</a>
-            <a class="collapse-item" href="fuels.php">Fuel</a>
+            <a class="collapse-item" href="fuel.php">Fuel</a>
             <a class="collapse-item" href="maintenance.php">Maintenance</a>
         </div>
     </div>
@@ -89,11 +75,7 @@ require 'db_conn.php';
 <div class="sidebar-heading">
     Others
 </div>
-<li class="nav-item">
-    <a class="nav-link" href="accounts.php">
-        <i class="fas fa-fw fa-user"></i>
-        <span>Accounts</span></a>
-</li>
+
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Documents"
         aria-expanded="true" aria-controls="Documents">
@@ -110,7 +92,6 @@ require 'db_conn.php';
         </div>
     </div>
 </li>
-
 <!-- Nav Messages - Tables -->
 <li class="nav-item">
     <a class="nav-link" href="chats.php">
@@ -292,9 +273,9 @@ require 'db_conn.php';
 
             <span class="mr-2 mt-2 d-none d-lg-inline text-info small text-uppercase">
                 <?php
-                require 'db_conn.php';
+                require '../db_conn.php';
                 $user_name = mysqli_real_escape_string($conn, $_SESSION['user_name']); // sanitize the input
-                $sql = "SELECT firstName, middlename, lastName, image FROM admins WHERE user_name = '$user_name'";
+                $sql = "SELECT firstName, middlename, lastName, image FROM drivers WHERE user_name = '$user_name'";
                 $result = mysqli_query($conn, $sql); // execute the query
 
                 if (mysqli_num_rows($result) > 0) {

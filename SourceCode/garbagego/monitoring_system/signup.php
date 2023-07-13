@@ -249,13 +249,19 @@ if (isset($_GET['error'])) {
                                                 <!-- Step 3: Create Password -->
                                                 <div class="step" id="step3">
                                                     <div class="form-group">
-                                                        <input type="text" name="user_name" class="form-control form-control-user" id="exampleInputPassword" placeholder="Username">
+                                                        <input type="text" id="user_name" name="user_name" class="form-control form-control-user" placeholder="Username" onkeyup="checkUsernameAvailability()">
+                                                        <div id="username-message"></div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                                                        <input type="password" name="password" class="form-control form-control-user" id="password" placeholder="Password"
+                                                        onkeyup="checkPasswordStrength()">
+                                                       <div id="password-strength" class="password-strength"></div>
+                                                       <div id="password-suggestions" class="password-suggestions"></div>
+
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="password" name="confirm_password" class="form-control form-control-user" id="exampleInputConfirmPassword" placeholder="Confirm Password">
+                                                        <input type="password" name="confirm_password" class="form-control form-control-user" id="confirm_password" placeholder="Confirm Password" onkeyup="checkPasswordMatch()">
+                                                       <div id="password-match-message" class="small"></div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-6 mt-2">
@@ -319,6 +325,97 @@ if (isset($_GET['error'])) {
                     $('.step-number').eq(currentStep - 1).addClass('active');
                 }
             });
+        </script>
+        <!-- password strength -->
+        <style>
+          .password-strength {
+            margin-top: 5px;
+            font-size: 12px;
+          }
+          .weak {
+            color: #dc3545; /* Bootstrap 4 danger color */
+          }
+          .medium {
+            color: #ffc107; /* Bootstrap 4 warning color */
+          }
+          .strong {
+            color: #28a745; /* Bootstrap 4 success color */
+          }
+          .password-suggestions {
+            margin-top: 8px;
+            font-size: 13px;
+          }
+        </style>
+        <script>
+          function checkPasswordStrength() {
+            var password = document.getElementById("password").value;
+            var passwordStrength = document.getElementById("password-strength");
+            var passwordSuggestions = document.getElementById("password-suggestions");
+
+            // Define the criteria for weak, medium, and strong passwords
+            var weakRegex = /^.{0,5}$/; // Less than 6 characters
+            var mediumRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/; // At least 6 characters with lowercase, uppercase, and numeric characters
+            var strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_#^+=(){}[\]|\\:;"'<>,.~`]).{8,}$/;
+
+            if (strongRegex.test(password)) {
+              passwordStrength.textContent = "Strong password";
+              passwordStrength.className = "password-strength strong";
+              passwordSuggestions.innerHTML = ""; // Clear previous suggestions
+            } else if (mediumRegex.test(password)) {
+              passwordStrength.textContent = "Medium password";
+              passwordStrength.className = "password-strength medium";
+              passwordSuggestions.innerHTML = "<ul><li>Add special characters, uppercase, and lowercase letters</li></ul>";
+            } else if (weakRegex.test(password)) {
+              passwordStrength.textContent = "Weak password";
+              passwordStrength.className = "password-strength weak";
+              passwordSuggestions.innerHTML = "<ul><li>Make it longer, include numbers, uppercase and lowercase letters, and special characters</li></ul>";
+            } else {
+              passwordStrength.textContent = "Password is too short";
+              passwordStrength.className = "password-strength";
+              passwordSuggestions.innerHTML = "<ul><li>Make it at least 8 characters long, include uppercase and lowercase letters, numbers, and special characters</li></ul>";
+            }
+          }
+        </script>
+        <!-- Username Checker -->
+        <script>
+          function checkUsernameAvailability() {
+            const username = document.getElementById('user_name').value;
+
+            // Send an AJAX request to check_username.php
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'check_username.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function () {
+              if (xhr.readyState === 4 && xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                const messageElement = document.getElementById('username-message');
+                if (response.available) {
+                  // Username is available
+                  messageElement.innerHTML = '<span class="small" style="color: #28a745; font-size: 12px;">Username is available</span>';
+                } else {
+                  // Username is already taken
+                  messageElement.innerHTML = '<span class="small" style="color: #dc3545; font-size: 12px;">Username is already taken</span>';
+                }
+              }
+            };
+            xhr.send('username=' + encodeURIComponent(username));
+          }
+        </script>
+        <!-- check if the passwords match -->
+        <script>
+          function checkPasswordMatch() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm_password").value;
+            var matchMessage = document.getElementById("password-match-message");
+
+            if (password === confirmPassword) {
+              matchMessage.innerHTML = "Passwords match";
+              matchMessage.style.color = "#28a745"; // Green color for success
+            } else {
+              matchMessage.innerHTML = "Passwords do not match";
+              matchMessage.style.color = "#dc3545"; // Red color for danger
+            }
+          }
         </script>
     </body>
 </html>

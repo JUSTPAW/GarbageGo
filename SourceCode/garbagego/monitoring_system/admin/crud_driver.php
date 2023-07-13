@@ -25,8 +25,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
         }
     }
 
-    // Add crew member
-    if (isset($_POST['add_crew_member'])) {
+    // Add Driver member
+    if (isset($_POST['add_driver'])) {
         // Retrieve form data
         $firstName = $_POST['firstName'];
         $middleName = $_POST['middleName'];
@@ -56,26 +56,26 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
         $street = mysqli_real_escape_string($conn, $street);
 
         // Perform the database insertion
-        $query = "INSERT INTO crew_members (firstName, middleName, lastName, position, birthday, gender, phone, email, province, city, barangay, street) 
+        $query = "INSERT INTO drivers (firstName, middleName, lastName, position, birthday, gender, phone, email, province, city, barangay, street) 
                   VALUES ('$firstName', '$middleName', '$lastName', '$position', '$birthday', '$gender', '$phone', '$email', '$province', '$city', '$barangay', '$street')";
         $result = mysqli_query($conn, $query);
 
         if ($result) {
             // Success message
-            $_SESSION['message'] = "Crew Member added successfully.";
-            header('Location: crew_members.php');
+            $_SESSION['message'] = "Driver added successfully.";
+            header('Location: drivers.php');
             exit();
         } else {
             // Error message
-            $_SESSION['message_danger'] = "Error occurred while adding the crew member.";
-            header('Location: crew_members.php');
+            $_SESSION['message_danger'] = "Error occurred while adding the driver.";
+            header('Location: drivers.php');
             exit();
         }
     }
     
-// edit crew member
-    if (isset($_POST['edit_crew_member'])) {
-        $crewId = $_POST['edit_crew_id'];
+// edit Driver
+    if (isset($_POST['edit_driver'])) {
+        $driverId = $_POST['edit_driver_id'];
         $firstName = $_POST['edit_firstName'];
         $middleName = $_POST['edit_middleName'];
         $lastName = $_POST['edit_lastName'];
@@ -90,7 +90,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
         $street = $_POST['edit_street'];
 
         // Escape special characters in variables
-        $crewId = mysqli_real_escape_string($conn, $crewId);
+        $driverId = mysqli_real_escape_string($conn, $driverId);
         $firstName = mysqli_real_escape_string($conn, $firstName);
         $middleName = mysqli_real_escape_string($conn, $middleName);
         $lastName = mysqli_real_escape_string($conn, $lastName);
@@ -105,7 +105,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
         $street = mysqli_real_escape_string($conn, $street);
 
         // Perform the database update
-        $query = "UPDATE crew_members SET 
+        $query = "UPDATE drivers SET 
                     firstName='$firstName', 
                     middleName='$middleName', 
                     lastName='$lastName', 
@@ -118,26 +118,25 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                     city='$city', 
                     barangay='$barangay', 
                     street='$street' 
-                  WHERE id='$crewId'";
+                  WHERE id='$driverId'";
         $result = mysqli_query($conn, $query);
 
         if ($result) {
             // Success message
-            $_SESSION['message'] = "Crew member updated successfully.";
-            header('Location: crew_members.php');
+            $_SESSION['message'] = "Driver updated successfully.";
+            header('Location: drivers.php');
             exit();
         } else {
             // Error message
-            $_SESSION['message_danger'] = "Failed to update crew member.";
-            header('Location: crew_members.php');
+            $_SESSION['message_danger'] = "Failed to update driver.";
+            header('Location: drivers.php');
             exit();
         }
     } else {
         // Redirect to the appropriate page if the form is not submitted
-        header("Location: crew_members.php");
+        header("Location: drivers.php");
         exit();
     }
-
 
 } else {
     // Redirect to the login page if not logged in as an admin
