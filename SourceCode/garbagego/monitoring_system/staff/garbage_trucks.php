@@ -1,12 +1,12 @@
 <?php
 session_start();
-if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'driver') {
+if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'staff') {
     // Regenerate the session ID
     session_regenerate_id(true);
 
     // Include the necessary files and establish database connection
     include('../includes/header.php');
-    include('../includes/navbar_driver.php');
+    include('../includes/navbar_staff.php');
     require '../db_conn.php';
 ?>
 
@@ -111,6 +111,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                 </div>
             </div>
         </div>
+
 
         <!-- Delete Truck Modal -->
         <div class="modal fade" id="delete_truck" tabindex="-1" role="dialog" aria-labelledby="deleteTruckModalLabel" aria-hidden="true">
@@ -283,11 +284,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
 </script>
 
         <!-- End of Page Content -->
-    <?php
-    include('../includes/scripts.php');
-    include('../includes/footer.php');
+<?php
+include('../includes/scripts.php');
+include('../includes/footer.php');
 } else {
-    header("Location: ../login.php");
-    exit();
+header("Location: ../login.php");
+exit();
 }
 ?>

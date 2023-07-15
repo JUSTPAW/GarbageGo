@@ -37,11 +37,6 @@ require '../db_conn.php';
 </div>
 
 <li class="nav-item">
-    <a class="nav-link" href="accounts.php">
-        <i class="fas fa-fw fa-user"></i>
-        <span>Accounts</span></a>
-</li>
-<li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Employees"
         aria-expanded="true" aria-controls="Employees">
         <i class="fas fa-fw fa-users"></i>
@@ -50,42 +45,41 @@ require '../db_conn.php';
     <div id="Employees" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Employees:</h6>
-            <a class="collapse-item" href="staffs.php">Office Staffs</a>
             <a class="collapse-item" href="drivers.php">Drivers</a>
             <a class="collapse-item" href="crew_members.php">Crew Members</a>
         </div>
     </div>
 </li>
 <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Ticket"
-        aria-expanded="true" aria-controls="Ticket">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Collections"
+        aria-expanded="true" aria-controls="Collections">
         <i class="fas fa-fw fa-trash"></i>
         <span>Waste Collections</span>
     </a>
-    <div id="Ticket" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+    <div id="Collections" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Waste Collections</h6>
-            <a class="collapse-item" href="garbage_trucks.php">Garbage Trucks</a>
+            <a class="collapse-item" href="map.php">Map</a>
+            <a class="collapse-item" href="schedule.php">Schedule</a>
             <a class="collapse-item" href="locations.php">Locations</a>
         </div>
     </div>
 </li>
-<!-- <li class="nav-item">
-    <a class="nav-link" href="appointments.php">
-        <i class="fas fa-fw fa-stethoscope"></i>
-        <span>Trip Ticket</span></a>
-</li>
 <li class="nav-item">
-    <a class="nav-link" href="medical_records.php">
-        <i class="fas fa-fw fa-book"></i>
-        <span>Garbage Truck</span></a>
-</li> -->
-<li class="nav-item">
-    <a class="nav-link" href="map.php">
-        <i class="fas fa-fw fa-road"></i>
-        <span>Map</span></a>
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Trucks"
+        aria-expanded="true" aria-controls="Trucks">
+        <i class="fas fa-fw fa-truck"></i>
+        <span>Vehicles</span>
+    </a>
+    <div id="Trucks" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Vehicles</h6>
+            <a class="collapse-item" href="garbage_trucks.php">Garbage Trucks</a>
+            <a class="collapse-item" href="fuels.php">Fuel</a>
+            <a class="collapse-item" href="maintenance.php">Maintenance</a>
+        </div>
+    </div>
 </li>
-
 <!-- Divider -->
 <hr class="sidebar-divider d-none d-md-block">
 

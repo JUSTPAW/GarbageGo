@@ -40,21 +40,23 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                     </div>
                     <div class="modal-body">
                         <form action="crud_truck.php" method="POST">
-                            <div class="form-group">
-                                <label for="brand" class="small text-info">Brand</label>
-                                <input type="text" class="form-control" id="brand" name="brand" placeholder="Enter brand" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="model" class="small text-info">Model</label>
-                                <input type="text" class="form-control" id="model" name="model" placeholder="Enter model" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="capacity" class="small text-info">Capacity</label>
-                                <input type="number" class="form-control" id="capacity" name="capacity" placeholder="Enter capacity" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="plateNumber" class="small text-info">Plate Number</label>
-                                <input type="text" class="form-control" id="plateNumber" name="plateNumber" placeholder="Enter plate number" required>
+                            <div class="form-row">
+                                <div class="form-group mt-2 col-md-12">
+                                    <input type="text" class="form-control" id="brand" name="brand" placeholder=" " required>
+                                    <label for="brand" class="text-gray">Brand</label>
+                                </div>
+                                <div class="form-group mt-2 col-md-12">
+                                    <input type="text" class="form-control" id="model" name="model" placeholder=" " required>
+                                    <label for="model" class="text-gray">Model</label>
+                                </div>
+                                <div class="form-group mt-2 col-md-12">
+                                    <input type="number" class="form-control" id="capacity" name="capacity" placeholder=" " required>
+                                    <label for="capacity" class="text-gray">Capacity</label>
+                                </div>
+                                <div class="form-group mt-2 col-md-12">
+                                    <input type="text" class="form-control" id="plateNumber" name="plateNumber" placeholder=" " required>
+                                     <label for="plateNumber" class="text-gray">Plate Number</label>
+                                </div>
                             </div>
                     </div>
                     <div class="modal-footer">
@@ -80,22 +82,25 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                     </div>
                     <div class="modal-body">
                         <form action="crud_truck.php" method="POST">
-                            <div class="form-group">
-                                <label for="edit_brand" class="small text-info">Brand</label>
-                                <input type="text" class="form-control" id="edit_brand" name="edit_brand" placeholder="Enter brand" required>
+                            <div class="form-row">
+                                <div class="form-group mt-2 col-md-12">
+                                    <input type="text" class="form-control" id="edit_brand" name="edit_brand" placeholder=" " required>
+                                    <label for="edit_brand" class="text-gray">Brand</label>
+                                </div>
+                                <div class="form-group mt-2 col-md-12">
+                                    <input type="text" class="form-control" id="edit_model" name="edit_model" placeholder=" " required>
+                                    <label for="edit_model" class="text-gray">Model</label>
+                                </div>
+                                <div class="form-group mt-2 col-md-12">
+                                    <input type="number" class="form-control" id="edit_capacity" name="edit_capacity" placeholder=" " required>
+                                    <label for="edit_capacity" class="text-gray">Capacity</label>
+                                </div>
+                                <div class="form-group mt-2 col-md-12">
+                                    <input type="text" class="form-control" id="edit_plateNumber" name="edit_plateNumber" placeholder=" " required>
+                                    <label for="edit_plateNumber" class="text-gray">Plate Number</label>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="edit_model" class="small text-info">Model</label>
-                                <input type="text" class="form-control" id="edit_model" name="edit_model" placeholder="Enter model" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="edit_capacity" class="small text-info">Capacity</label>
-                                <input type="number" class="form-control" id="edit_capacity" name="edit_capacity" placeholder="Enter capacity" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="edit_plateNumber" class="small text-info">Plate Number</label>
-                                <input type="text" class="form-control" id="edit_plateNumber" name="edit_plateNumber" placeholder="Enter plate number" required>
-                            </div>
+
                             <input type="hidden" id="edit_truck_id" name="edit_truck_id">
                     </div>
                     <div class="modal-footer">

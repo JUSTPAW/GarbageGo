@@ -1,12 +1,12 @@
 <?php
 session_start();
-if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
+if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'staff') {
     // Regenerate the session ID
     session_regenerate_id(true);
 
     // Include the necessary files and establish database connection
     include('../includes/header.php');
-    include('../includes/navbar_admin.php');
+    include('../includes/navbar_staff.php');
     require '../db_conn.php';
 ?>
 
@@ -142,7 +142,7 @@ function calculateAge($birthday) {
                       <input type="text" class="form-control" id="edit_lastName" name="edit_lastName" placeholder=" " required>
                       <label for="edit_lastName" class="text-gray">Last Name</label>
                     </div>
-                  </div>
+                  </div
 
                   <input type="hidden" class="form-control" id="edit_position" name="edit_position" value="Driver">
 
@@ -428,7 +428,7 @@ function calculateAge($birthday) {
     include('../includes/scripts.php');
     include('../includes/footer.php');
 } else {
-    header("Location: ../admin_login.php");
+    header("Location: ../login.php");
     exit();
 }
 ?>

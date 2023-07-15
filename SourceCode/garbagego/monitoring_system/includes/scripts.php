@@ -38,6 +38,21 @@
 
  <!--    <script src="https://code.jquery.com/jquery-1.9.1.js"></script> -->
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+ <!--  script for input fields -->
+<script>
+$(document).ready(function() {
+  // Handle label animation for select input
+  $('.form-group select').on('change', function() {
+    if ($(this).val()) {
+      $(this).addClass('filled');
+    } else {
+      $(this).removeClass('filled');
+    }
+  });
+});
+</script>
+
 
 
 

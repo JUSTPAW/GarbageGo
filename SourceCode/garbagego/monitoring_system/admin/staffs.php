@@ -49,63 +49,63 @@ function calculateAge($birthday) {
                     <div class="modal-body">
                         <form action="crud_staff.php" method="POST">
                             <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="firstName" class="small text-info">First Name</label>
-                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter first name" required>
+                                <div class="form-group mt-2 col-md-4 ">
+                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder=" " required>
+                                    <label for="firstName" class="text-gray">First Name</label>
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="middleName" class="small text-info">Middle Name</label>
-                                    <input type="text" class="form-control" id="middleName" name="middleName" placeholder="Enter middle name">
+                                <div class="form-group mt-2 col-md-4 ">
+                                    <input type="text" class="form-control" id="middleName" name="middleName" placeholder=" ">
+                                    <label for="middleName" class="text-gray">Middle Name</label>
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="lastName" class="small text-info">Last Name</label>
-                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter last name" required>
+                                <div class="form-group mt-2 col-md-4 ">
+                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder=" " required>
+                                    <label for="lastName" class="text-gray">Last Name</label>
                                 </div>
                             </div>
                             <div class="form-row">
-                                 <div class="form-group col-md-4">
-                                    <label for="position" class="small text-info">Position</label>
-                                    <input type="text" class="form-control" id="position" name="position" placeholder="Enter position" required>
+                                 <div class="form-group mt-2 col-md-4 ">
+                                    <input type="text" class="form-control" id="position" name="position" placeholder=" " required>
+                                    <label for="position" class="text-gray">Position</label>
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="birthday" class="small text-info">Date Of Birth</label>
-                                    <input type="date" class="form-control" id="birthday" name="birthday" placeholder="Enter birthday" required>
+                                <div class="form-group mt-2 col-md-4 ">
+                                    <input type="date" class="form-control" id="birthday" name="birthday" placeholder=" " required>
+                                    <label for="birthday" class="text-gray">Date Of Birth</label>
                                 </div>
-                                <div class="form-group col-md-4">
-                                    <label for="gender" class="small text-info">Gender</label>
+                                <div class="form-group mt-2 col-md-4 ">
                                     <select class="form-control" id="gender" name="gender" required>
-                                        <option value="">Select gender</option>
+                                        <option value=""></option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                     </select>
+                                    <label for="gender" class="text-gray">Gender</label>
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="phone" class="small text-info">Contact Number</label>
-                                    <input type="number" class="form-control" id="phone" name="phone" placeholder="Enter phone" required>
+                                <div class="form-group mt-2 col-md-4 ">
+                                    <input type="number" class="form-control" id="phone" name="phone" placeholder=" " required>
+                                    <label for="phone" class="text-gray">Contact Number</label>
                                 </div>
-                                <div class="form-group col-md-8">
-                                    <label for="email" class="small text-info">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+                                <div class="form-group mt-2 col-md-8 ">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder=" ">
+                                    <label for="email" class="text-gray">Email</label>
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="form-group col-md-3">
-                                    <label for="province" class="small text-info">Province</label>
-                                    <input type="text" class="form-control" id="province" name="province" placeholder="Enter province" required>
+                                <div class="form-group mt-2 col-md-3 ">
+                                    <input type="text" class="form-control" id="province" name="province" placeholder=" " required>
+                                    <label for="province" class="text-gray">Province</label>
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <label for="city" class="small text-info">City/Municipality</label>
-                                    <input type="text" class="form-control" id="city" name="city" placeholder="Enter city" required>
+                                <div class="form-group mt-2 col-md-3 ">
+                                    <input type="text" class="form-control" id="city" name="city" placeholder=" " required>
+                                    <label for="city" class="text-gray">City/Municipality</label>
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <label for="barangay" class="small text-info">Barangay</label>
-                                    <input type="text" class="form-control" id="barangay" name="barangay" placeholder="Enter barangay" required>
+                                <div class="form-group mt-2 col-md-3 ">
+                                    <input type="text" class="form-control" id="barangay" name="barangay" placeholder=" " required>
+                                    <label for="barangay" class="text-gray">Barangay</label>
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <label for="street" class="small text-info">Street/Sitio</label>
-                                    <input type="text" class="form-control" id="street" name="street" placeholder="Enter street/sitio">
+                                <div class="form-group mt-2 col-md-3 ">
+                                    <input type="text" class="form-control" id="street" name="street" placeholder=" ">
+                                    <label for="street" class="text-gray">Street/Sitio</label>
                                 </div>
                             </div>
                     </div>
@@ -131,63 +131,63 @@ function calculateAge($birthday) {
               <div class="modal-body">
                 <form action="crud_staff.php" method="POST">
                   <div class="form-row">
-                    <div class="form-group col-md-4">
-                      <label for="edit_firstName" class="small text-info">First Name</label>
-                      <input type="text" class="form-control" id="edit_firstName" name="edit_firstName" placeholder="Enter first name" required>
+                    <div class="form-group mt-2 col-md-4">
+                      <input type="text" class="form-control" id="edit_firstName" name="edit_firstName" placeholder=" " required>
+                      <label for="edit_firstName" class="text-gray">First Name</label>
                     </div>
-                    <div class="form-group col-md-4">
-                      <label for="edit_middleName" class="small text-info">Middle Name</label>
-                      <input type="text" class="form-control" id="edit_middleName" name="edit_middleName" placeholder="Enter middle name">
+                    <div class="form-group mt-2 col-md-4">
+                      <input type="text" class="form-control" id="edit_middleName" name="edit_middleName" placeholder=" ">
+                      <label for="edit_firstName" class="text-gray">First Name</label>
                     </div>
-                    <div class="form-group col-md-4">
-                      <label for="edit_lastName" class="small text-info">Last Name</label>
-                      <input type="text" class="form-control" id="edit_lastName" name="edit_lastName" placeholder="Enter last name" required>
+                    <div class="form-group mt-2 col-md-4">
+                      <input type="text" class="form-control" id="edit_lastName" name="edit_lastName" placeholder=" " required>
+                      <label for="edit_lastName" class=" text-gray">Last Name</label>
                     </div>
                   </div>
                   <div class="form-row">
-                    <div class="form-group col-md-4">
-                      <label for="edit_position" class="small text-info">Position</label>
-                      <input type="text" class="form-control" id="edit_position" name="edit_position" placeholder="Enter position" required>
+                    <div class="form-group mt-2 col-md-4">
+                      <input type="text" class="form-control" id="edit_position" name="edit_position" placeholder=" " required>
+                      <label for="edit_position" class=" text-gray">Position</label>                     
                     </div>
-                    <div class="form-group col-md-4">
-                      <label for="edit_birthday" class="small text-info">Date Of Birth</label>
-                      <input type="date" class="form-control" id="edit_birthday" name="edit_birthday" placeholder="Enter birthday" required>
+                    <div class="form-group mt-2 col-md-4">
+                      <input type="date" class="form-control" id="edit_birthday" name="edit_birthday" placeholder=" " required>
+                      <label for="edit_birthday" class=" text-gray">Date Of Birth</label>                      
                     </div>
-                    <div class="form-group col-md-4">
-                      <label for="edit_gender" class="small text-info">Gender</label>
+                    <div class="form-group mt-2 col-md-4">
                       <select class="form-control" id="edit_gender" name="edit_gender" required>
-                        <option value="">Select gender</option>
+                        <option value=""></option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                       </select>
+                      <label for="edit_gender" class=" text-gray">Gender</label>                     
                     </div>
                   </div>
                   <div class="form-row">
-                    <div class="form-group col-md-4">
-                      <label for="edit_phone" class="small text-info">Contact Number</label>
-                      <input type="number" class="form-control" id="edit_phone" name="edit_phone" placeholder="Enter phone" required>
+                    <div class="form-group mt-2 col-md-4">
+                      <input type="number" class="form-control" id="edit_phone" name="edit_phone" placeholder=" " required>
+                      <label for="edit_phone" class=" text-gray">Contact Number</label>                     
                     </div>
-                    <div class="form-group col-md-8">
-                      <label for="edit_email" class="small text-info">Email</label>
-                      <input type="email" class="form-control" id="edit_email" name="edit_email" placeholder="Enter Email">
+                    <div class="form-group mt-2 col-md-8">
+                      <input type="email" class="form-control" id="edit_email" name="edit_email" placeholder=" ">
+                      <label for="edit_email" class=" text-gray">Email</label>
                     </div>
                   </div>
                   <div class="form-row">
-                    <div class="form-group col-md-3">
-                      <label for="edit_province" class="small text-info">Province</label>
-                      <input type="text" class="form-control" id="edit_province" name="edit_province" placeholder="Enter province" required>
+                    <div class="form-group mt-2 col-md-3">
+                      <input type="text" class="form-control" id="edit_province" name="edit_province" placeholder=" " required>
+                      <label for="edit_province" class=" text-gray">Province</label>
                     </div>
-                    <div class="form-group col-md-3">
-                      <label for="edit_city" class="small text-info">City/Municipality</label>
-                      <input type="text" class="form-control" id="edit_city" name="edit_city" placeholder="Enter city" required>
+                    <div class="form-group mt-2 col-md-3">
+                      <input type="text" class="form-control" id="edit_city" name="edit_city" placeholder=" " required>
+                      <label for="edit_city" class=" text-gray">City/Municipality</label>
                     </div>
-                    <div class="form-group col-md-3">
-                      <label for="edit_barangay" class="small text-info">Barangay</label>
-                      <input type="text" class="form-control" id="edit_barangay" name="edit_barangay" placeholder="Enter barangay" required>
+                    <div class="form-group mt-2 col-md-3">
+                      <input type="text" class="form-control" id="edit_barangay" name="edit_barangay" placeholder=" " required>
+                      <label for="edit_barangay" class=" text-gray">Barangay</label>
                     </div>
-                    <div class="form-group col-md-3">
-                      <label for="edit_street" class="small text-info">Street/Sitio</label>
-                      <input type="text" class="form-control" id="edit_street" name="edit_street" placeholder="Enter street/sitio">
+                    <div class="form-group mt-2 col-md-3">
+                      <input type="text" class="form-control" id="edit_street" name="edit_street" placeholder=" ">
+                      <label for="edit_street" class=" text-gray">Street/Sitio</label>
                     </div>
                   </div>
                   <input type="hidden" id="edit_staff_id" name="edit_staff_id">

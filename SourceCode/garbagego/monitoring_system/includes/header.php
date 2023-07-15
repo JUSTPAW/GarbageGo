@@ -41,7 +41,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> -->
-
+<!-- styles for export options -->
 <style>
 div.dt-button-collection {
     width: auto;
@@ -69,9 +69,45 @@ div.dt-button-collection h3 {
 div.dt-button-collection h3.not-top-heading {
     margin-top: 10px;
 }
-
 </style>
-    
+
+<!-- styles for inputs -->
+<style>
+  .form-group {
+    position: relative;
+  }
+  .form-group input,
+  .form-group textarea {
+    padding-top: 1.10rem; /* Reduced padding on the top */
+  }
+  .form-group select{
+    padding-top: 0.7rem;
+  }
+  .form-group label {
+    position: absolute;
+    top: 0.5rem; /* Added top padding */
+    left: 1.3rem; /* Added left padding */
+    pointer-events: none;
+    transition: all 0.3s;
+    transform-origin: 0 0;
+    margin-bottom: 0.5rem; /* Added margin-bottom */
+  }
+  .form-group input:focus + label,
+  .form-group input:not(:placeholder-shown):not(:focus) + label,
+  .form-group select:focus + label,
+  .form-group select:valid + label,
+  .form-group textarea:focus + label,
+  .form-group textarea:not(:placeholder-shown):not(:focus) + label {
+    transform: translateY(-100%) scale(0.75);
+    font-size: 0.95rem; /* Increase font size */
+    opacity: 0.75;
+    color: green;
+    left: 1.15rem;
+    bottom: 0.80rem; /* Remove left margin */
+  }
+</style>
+
+
 <!--     <script src=”//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js”></script>
 
     

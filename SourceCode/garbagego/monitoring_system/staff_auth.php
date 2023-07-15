@@ -26,7 +26,15 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
         // hashing the password
         $pass = md5($pass);
 
-        $sql = "SELECT * FROM staffs WHERE user_name='$uname' AND password='$pass' UNION SELECT * FROM drivers WHERE user_name='$uname' AND password='$pass'";
+        $sql = "SELECT id, firstName, middleName, lastName, position, birthday, gender, phone, email, province, city, barangay, street, user_name, password, role, image, dateCreated 
+        FROM staffs 
+        WHERE user_name='$uname' AND password='$pass' 
+        UNION 
+        SELECT id, firstName, middleName, lastName, position, birthday, gender, phone, email, province, city, barangay, street, user_name, password, role, image, dateCreated 
+        FROM drivers 
+        WHERE user_name='$uname' AND password='$pass'";
+
+
 
         $result = mysqli_query($conn, $sql);
 

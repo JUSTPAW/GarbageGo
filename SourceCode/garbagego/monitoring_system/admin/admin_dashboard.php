@@ -17,34 +17,44 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossorigin="" />
 <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        #map2 {
-            width: 100%;
-            height: 100vh;
-        }
-</style>
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-    }
+body {
+    margin: 0;
+    padding: 0;
+}
 
-    #map {
-        width: 100%;
-        height: 60vh;
-    }
-    .fa-icon {
-        font-size: 10px;
-        color: #026601;
-    }
-</style>
+#map {
+    width: 100%;
+    height: 60vh;
+}
+.fa-icon {
+    font-size: 10px;
+    color: #026601;
+}
 
-<style>
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 220px;
+  padding: 10px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content p {
+  margin: 5px 0;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
 .forecast-container {
   display: flex;
   overflow-x: auto;
@@ -56,6 +66,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
   margin-right: 10px;
 }
 </style>
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -202,15 +213,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                 </div>
                 <!-- Ongoing/ Outgoing row end-->
              </div>
-<!-- weather api start-->
-  <div class="col-md-3">
-    <form id="weatherForm">
-    </form>
-    <div id="weatherResults">
-    </div>
-  </div>
-</div>
-<!-- weather api end -->
+          <!-- weather api start-->
+            <div class="col-md-3">
+              <form id="weatherForm">
+              </form>
+              <div id="weatherResults">
+              </div>
+            </div>
+          </div>
+          <!-- weather api end -->
 
 </div>
 </div>
@@ -234,33 +245,33 @@ $(document).ready(function() {
     .done(function(response) {
       // Display current weather results
       var weatherHTML = `
-       <div class="card shadow bg-gradient-secondary">
-          <div class="card-body">
-          <h5 class="mt-2 text-white"> ${response.name}, ${response.sys.country}</h5>
-            <div class="text-center">
-              <p>
-                <img src="http://openweathermap.org/img/wn/${response.weather[0].icon}.png" alt="Weather Icon">
-                <span class="h5 font-weight-bold text-capitalize text-white">${response.weather[0].description}</span>
-              </p>
-            </div>
-            <p><i class="fas fa-thermometer-half mr-2 text-white"></i></i><span class="text-white">${response.main.temp} °C </span></p>
-            <div class="dropdown small">
-              <button onclick="toggleDetails()" id="see-more-btn" class="btn btn-info btn-sm">See More</button>
-              <div id="see-more-details" class="dropdown-content">
-                <p><i class="fas fa-tint"></i> Humidity: <span class="font-weight-bold">${response.main.humidity} %</span></p>
-                <p><i class="fas fa-wind"></i> Wind Speed: <span class="font-weight-bold">${response.wind.speed} m/s </span></p>
-                <p><i class="fas fa-thermometer-empty"></i> Min Temperature: <span class="font-weight-bold">${response.main.temp_min} °C </span></p>
-                <p><i class="fas fa-thermometer-full"></i> Max Temperature: <span class="font-weight-bold">${response.main.temp_max} °C </span></p>
-                <p><i class="fas fa-sun"></i> Sunrise: <span class="font-weight-bold">${new Date(response.sys.sunrise * 1000).toLocaleTimeString()} </span></p>
-                <p><i class="fas fa-moon"></i> Sunset: <span class="font-weight-bold">${new Date(response.sys.sunset * 1000).toLocaleTimeString()} </span></p>
-                <p><i class="fas fa-cloud"></i> Cloudiness: <span class="font-weight-bold">${response.clouds.all} % </span></p>
-                <p><i class="fas fa-temperature-low"></i> Feels Like: <span class="font-weight-bold">${response.main.feels_like} °C </span></p>
-                <p><i class="fas fa-compass"></i> Wind Direction: <span class="font-weight-bold">${response.wind.deg}° </span></p>
-                <p><i class="fas fa-sun"></i> UV Index: <span class="font-weight-bold">${response.uvi} </span></p>
-              </div>
+       <div class="card shadow">
+        <div class="card-body">
+          <h6 class="mt-2 text-gray-800">${response.name}, ${response.sys.country} <span class="float-right" id="current-time">${new Date().toLocaleTimeString()}</span></h6>
+          <div class="text-center px-0">
+            <p>
+              <img src="http://openweathermap.org/img/wn/${response.weather[0].icon}.png" alt="Weather Icon">
+              <span class="small font-weight-bold text-capitalize text-gray-800">${response.weather[0].description}</span>
+            </p>
+          </div>
+          <p class="text-center h6"></i></i><span class="text-gray-900">${response.main.temp} °C </span></p>
+          <div class="dropdown small">
+            <a onclick="toggleDetails()" id="see-more-btn" class="text-info">See More</a>
+            <div id="see-more-details" class="dropdown-content">
+              <p><i class="fas fa-tint"></i> Humidity: <span class="font-weight-bold">${response.main.humidity} %</span></p>
+              <p><i class="fas fa-wind"></i> Wind Speed: <span class="font-weight-bold">${response.wind.speed} m/s </span></p>
+              <p><i class="fas fa-thermometer-empty"></i> Min Temperature: <span class="font-weight-bold">${response.main.temp_min} °C </span></p>
+              <p><i class="fas fa-thermometer-full"></i> Max Temperature: <span class="font-weight-bold">${response.main.temp_max} °C </span></p>
+              <p><i class="fas fa-sun"></i> Sunrise: <span class="font-weight-bold">${new Date(response.sys.sunrise * 1000).toLocaleTimeString()} </span></p>
+              <p><i class="fas fa-moon"></i> Sunset: <span class="font-weight-bold">${new Date(response.sys.sunset * 1000).toLocaleTimeString()} </span></p>
+              <p><i class="fas fa-cloud"></i> Cloudiness: <span class="font-weight-bold">${response.clouds.all} % </span></p>
+              <p><i class="fas fa-temperature-low"></i> Feels Like: <span class="font-weight-bold">${response.main.feels_like} °C </span></p>
+              <p><i class="fas fa-compass"></i> Wind Direction: <span class="font-weight-bold">${response.wind.deg}° </span></p>
+              <p><i class="fas fa-sun"></i> UV Index: <span class="font-weight-bold">${response.uvi} </span></p>
             </div>
           </div>
         </div>
+      </div>
       `;
 
       // Make API request for weather forecast
@@ -287,11 +298,11 @@ $(document).ready(function() {
             var forecastDate = new Date(forecast.dt * 1000);
             var dayOfWeek = daysOfWeek[(currentDay + i) % 7];
             forecastHTML += `
-              <div class="forecast-card card mt-2 bg-gray-400" style="max-width: 200px;">
+              <div class="forecast-card card  mt-2" style="max-width: 200px; max-height: 150px;">
                 <div class="card-body">
-                  <h5 class="text-gray-800">${dayOfWeek}</h5>
-                  <p><img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}.png" alt="Weather Icon"> <span class="font-weight-bold text-capitalize text-gray-800 h6">${forecast.weather[0].description}</span></p>
-                  <p><i class="fas fa-thermometer-half mr-2 text-gray-800"></i> <span class="text-gray-800">${forecast.main.temp} °C </span></p>
+                  <h6 class=" small text-gray-800 text-center">${dayOfWeek}</h6>
+                  <p><img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}.png" alt="Weather Icon"> <span class="font-weight-bold text-capitalize text-gray-800 small">${forecast.weather[0].description}</span></p>
+                  <p class="text-center h5><i class="fas fa-thermometer-half mr-2 text-gray-800"></i> <span class="text-gray-800">${forecast.main.temp} °C </span></p>
                 </div>
               </div>
             `;
@@ -334,31 +345,7 @@ $(document).ready(function() {
   $('#weatherForm').submit();
 });
 </script>
-<style>
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 220px;
-  padding: 10px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content p {
-  margin: 5px 0;
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-</style>
-
+<script>setInterval(() => document.getElementById('current-time').textContent = new Date().toLocaleTimeString(), 1000);</script>
 <script>
 function toggleDetails() {
   var detailsElement = document.getElementById("see-more-details");

@@ -288,3 +288,121 @@
 
 
 
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MapQuest API Example</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" /> <!-- Replace the integrity and crossorigin with the actual Font Awesome CSS link -->
+  <style>
+    #map {
+      height: 500px;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script>
+$(document).ready(function() {
+  // Initialize the map
+  var map = L.map('map').setView([39.74, -104.99], 12);
+
+  // Add the tile layer (replace 'your-mapbox-access-token' with your actual Mapbox access token)
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
+    maxZoom: 18,
+  }).addTo(map);
+
+  // Make the API request
+  $.getJSON('https://www.mapquestapi.com/traffic/v2/incidents', {
+    outFormat: 'json',
+    boundingBox: '39.80932724630671,-104.82776641845703,39.67046353361311,-105.1559829711914',
+    key: 'TDRRaX9wx0hftJTBnmvKUO0MCId12FP8'
+  }).done(function(data) {
+    // Process the response
+    var incidents = data.incidents;
+    for (var i = 0; i < incidents.length; i++) {
+      var incident = incidents[i];
+      var lat = incident.lat;
+      var lng = incident.lng;
+      var severity = incident.severity;
+      var type = incident.type;
+
+      // Determine the icon and marker color based on severity
+      var iconClass = '';
+      var markerColor = '';
+      if (severity === 1) {
+        iconClass = 'fas fa-exclamation-circle text-success';
+        markerColor = 'green';
+      } else if (severity === 2) {
+        iconClass = 'fas fa-exclamation-triangle text-warning';
+        markerColor = 'orange';
+      } else if (severity === 3) {
+        iconClass = 'fas fa-exclamation-triangle text-danger';
+        markerColor = 'red';
+      } else {
+        iconClass = 'fas fa-exclamation-circle';
+        markerColor = 'gray';
+      }
+
+      // Create a marker with the appropriate icon and marker color for each incident and add it to the map
+      L.marker([lat, lng], {
+        icon: L.divIcon({ className: iconClass }),
+        // Set the marker color
+        riseOnHover: true,
+        riseOffset: 250,
+        fillColor: markerColor,
+        fillOpacity: 0.8,
+        stroke: false,
+        radius: 8
+      }).addTo(map);
+    }
+
+    // Add the legend
+    var legend = L.control({ position: 'bottomright' });
+
+    legend.onAdd = function(map) {
+      var div = L.DomUtil.create('div', 'legend');
+      div.style.backgroundColor = 'white'; // Set the background color to white
+      div.style.padding = '10px'; // Add padding to the legend
+      div.innerHTML += '<h4>Legend</h4>';
+      div.innerHTML += '<div><i class="fas fa-exclamation-circle text-success"></i> Construction</div>';
+      div.innerHTML += '<div><i class="fas fa-exclamation-triangle text-warning"></i> Low Severity Incident</div>';
+      div.innerHTML += '<div><i class="fas fa-exclamation-triangle text-danger"></i> High Severity Incident</div>';
+      div.innerHTML += '<div><i class="fas fa-exclamation-circle"></i> Unknown</div>';
+      return div;
+    };
+
+    legend.addTo(map);
+  }).fail(function(jqxhr, textStatus, error) {
+    // Handle the error
+    console.log('Request failed: ' + textStatus + ', ' + error);
+  });
+});
+
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
