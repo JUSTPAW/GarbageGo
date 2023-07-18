@@ -1,14 +1,11 @@
 <?php
 session_start();
 if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
-    // Regenerate the session ID
-    session_regenerate_id(true);
 
-    // Include the necessary files and establish database connection
-    include('../includes/header.php');
-    include('../includes/navbar_admin.php');
-    require '../db_conn.php';
-    ?>
+include('../includes/header.php');
+include('../includes/navbar_admin.php');
+require '../db_conn.php';
+?>
 
     <!-- Begin Page Content -->
     <div class="container-fluid">
@@ -138,12 +135,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
     </div>
     <!-- End of Main Content -->
 
-    <!-- End of Page Content -->
-    <?php
-    include('../includes/scripts.php');
-    include('../includes/footer.php');
+<?php
+include('../includes/footer.php');
+include('../includes/scripts.php');
 } else {
-    header("Location: ../admin_login.php");
-    exit();
+header("Location: ../login.php");
+exit();
 }
 ?>

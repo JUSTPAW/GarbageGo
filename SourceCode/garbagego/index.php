@@ -25,8 +25,31 @@
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-control-geocoder/1.13.1/Control.Geocoder.min.css" />
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+
+<style>
+#map {
+    width: 100%;
+    height: 50vh;
+}
+
+.legend-color {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+    }
+</style>
 </head>
 
 <body>
@@ -55,19 +78,11 @@
         <ul>
           <li><a class="nav-link scrollto" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li class="dropdown"><a href="#"><span>Resources</span> <i class="bi bi-chevron-down"></i></a>
+          <li><a class="nav-link scrollto" href="#featured-services">Services</a></li>
+          <li class="dropdown"><a ><span>Resources</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <!-- <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li> -->
+              <li><a class="nav-link scrollto" href="#history">History</a></li>
+              <li><a class="nav-link scrollto" href="#gallery">Gallery</a></li>
               <li><a class="nav-link scrollto" href="#collection">Collection Schedules</a></li>
               <li><a class="nav-link scrollto" href="#location">Garbage Truck Location</a></li>
             </ul>
@@ -91,28 +106,28 @@
       <div class="carousel-inner" role="listbox">
 
         <!-- Slide 1 -->
-        <div class="carousel-item active" style="background-image: url(assets/img/slide/slide-01.jpg)">
+        <div class="carousel-item active" style="background-image: url(assets/img/slide/slide_2.jpg)">
           <div class="container">
-            <h2>Welcome to <span>MENRO LIAN</span></h2>
-            <p>At MENRO LIAN, we're dedicated to preserving our planet's beauty and creating a greener future. With sustainable innovation, community engagement, and unwavering commitment, we lead in environmental conservation. Join us in building a harmonious world for humans and nature. Together, towards a greener tomorrow.</p>
+            <h3>Welcome to <span>MENRO LIAN</span></h3>
+            <p>With sustainable innovation, community engagement, and unwavering commitment, we lead in environmental conservation. Join us in building a harmonious world for humans and nature. Together, towards a greener tomorrow.</p>
             <a href="#about" class="btn-get-started scrollto">Read More</a>
           </div>
         </div>
 
         <!-- Slide 2 -->
-        <div class="carousel-item" style="background-image: url(assets/img/slide/slide-2.jpg)">
+        <div class="carousel-item" style="background-image: url(assets/img/slide/slide_1.jpg)">
           <div class="container">
-            <h2>MISSION</h2>
-            <p>At MENRO LIAN, our mission is to protect and conserve the environment through sustainable practices, education, and community engagement. We are committed to preserving the natural beauty of our surroundings, mitigating environmental impacts, and fostering a sense of responsibility towards the planet.</p>
-            <a href="#about" class="btn-get-started scrollto">Read More</a>
+            <h3> Hassle-free waste collection schedule</h3>
+            <p>Stay in the loop and keep your community clean with our convenient waste collection schedule, ensuring a seamless and eco-friendly disposal process for a greener tomorrow.</p>
+            <a href="#collection" class="btn-get-started scrollto">Read More</a>
           </div>
         </div>
 
         <!-- Slide 3 -->
-        <div class="carousel-item" style="background-image: url(assets/img/slide/slide-3.jpg)">
+        <div class="carousel-item" style="background-image: url(assets/img/slide/slide_4.jpg)">
           <div class="container">
-            <h2>VISION</h2>
-            <p>Our vision is to create a future where humans and nature coexist harmoniously. We strive to be a leading force in environmental conservation, promoting sustainable development, and inspiring individuals and communities to adopt eco-friendly lifestyles. Through innovation, collaboration, and advocacy, we envision a world where every action contributes to the well-being of our planet, ensuring a vibrant and sustainable future for all.</p>
+            <h3>Track our garbage trucks</h3>
+            <p>Track our garbage trucks in real-time and witness the incredible journey they embark on, as they diligently collect and transport waste to promote a cleaner and greener community.</p>
             <a href="#about" class="btn-get-started scrollto">Read More</a>
           </div>
         </div>
@@ -178,6 +193,7 @@
             </div>
 
 
+          <div class="table-responsive">
           <table id="garbage-table" class="table table-hover left-border text-center animated-table mt-1" data-aos="fade-left">
             <thead class="table-success">
               <tr>
@@ -215,6 +231,8 @@
               <!-- Add more rows as needed -->
             </tbody>
           </table>
+        </div>
+
         </div>
 
         <script>
@@ -289,7 +307,126 @@
     </div>
 
       </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
     </section><!-- End Collection Section -->
+
+        <!-- ======= Pricing Section ======= -->
+    <section id="location" class="pricing">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Garbage Truck Location</h2>
+          <p>Track the dynamic whereabouts of our diligent garbage trucks as they navigate the city's bustling streets, ensuring timely waste collection and promoting a cleaner, greener environment for all.</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-4 col-md-12">
+          <div class="box" data-aos="fade-right" data-aos-delay="100">
+            <h3>Garbage Trucks</h3>
+            <ul>
+              <li>
+                <label>
+                  <input type="checkbox" name="truck" value="Truck A"> Truck A
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" name="truck" value="Truck B"> Truck B
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" name="truck" value="Truck C"> Truck C
+                </label>
+              </li>
+              <!-- Add more truck selections as needed -->
+            </ul>
+          </div>
+          
+          <div class="legend mt-4" data-aos="fade-right" data-aos-delay="200">
+           <div class="box" data-aos="fade-right" data-aos-delay="100">
+                <h6>Legend:</h6>
+                <ul class="legend-list mt-4">
+                  <li><span class="legend-color" style="background-color: #ff0000;"></span> Truck A</li>
+                  <li><span class="legend-color" style="background-color: #00ff00;"></span> Truck B</li>
+                  <li><span class="legend-color" style="background-color: #0000ff;"></span> Truck C</li>
+                  <!-- Add more truck colors and names as needed -->
+                </ul>
+            </div>
+          </div>
+        </div>
+
+
+
+          <div class="col-lg-8 col-md-12 mt-4 mt-md-0">
+            <div class="box featured" data-aos="fade-left" data-aos-delay="200">
+              <!-- <div class="card">
+                <div class="card-body"> -->
+                  <h5 class="card-title text-gray-800 mb-4">Garbage Trucks Location</h5>
+                  <div id="map"></div>
+               <!--  </div>
+              </div> -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script>
+        var map_init = L.map('map', {
+            center: [9.0820, 8.6753],
+            zoom: 8
+        });
+        var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map_init);
+        L.Control.geocoder().addTo(map_init);
+        if (!navigator.geolocation) {
+            console.log("Your browser doesn't support geolocation feature!")
+        } else {
+            setInterval(() => {
+                navigator.geolocation.getCurrentPosition(getPosition)
+            }, 5000);
+        };
+        var marker, circle, lat, long, accuracy;
+
+        function getPosition(position) {
+            // console.log(position)
+            lat = position.coords.latitude
+            long = position.coords.longitude
+            accuracy = position.coords.accuracy
+
+            if (marker) {
+                map_init.removeLayer(marker)
+            }
+
+            if (circle) {
+                map_init.removeLayer(circle)
+            }
+
+            marker = L.marker([lat, long])
+            circle = L.circle([lat, long], { radius: accuracy })
+
+            var featureGroup = L.featureGroup([marker, circle]).addTo(map_init)
+
+            map_init.fitBounds(featureGroup.getBounds())
+
+            console.log("Your coordinate is: Lat: " + lat + " Long: " + long + " Accuracy: " + accuracy)
+        }
+    </script>
+
+    </section><!-- End Pricing Section -->
 
     <!-- ======= Cta Section ======= -->
     <section id="cta" class="cta">
@@ -313,81 +450,31 @@
           <p>Welcome to MENRO Lian, where we strive to harmonize progress and environmental preservation. Our dedicated team works towards sustainable development, protecting nature's wonders for generations to come.</p>
         </div>
 
-        <div class="row mt-4">
+        <div class="row mt-2">
           <div class="col-lg-6" data-aos="fade-right">
             <div style="display: flex; justify-content: center;">
-              <img src="assets/img/icon.jpg" class="img-fluid" alt="" style="max-width: 100%; height: 250px; margin-left: auto; margin-right: auto;">
+              <img src="assets/img/try.jpg" class="img-fluid" alt="" style="max-width: 100%; height: 300px; margin-left: auto; margin-right: auto;">
             </div>
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left">
             <h3>Welcome to Municipal Environment and Natural Resources Office of Lian, Batangas</h3>
             <p class="fst-italic">
               Where passion for the planet meets sustainable innovation. As a team of dedicated environmental enthusiasts, we are on a mission to preserve our natural wonders and create a greener future. Through our unwavering commitment to conservation, education, and innovative solutions, we are driving positive change and shaping a sustainable world for generations to come. Join us in our journey towards a thriving planet, where harmony between humans and nature is not just a dream, but a remarkable reality.
+
+              Here, we believe that a harmonious coexistence between humans and nature is not only possible but essential for a thriving community. Our tireless efforts encompass a diverse range of initiatives, from promoting eco-friendly practices to ensuring the efficient management of waste and pollution control.
             </p>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-lg-12 fst-italic" data-aos="fade-right">
+              As you navigate through our website, you'll discover a wealth of information about our services, projects, and ongoing initiatives. From waste management and recycling programs to environmental impact assessments, we are here to assist you every step of the way. We invite you to explore our resources, engage with our knowledgeable staff, and join us in our mission to preserve the natural wonders that make Lian, Batangas, truly special.
+
+              Together, let us foster a community where sustainability thrives, and where the beauty of nature is cherished and protected for generations to come. Welcome to the Municipal Environment and Natural Resources Office of Lian, Batangas – where environmental preservation is our shared responsibility and our collective legacy.
           </div>
         </div>
 
       </div>
     </section><!-- End About Us Section -->
-
-    <!-- ======= Featured Services Section ======= -->
-    <section id="featured-services" class="featured-services">
-      <div class="container" data-aos="fade-up">
-
-        <div class="row">
-          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-              <div class="icon"><i class="fas fa-leaf"></i></div>
-              <h4 class="title"><a href="">Conservation</a></h4>
-              <p class="description">Safeguarding nature's treasures, ensuring a thriving legacy for generations to come.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-              <div class="icon"><i class="fas fa-seedling"></i></div>
-              <h4 class="title"><a href="">Sustainable Practices</a></h4>
-              <p class="description">Embracing eco-friendly solutions, paving the way towards a greener footprint.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
-              <div class="icon"><i class="fas fa-book-open"></i></div>
-              <h4 class="title"><a href="">Education & Awareness</a></h4>
-              <p class="description">Inspiring minds, empowering actions for a planet in need.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="row mt-3">
-          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-              <div class="icon"><i class="fas fa-hands-helping"></i></div>
-              <h4 class="title"><a href="">Community Engagement</a></h4>
-              <p class="description">Uniting communities, igniting the power of collaboration for impactful change.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-              <div class="icon"><i class="fas fa-heart"></i></div>
-              <h4 class="title"><a href="">Advocacy</a></h4>
-              <p class="description">Shaping policies, championing sustainability on a global scale.</p>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
-              <div class="icon"><i class="fas fa-lightbulb"></i></div>
-              <h4 class="title"><a href="">Innovation</a></h4>
-              <p class="description">Pioneering new frontiers, revolutionizing environmental solutions for a brighter future.</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Featured Services Section -->
 
     <!-- ======= Staff Members Section ======= -->
     <section id="staff" class="staff section-bg">
@@ -493,7 +580,7 @@
               <div class="card shadow" style="border-color: #026601;">
                 <div class="card-body">
                   <h3 class="text-center mb-3">Municipal Environment and Natural Resources Office of Lian, Batangas</h3>
-                  <div class="scrollable-content" style="max-height: 300px; overflow-y: auto;">
+                  <div class="scrollable-content" style="max-height: 450px; overflow-y: auto;">
                     <p style="text-indent: 2em; text-align: justify;">
                       The Municipal Environment and Natural Resources Office (MENRO) of Lian has a rich history rooted in the town's commitment to environmental conservation and sustainable development. Lian, a municipality located in the province of Batangas, Philippines, is blessed with abundant natural resources, including pristine beaches, lush forests, and diverse marine ecosystems. Recognizing the importance of preserving and protecting these valuable assets, the local government established the MENRO to spearhead environmental initiatives and promote responsible resource management.
                     </p>
@@ -535,206 +622,68 @@
     </section><!-- End History Section -->
 
     <!-- ======= Services Section ======= -->
-    <section id="services" class="services services">
+    <section id="featured-services" class="featured-services">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
           <h2>Services</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>Discover a world of sustainable solutions as our dedicated team at the Municipal Environment and Natural Resources Office offers a wide array of services to protect and preserve our precious environment for future generations.</p>
         </div>
 
         <div class="row">
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon"><i class="fas fa-heartbeat"></i></div>
-            <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+              <div class="icon"><i class="fas fa-leaf"></i></div>
+              <h4 class="title"><a >Conservation</a></h4>
+              <p class="description">Safeguarding nature's treasures, ensuring a thriving legacy for generations to come.</p>
+            </div>
           </div>
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon"><i class="fas fa-pills"></i></div>
-            <h4 class="title"><a href="">Dolor Sitema</a></h4>
-            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+              <div class="icon"><i class="fas fa-seedling"></i></div>
+              <h4 class="title"><a >Sustainable Practices</a></h4>
+              <p class="description">Embracing eco-friendly solutions, paving the way towards a greener footprint.</p>
+            </div>
           </div>
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon"><i class="fas fa-hospital-user"></i></div>
-            <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-          </div>
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="100">
-            <div class="icon"><i class="fas fa-dna"></i></div>
-            <h4 class="title"><a href="">Magni Dolores</a></h4>
-            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-          </div>
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="200">
-            <div class="icon"><i class="fas fa-wheelchair"></i></div>
-            <h4 class="title"><a href="">Nemo Enim</a></h4>
-            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
-          </div>
-          <div class="col-lg-4 col-md-6 icon-box" data-aos="zoom-in" data-aos-delay="300">
-            <div class="icon"><i class="fas fa-notes-medical"></i></div>
-            <h4 class="title"><a href="">Eiusmod Tempor</a></h4>
-            <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+              <div class="icon"><i class="fas fa-book-open"></i></div>
+              <h4 class="title"><a >Education & Awareness</a></h4>
+              <p class="description">Inspiring minds, empowering actions for a planet in need.</p>
+            </div>
           </div>
         </div>
 
-      </div>
-    </section><!-- End Services Section -->
-
-    <!-- ======= Departments Section ======= -->
-    <section id="departments" class="departments">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Departments</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
-
-        <div class="row" data-aos="fade-up" data-aos-delay="100">
-          <div class="col-lg-4 mb-5 mb-lg-0">
-            <ul class="nav nav-tabs flex-column">
-              <li class="nav-item">
-                <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#tab-1">
-                  <h4>Cardiology</h4>
-                  <p>Quis excepturi porro totam sint earum quo nulla perspiciatis eius.</p>
-                </a>
-              </li>
-              <li class="nav-item mt-2">
-                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-2">
-                  <h4>Neurology</h4>
-                  <p>Voluptas vel esse repudiandae quo excepturi.</p>
-                </a>
-              </li>
-              <li class="nav-item mt-2">
-                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-3">
-                  <h4>Hepatology</h4>
-                  <p>Velit veniam ipsa sit nihil blanditiis mollitia natus.</p>
-                </a>
-              </li>
-              <li class="nav-item mt-2">
-                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-4">
-                  <h4>Pediatrics</h4>
-                  <p>Ratione hic sapiente nostrum doloremque illum nulla praesentium id</p>
-                </a>
-              </li>
-            </ul>
+        <div class="row mt-3">
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+              <div class="icon"><i class="fas fa-hands-helping"></i></div>
+              <h4 class="title"><a >Community Engagement</a></h4>
+              <p class="description">Uniting communities, igniting the power of collaboration for impactful change.</p>
+            </div>
           </div>
-          <div class="col-lg-8">
-            <div class="tab-content">
-              <div class="tab-pane active show" id="tab-1">
-                <h3>Cardiology</h3>
-                <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
-                <img src="assets/img/departments-1.jpg" alt="" class="img-fluid">
-                <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero</p>
-              </div>
-              <div class="tab-pane" id="tab-2">
-                <h3>Neurology</h3>
-                <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
-                <img src="assets/img/departments-2.jpg" alt="" class="img-fluid">
-                <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero</p>
-              </div>
-              <div class="tab-pane" id="tab-3">
-                <h3>Hepatology</h3>
-                <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
-                <img src="assets/img/departments-3.jpg" alt="" class="img-fluid">
-                <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero</p>
-              </div>
-              <div class="tab-pane" id="tab-4">
-                <h3>Pediatrics</h3>
-                <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
-                <img src="assets/img/departments-4.jpg" alt="" class="img-fluid">
-                <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero</p>
-              </div>
+
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+              <div class="icon"><i class="fas fa-heart"></i></div>
+              <h4 class="title"><a >Advocacy</a></h4>
+              <p class="description">Shaping policies, championing sustainability on a global scale.</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+              <div class="icon"><i class="fas fa-lightbulb"></i></div>
+              <h4 class="title"><a >Innovation</a></h4>
+              <p class="description">Pioneering new frontiers, revolutionizing environmental solutions for a brighter future.</p>
             </div>
           </div>
         </div>
 
       </div>
-    </section><!-- End Departments Section -->
-
-    <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Testimonials</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
-
-        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                <h3>Saul Goodman</h3>
-                <h4>Ceo &amp; Founder</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                <h3>Sara Wilsson</h3>
-                <h4>Designer</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                <h3>Jena Karlis</h3>
-                <h4>Store Owner</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                <h3>Matt Brandon</h3>
-                <h4>Freelancer</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                <h3>John Larson</h3>
-                <h4>Entrepreneur</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-    </section><!-- End Testimonials Section -->
-
-    
+    </section><!-- End Services Section -->
 
     <!-- ======= Gallery Section ======= -->
     <section id="gallery" class="gallery">
@@ -742,110 +691,25 @@
 
         <div class="section-title">
           <h2>Gallery</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>Step into a captivating visual journey through the pristine landscapes and breathtaking beauty of our city's environment, showcased in our mesmerizing gallery section, brought to you by the Municipal Environment and Natural Resources Office.</p>
         </div>
 
         <div class="gallery-slider swiper">
           <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><a class="gallery-lightbox" href="assets/img/gallery/gallery-1.jpg"><img src="assets/img/gallery/gallery-1.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="assets/img/gallery/gallery-2.jpg"><img src="assets/img/gallery/gallery-2.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="assets/img/gallery/gallery-3.jpg"><img src="assets/img/gallery/gallery-3.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="assets/img/gallery/gallery-4.jpg"><img src="assets/img/gallery/gallery-4.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="assets/img/gallery/gallery-5.jpg"><img src="assets/img/gallery/gallery-5.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="assets/img/gallery/gallery-6.jpg"><img src="assets/img/gallery/gallery-6.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="assets/img/gallery/gallery-7.jpg"><img src="assets/img/gallery/gallery-7.jpg" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="gallery-lightbox" href="assets/img/gallery/gallery-8.jpg"><img src="assets/img/gallery/gallery-8.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="gallery-lightbox" href="assets/img/gallery/gallery-01.jpg"><img src="assets/img/gallery/gallery-01.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="gallery-lightbox" href="assets/img/gallery/gallery-02.jpg"><img src="assets/img/gallery/gallery-02.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="gallery-lightbox" href="assets/img/gallery/gallery-03.jpg"><img src="assets/img/gallery/gallery-03.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="gallery-lightbox" href="assets/img/gallery/gallery-04.jpg"><img src="assets/img/gallery/gallery-04.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="gallery-lightbox" href="assets/img/gallery/gallery-05.jpg"><img src="assets/img/gallery/gallery-05.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="gallery-lightbox" href="assets/img/gallery/gallery-06.jpg"><img src="assets/img/gallery/gallery-06.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="gallery-lightbox" href="assets/img/gallery/gallery-07.jpg"><img src="assets/img/gallery/gallery-07.jpg" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="gallery-lightbox" href="assets/img/gallery/gallery-08.jpg"><img src="assets/img/gallery/gallery-08.jpg" class="img-fluid" alt=""></a></div>
           </div>
           <div class="swiper-pagination"></div>
         </div>
 
       </div>
     </section><!-- End Gallery Section -->
-
-    <!-- ======= Pricing Section ======= -->
-    <section id="pricing" class="pricing">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Pricing</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
-
-        <div class="row">
-
-          <div class="col-lg-3 col-md-6">
-            <div class="box" data-aos="fade-up" data-aos-delay="100">
-              <h3>Free</h3>
-              <h4><sup>$</sup>0<span> / month</span></h4>
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li class="na">Pharetra massa</li>
-                <li class="na">Massa ultricies mi</li>
-              </ul>
-              <div class="btn-wrap">
-                <a href="#" class="btn-buy">Buy Now</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mt-4 mt-md-0">
-            <div class="box featured" data-aos="fade-up" data-aos-delay="200">
-              <h3>Business</h3>
-              <h4><sup>$</sup>19<span> / month</span></h4>
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li>Pharetra massa</li>
-                <li class="na">Massa ultricies mi</li>
-              </ul>
-              <div class="btn-wrap">
-                <a href="#" class="btn-buy">Buy Now</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
-            <div class="box" data-aos="fade-up" data-aos-delay="300">
-              <h3>Developer</h3>
-              <h4><sup>$</sup>29<span> / month</span></h4>
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li>Pharetra massa</li>
-                <li>Massa ultricies mi</li>
-              </ul>
-              <div class="btn-wrap">
-                <a href="#" class="btn-buy">Buy Now</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
-            <div class="box" data-aos="fade-up" data-aos-delay="400">
-              <span class="advanced">Advanced</span>
-              <h3>Ultimate</h3>
-              <h4><sup>$</sup>49<span> / month</span></h4>
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li>Pharetra massa</li>
-                <li>Massa ultricies mi</li>
-              </ul>
-              <div class="btn-wrap">
-                <a href="#" class="btn-buy">Buy Now</a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Pricing Section -->
 
     <!-- ======= Frequently Asked Questioins Section ======= -->
     <section id="faq" class="faq section-bg">
@@ -1016,11 +880,11 @@
                 <strong>Email:</strong> info@example.com<br>
               </p>
               <div class="social-links mt-3">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                <a href="" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="" class="linkedin"><i class="bx bxl-linkedin"></i></a>
               </div>
             </div>
           </div>
@@ -1030,31 +894,35 @@
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a class="scrollto" href="#hero">Home</a></li>
               <li><i class="bx bx-chevron-right"></i> <a class="scrollto" href="#about">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a class="scrollto" href="#services">Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a class="scrollto" href="#featured-services">Services</a></li>
               <li><i class="bx bx-chevron-right"></i> <a class="scrollto" href="#collection">Collection Schedules</a></li>
               <li><i class="bx bx-chevron-right"></i> <a class="scrollto" href="#location">Garbage Truck Location</a></li>
             </ul>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Our Services</h4>
+            <h4>Useful Links</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Office Staffs</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Environmental Conservation</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Waste Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#history">History</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#staff">Office Staffs</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#faq">FAQ'S</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#gallery">Gallery</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#contact">Contacts</a></li>
             </ul>
           </div>
 
-          <div class="col-lg-4 col-md-6 footer-newsletter">
-            <h4>Our Newsletter</h4>
-            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-            <form action="" method="post">
-              <input type="email" name="email"><input type="submit" value="Subscribe">
-            </form>
-
+          <div class="col-lg-4 col-md-6 footer-newsletter mt-5">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="d-flex  justify-content-center align-items-center">
+                  <img src="assets/img/lian_logo.png" class="img-fluid mx-2" alt="" style="max-width: 100px; height: auto;">
+                  <img src="assets/img/menro_logo.png" class="img-fluid mx-2" alt="" style="max-width: 100px; height: auto;">
+                  <img src="assets/img/batangas_logo.png" class="img-fluid mx-2" alt="" style="max-width: 100px; height: auto;">
+                </div>
+              </div>
+            </div>
           </div>
+
 
         </div>
       </div>

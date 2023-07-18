@@ -1,13 +1,10 @@
 <?php
 session_start();
 if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'driver') {
-    // Regenerate the session ID
-    session_regenerate_id(true);
 
-    // Include the necessary files and establish database connection
-    include('../includes/header.php');
-    include('../includes/navbar_driver.php');
-    require '../db_conn.php';
+include('../includes/header.php');
+include('../includes/navbar_driver.php');
+require '../db_conn.php';
 ?>
 
 <!-- Begin Page Content -->
@@ -161,11 +158,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
 <!-- /.container-fluid -->
 
 <?php
-    // Include the necessary files and establish database connection
-    include('../includes/footer.php');
-    include('../includes/scripts.php');
+include('../includes/footer.php');
+include('../includes/scripts.php');
 } else {
-    header("Location: ../login.php");
-    exit();
+header("Location: ../login.php");
+exit();
 }
 ?>

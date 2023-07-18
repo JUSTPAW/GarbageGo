@@ -118,6 +118,29 @@
         .step-map .step-description.active {
             color: #026601;
         }
+        @media (max-width: 576px) {
+            .step-map .step-number,
+            .step-map .step-description {
+                display: none;
+            }
+            
+            .step-map .step-number.active + .step-description,
+            .step-map .step-description.active {
+                display: block;
+            }
+        }
+
+        @media (max-width: 576px) {
+          .form-group.text-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          .role-option {
+            margin: 0 7px;
+          }
+        }
     </style>
 
     <body id="page-top" class="step-form">
@@ -173,7 +196,8 @@ if (isset($_GET['error'])) {
                                                 </div>
                                                 <div class="col-lg-9 col-md-8 col-sm-8">
                                                     
-                                                    <h1 class="h4 text-gray-900 mt-2">MENRO Lian Employee Registration</h1>
+                                                     <h1 class="h4 text-gray-900 mt-2 d-none d-sm-block">MENRO Lian Employee Registration</h1>
+                                                    <h1 class="h6 text-gray-900 mt-2 d-sm-none">Employee Registration</h1>
                                                     <h1 class="small text-gray-900">Please create your Account.</h1>
                                                 </div>
                                             </div>
@@ -183,36 +207,43 @@ if (isset($_GET['error'])) {
                                                 <div class="container">
                                                     <div class="row">
                                                         <div class="col-sm-4 text-center">
-                                                            <span class="step-number">1</span>
-                                                            <span class="step-description text text-gray-800 text-xs">Account Type Selection</span>
+                                                            <div class="d-flex flex-column align-items-center">
+                                                                <span class="step-number">1</span>
+                                                                <span class="step-description text text-gray-800 text-xs">Account Type Selection</span>
+                                                            </div>
                                                         </div>
                                                         <div class="col-sm-4 text-center">
-                                                            <span class="step-number active">2</span>
-                                                            <span class="step-description text text-gray-800 text-xs">Personal Information Input</span>
+                                                            <div class="d-flex flex-column align-items-center">
+                                                                <span class="step-number">2</span>
+                                                                <span class="step-description text text-gray-800 text-xs">Personal Information Input</span>
+                                                            </div>
                                                         </div>
                                                         <div class="col-sm-4 text-center">
-                                                            <span class="step-number">3</span>
-                                                            <span class="step-description text text-gray-800 text-xs">Username & Password Setup</span>
+                                                            <div class="d-flex flex-column align-items-center">
+                                                                <span class="step-number">3</span>
+                                                                <span class="step-description text text-gray-800 text-xs">Username & Password Setup</span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
+
                                             <form class="user mt-2" action="signup_auth.php" method="post" id="stepForm">
                                                 <!-- Step 1: Account Type -->
                                                 <div class="step" id="step1">
                                                     <div class="form-group text-center">
-                                                        <label class="role-option mx-2">
-                                                            <input type="radio" id="staff" name="role" value="staff" style="opacity: 0; position: absolute; width: 1px; height: 1px; overflow: hidden;">
-                                                            <img src="images/staff.png" class="img-fluid mx-auto d-block" alt="Staff" style="max-width: 100%; height: 100px;">
-                                                            <span class="role-text">Staff</span>
-                                                        </label>
+                                                      <label class="role-option">
+                                                        <input type="radio" id="staff" name="role" value="staff" style="opacity: 0; position: absolute; width: 1px; height: 1px; overflow: hidden;">
+                                                        <img src="images/staff.png" class="img-fluid mx-auto d-block" alt="Staff" style="max-width: 100%; height: 100px;">
+                                                        <span class="role-text">Staff</span>
+                                                      </label>
 
-                                                        <label class="role-option mx-2">
-                                                            <input type="radio" id="driver" name="role" value="driver" style="opacity: 0; position: absolute; width: 1px; height: 1px; overflow: hidden;" required>
-                                                            <img src="images/driver.png" class="img-fluid mx-auto d-block" alt="Driver" style="max-width: 100%; height: 100px;">
-                                                            <span class="role-text">Driver</span>
-                                                        </label>
+                                                      <label class="role-option">
+                                                        <input type="radio" id="driver" name="role" value="driver" style="opacity: 0; position: absolute; width: 1px; height: 1px; overflow: hidden;" required>
+                                                        <img src="images/driver.png" class="img-fluid mx-auto d-block" alt="Driver" style="max-width: 100%; height: 100px;">
+                                                        <span class="role-text">Driver</span>
+                                                      </label>
                                                     </div>
                                                     <button type="button" class="btn btn-secondary btn-user btn-block next-step">Next</button>
                                                 </div>
@@ -220,11 +251,11 @@ if (isset($_GET['error'])) {
                                                 <!-- Step 2: Personal Details -->
                                                 <div class="step" id="step2">
                                                     <div class="form-group row">
-                                                        <div class="col-sm-4 mb-3 mb-sm-0">
-                                                            <input type="text" name="firstName" class="form-control form-control-user" id="exampleInputFirstName" placeholder="First Name">
+                                                        <div class="col-sm-4">
+                                                            <input type="text" name="firstName" class="form-control form-control-user mb-3" id="exampleInputFirstName" placeholder="First Name">
                                                         </div>
                                                         <div class="col-sm-4">
-                                                            <input type="text" name="middleName" class="form-control form-control-user" id="exampleInputMiddleName" placeholder="Middle Name">
+                                                            <input type="text" name="middleName" class="form-control form-control-user mb-3" id="exampleInputMiddleName" placeholder="Middle Name">
                                                         </div>
                                                         <div class="col-sm-4">
                                                             <input type="text" name="lastName" class="form-control form-control-user" id="exampleInputLastName" placeholder="Last Name">
@@ -234,7 +265,7 @@ if (isset($_GET['error'])) {
                                                         <input type="tel" name="phone" class="form-control form-control-user" id="exampleInputPhone" placeholder="Phone Number">
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address">
+                                                        <input type="email" name="email" class="form-control form-control-user mb-3" id="exampleInputEmail" placeholder="Email Address">
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-6 mt-2">

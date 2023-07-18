@@ -1,10 +1,12 @@
+
 <?php
 
 $sname= "localhost";
-$unmae= "root";
-$password = "";
-
-$db_name = "garbagego";
+$unmae= "root"; 
+// u457140180_garbagego    
+$password ="";
+// Garbagego2023
+$db_name = "u457140180_garbagego";
 
 $conn = mysqli_connect($sname, $unmae, $password, $db_name);
 

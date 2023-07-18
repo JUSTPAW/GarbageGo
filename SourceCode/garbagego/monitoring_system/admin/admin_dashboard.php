@@ -1,14 +1,12 @@
 <?php
 session_start();
 if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
-    // Regenerate the session ID
-    session_regenerate_id(true);
 
-    // Include the necessary files and establish database connection
-    include('../includes/header.php');
-    include('../includes/navbar_admin.php');
-    require '../db_conn.php';
+include('../includes/header.php');
+include('../includes/navbar_admin.php');
+require '../db_conn.php';
 ?>
+
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-control-geocoder/1.13.1/Control.Geocoder.min.css" />
@@ -410,11 +408,10 @@ function toggleDetails() {
     </script>
 
 <?php
-    // Include the necessary files and establish database connection
-    include('../includes/footer.php');
-    include('../includes/scripts.php');
+include('../includes/footer.php');
+include('../includes/scripts.php');
 } else {
-    header("Location: ../admin_login.php");
-    exit();
+header("Location: ../login.php");
+exit();
 }
 ?>

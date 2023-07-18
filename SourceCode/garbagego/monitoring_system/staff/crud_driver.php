@@ -1,8 +1,6 @@
 <?php
 session_start();
 if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'staff') {
-    // Regenerate the session ID
-    session_regenerate_id(true);
 
     require '../db_conn.php';
 
@@ -139,8 +137,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
     }
 
 } else {
-    // Redirect to the login page if not logged in as an admin
-    header("Location: ../admin_login.php");
-    exit();
+header("Location: ../admin_login.php");
+exit();
 }
 ?>

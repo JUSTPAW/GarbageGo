@@ -1,15 +1,24 @@
 <?php
 session_start();
 if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'driver') {
-    // Regenerate the session ID
-    session_regenerate_id(true);
 
-    // Include the necessary files and establish database connection
-    include('../includes/header.php');
-    include('../includes/navbar_driver.php');
-    require '../db_conn.php';
+include('../includes/header.php');
+include('../includes/navbar_driver.php');
+require '../db_conn.php';
 ?>
 
+<?php
+function calculateTankBalance($initialBalance, $kilometersDriven, $fuelEfficiency) {
+    // Calculate fuel consumption
+    $fuelConsumption = $kilometersDriven / $fuelEfficiency;
+
+    // Subtract fuel consumption from initial balance
+    $updatedBalance = $initialBalance - $fuelConsumption;
+
+    // Return the updated tank balance
+    return $updatedBalance;
+}
+?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -32,29 +41,56 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
 
     <div class="row">
         <div class="col-lg-4">
-            <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Gasoline Tracker</h5>
-                <form>
-                    <div class="form-group">
-                        <label for="amountInput">Amount Added (in liters)</label>
-                        <input type="number" class="form-control" id="amountInput" placeholder="Enter amount">
-                    </div>
-                    <div class="form-group">
-                        <label for="tripCheckbox">Added During Trip</label>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="tripCheckbox">
-                            <label class="custom-control-label" for="tripCheckbox">Yes</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="balanceDisplay">Balance in Tank</label>
-                        <input type="text" class="form-control" id="balanceDisplay" readonly>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Fuel Consumption</h5>
+        <?php
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Retrieve form inputs
+            $initialBalance = $_POST['initialBalance'];
+            $kilometersDriven = $_POST['kilometersDriven'];
+            $fuelEfficiency = $_POST['fuelEfficiency'];
+
+            // Calculate tank balance using the function
+            $updatedBalance = calculateTankBalance($initialBalance, $kilometersDriven, $fuelEfficiency);
+
+            // Calculate the percentage of tank balance remaining
+            $percentageRemaining = ($updatedBalance / $initialBalance) * 100;
+
+            // Display the updated tank balance with progress bar
+            echo "<h6>Tank Balance: {$updatedBalance} liters</h6>";
+            echo '<div class="progress">';
+            echo '<div class="progress-bar" role="progressbar" style="width: ' . $percentageRemaining . '%" aria-valuenow="' . $percentageRemaining . '" aria-valuemin="0" aria-valuemax="100">' . $percentageRemaining . '%</div>';
+            echo '</div>';
+        }
+        ?>
+        <form method="POST" action="" >
+        <div class="form-row mt-3">
+            <div class="form-group mt-2 col-md-12">
+                <input type="number" class="form-control" id="initialBalance" name="initialBalance" placeholder=" " required>
+                <label for="initialBalance">Initial Tank Balance (liters)</label>
+            </div>
+            <div class="form-group mt-2 col-md-12">
+                <input type="date" class="form-control" id="lastPurchaseDate" placeholder=" ">
+                <label for="lastPurchaseDate" class="text-gray"> Last Date Purchased:</label>
+            </div>
+            <div class="form-group mt-2 col-md-12">
+                <input type="number" class="form-control" id="kilometersDriven" name="kilometersDriven" placeholder=" " required>
+                <label for="kilometersDriven">Kilometers Driven</label>
+            </div>
+            <div class="form-group mt-2 col-md-12">
+                <input type="number" step="0.01" class="form-control" id="fuelEfficiency" name="fuelEfficiency" placeholder=" " required>
+                <label for="fuelEfficiency">Fuel Efficiency (L/km) for Garbage Trucks</label>
             </div>
         </div>
+    <button type="submit" class="btn btn-outline-info">Request Fuel Slip</button>
+    </form>
+     </div>
+</div>
+
+
+</script>
+
         </div>
         <div class="col-lg-8">
 

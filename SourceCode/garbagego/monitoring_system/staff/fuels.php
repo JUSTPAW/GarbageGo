@@ -1,13 +1,10 @@
 <?php
 session_start();
 if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'staff') {
-    // Regenerate the session ID
-    session_regenerate_id(true);
 
-    // Include the necessary files and establish database connection
-    include('../includes/header.php');
-    include('../includes/navbar_staff.php');
-    require '../db_conn.php';
+include('../includes/header.php');
+include('../includes/navbar_staff.php');
+require '../db_conn.php';
 ?>
 
 <!-- Begin Page Content -->
@@ -17,7 +14,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
     <div class="d-sm-flex align-items-center justify-content-between mb-1 mt-1">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent p-0">
-                <li class="breadcrumb-item"><a href="driver_dashboard.php" class="text-secondary"
+                <li class="breadcrumb-item"><a href="staff_dashboard.php" class="text-secondary"
                         style="color: #026601; text-decoration: none;">Dashboard</a></li>
                 <li class="breadcrumb-item"><span class="text-gray-700">Garbage Trucks</span></li>
                 <li class="breadcrumb-item active text-gray-900" aria-current="page">Fuel</li>
@@ -42,35 +39,37 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                     </div>
                     <div class="modal-body">
                         <form action="crud_truck.php" method="POST">
-                            <div class="form-group">
-                              <label for="fuelType" class="small text-info">Fuel Type</label>
-                              <select class="form-control" id="fuelType" name="fuelType" required>
-                                 <option value="">Select fuel type</option>
-                                <option value="Diesel">Diesel</option>
-                                <option value="Gasoline">Gasoline</option>
-                              </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="fuelAmount" class="small text-info">Amount</label>
-                                <input type="number" class="form-control" id="fuelAmount" name="fuelAmount" placeholder="Enter Amount" required>
-                            </div>
-                            <div class="form-group">
-                              <label for="fuelType" class="small text-info">Vehicle/ Equipment</label>
-                              <select class="form-control" id="fuelType" name="fuelType" required>
-                                 <option value="">Select fuel type</option>
-                                <option value="GarbageTruck">Garbage Truck</option>
-                                <option value="Patrol Boat">Patrol Boat</option>
-                                 <option value="Shredder">Shredder</option>
-                                  <option value="Grass Cutter">Grass Cutter</option>
-                              </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="fuelAmount" class="small text-info">Plate Number</label>
-                                <input type="number" class="form-control" id="fuelAmount" name="fuelAmount" placeholder="Enter Amount" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="fuelAmount" class="small text-info">Driver</label>
-                                <input type="number" class="form-control" id="fuelAmount" name="fuelAmount" placeholder="Enter Amount" required>
+                            <div class="form-row">
+                                <div class="form-group mt-2 col-md-12">
+                                    <select class="form-control" id="fuelType" name="fuelType" required>
+                                        <option value=""> </option>
+                                        <option value="Diesel">Diesel</option>
+                                        <option value="Gasoline">Gasoline</option>
+                                    </select>
+                                    <label for="fuelType" class="text-gray">Fuel Type</label>
+                                </div>
+                                <div class="form-group mt-2 col-md-12">
+                                    <input type="number" class="form-control" id="fuelAmount" name="fuelAmount" placeholder=" " required>
+                                    <label for="fuelAmount" class="text-gray">Amount</label>
+                                </div>
+                                <div class="form-group mt-2 col-md-12">
+                                      <select class="form-control" id="fuelType" name="fuelType" required>
+                                         <option value=""> </option>
+                                        <option value="GarbageTruck">Garbage Truck</option>
+                                        <option value="Patrol Boat">Patrol Boat</option>
+                                         <option value="Shredder">Shredder</option>
+                                          <option value="Grass Cutter">Grass Cutter</option>
+                                      </select>
+                                      <label for="fuelType" class="text-gray">Vehicle/ Equipment</label>
+                                </div>
+                                <div class="form-group mt-2 col-md-12">
+                                    <input type="text" class="form-control" id="fuelAmount" name="fuelAmount" placeholder=" " required>
+                                    <label for="fuelAmount" class="text-gray">Plate Number</label>
+                                </div>
+                                <div class="form-group mt-2 col-md-12">
+                                    <input type="text" class="form-control" id="fuelAmount" name="fuelAmount" placeholder=" " required>
+                                    <label for="fuelAmount" class="text-gray">Driver</label>
+                                </div>
                             </div>
                     </div>
                     <div class="modal-footer">
@@ -97,19 +96,19 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                     <div class="modal-body">
                         <form action="crud_truck.php" method="POST">
                             <div class="form-group">
-                                <label for="edit_brand" class="small text-info">Brand</label>
+                                <label for="edit_brand" class="text-gray">Brand</label>
                                 <input type="text" class="form-control" id="edit_brand" name="edit_brand" placeholder="Enter brand" required>
                             </div>
                             <div class="form-group">
-                                <label for="edit_model" class="small text-info">Model</label>
+                                <label for="edit_model" class="text-gray">Model</label>
                                 <input type="text" class="form-control" id="edit_model" name="edit_model" placeholder="Enter model" required>
                             </div>
                             <div class="form-group">
-                                <label for="edit_capacity" class="small text-info">Capacity</label>
+                                <label for="edit_capacity" class="text-gray">Capacity</label>
                                 <input type="number" class="form-control" id="edit_capacity" name="edit_capacity" placeholder="Enter capacity" required>
                             </div>
                             <div class="form-group">
-                                <label for="edit_plateNumber" class="small text-info">Plate Number</label>
+                                <label for="edit_plateNumber" class="text-gray">Plate Number</label>
                                 <input type="text" class="form-control" id="edit_plateNumber" name="edit_plateNumber" placeholder="Enter plate number" required>
                             </div>
                             <input type="hidden" id="edit_truck_id" name="edit_truck_id">
@@ -201,95 +200,92 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
                         <div class="card-body">
                             <div class="table-responsive">
                                 <!-- Issued Gasoline Table -->
-                                                    <table id="issuedGasolineTable" class="display nowrap table table-bordered table-hover" style="width:100%;">
-                        <thead class='thead-light text-gray-900'>
-                          <tr style="text-align:center">
-                            <th style="text-align: center;">No.</th>
-                            <th style="text-align: center;">Brand</th>
-                            <th style="text-align: center;">Model</th>
-                            <th style="text-align: center;">Capacity</th>
-                            <th style="text-align: center;">Plate Number</th>
-                            <th class="no-export" width="12%" style="text-align: center;">Actions</th>
-                          </tr>
-                        </thead>
-                        <tfoot class='thead-light text-gray-700'>
-                          <tr style="text-align:center">
-                            <th style="text-align: center;">No.</th>
-                            <th style="text-align: center;">Brand</th>
-                            <th style="text-align: center;">Model</th>
-                            <th style="text-align: center;">Capacity</th>
-                            <th style="text-align: center;">Plate Number</th>
-                            <th class="no-export" width="12%" style="text-align: center;">Actions</th>
-                          </tr>
-                        </tfoot>
-                        <tbody>
-                            <?php
-                            $no = 1;
-                            $query = "SELECT * FROM garbage_trucks";
-                            $query_run = mysqli_query($conn, $query);
+                                <table id="issuedGasolineTable" class="display nowrap table table-bordered table-hover" style="width:100%;">
+                                <thead class='thead-light text-gray-900'>
+                                  <tr style="text-align:center">
+                                    <th style="text-align: center;">No.</th>
+                                    <th style="text-align: center;">Date Created</th>
+                                    <th style="text-align: center;">Vehicle</th>
+                                    <th style="text-align: center;">Driver</th>
+                                    <th style="text-align: center;">Plate Number</th>
+                                    <th style="text-align: center;">Fuel Type</th>
+                                    <th style="text-align: center;">Amount</th>
+                                    <th class="no-export" width="12%" style="text-align: center;">Actions</th>
+                                  </tr>
+                                </thead>
+                                <tfoot class='thead-light text-gray-700'>
+                                  <tr style="text-align:center">
+                                    <th style="text-align: center;">No.</th>
+                                    <th style="text-align: center;">Date Created</th>
+                                    <th style="text-align: center;">Vehicle</th>
+                                    <th style="text-align: center;">Driver</th>
+                                    <th style="text-align: center;">Plate Number</th>
+                                    <th style="text-align: center;">Fuel Type</th>
+                                    <th style="text-align: center;">Amount</th>
+                                    <th class="no-export" width="12%" style="text-align: center;">Actions</th>
+                                  </tr>
+                                </tfoot>
+                                <tbody>
+                                    <?php
+                                    $no = 1;
+                                    $query = "SELECT * FROM garbage_trucks";
+                                    $query_run = mysqli_query($conn, $query);
 
-                            if (mysqli_num_rows($query_run) > 0) {
-                                foreach ($query_run as $row) {
+                                    if (mysqli_num_rows($query_run) > 0) {
+                                        foreach ($query_run as $row) {
+                                            ?>
+                                            <tr style="text-align:center">
+                                                <td><?php echo $no; ?></td>
+                                                <td><?= $row['brand']; ?></td>
+                                                <td><?= $row['model']; ?></td>
+                                                <td><?= $row['capacity']; ?></td>
+                                                <td><?= $row['plateNumber']; ?></td>
+                                                <td><?= $row['plateNumber']; ?></td>
+                                                <td><?= $row['plateNumber']; ?></td>
+                                                <td>
+                                                <div class="dropdown">
+                                                  <button class="btn btn-sm btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Actions
+                                                  </button>
+                                                  <div class="dropdown-menu text-info pr-0" aria-labelledby="dropdownMenuButton">
+                                                    <button class="dropdown-item edit-truck-btn" data-toggle="modal" 
+                                                    data-target="#edit_truck" 
+                                                    data-id="<?= $row['id']; ?>" 
+                                                    data-brand="<?= $row['brand']; ?>" 
+                                                    data-model="<?= $row['model']; ?>" 
+                                                    data-capacity="<?= $row['capacity']; ?>" 
+                                                    data-platenumber="<?= $row['plateNumber']; ?>" 
+                                                    data-toggle="tooltip" 
+                                                    title="Edit <?= $row['brand']; ?>!" 
+                                                    data-placement="top">
+                                                      <i class="fa fa-edit fw-fa text-primary" aria-hidden="true"></i> Edit
+                                                    </button>
+                                                    <button class="dropdown-item delete-truck-btn" data-toggle="modal" 
+                                                    data-target="#delete_truck" 
+                                                    data-id="<?= $row['id']; ?>" 
+                                                    data-brand="<?= $row['brand']; ?>" 
+                                                    data-toggle="tooltip" 
+                                                    title="Delete <?= $row['brand']; ?>!" 
+                                                    data-placement="top">
+                                                      <i class="fa fa-trash fw-fa text-danger" aria-hidden="true"></i> Delete
+                                                    </button>
+                                                  </div>
+                                                </div>
+                                                </td>
+                                            </tr>
+                                    <?php
+                                            $no++;
+                                        }
+                                    } else {
+                                        echo "<h5> No Record Found </h5>";
+                                    }
                                     ?>
-                                    <tr style="text-align:center">
-                                        <td><?php echo $no; ?></td>
-                                        <td><?= $row['brand']; ?></td>
-                                        <td><?= $row['model']; ?></td>
-                                        <td><?= $row['capacity']; ?></td>
-                                        <td><?= $row['plateNumber']; ?></td>
-                                        <td>
-                                        <div class="dropdown">
-                                          <button class="btn btn-sm btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Actions
-                                          </button>
-                                          <div class="dropdown-menu text-info pr-0" aria-labelledby="dropdownMenuButton">
-                                            <button class="dropdown-item edit-truck-btn" data-toggle="modal" 
-                                            data-target="#edit_truck" 
-                                            data-id="<?= $row['id']; ?>" 
-                                            data-brand="<?= $row['brand']; ?>" 
-                                            data-model="<?= $row['model']; ?>" 
-                                            data-capacity="<?= $row['capacity']; ?>" 
-                                            data-platenumber="<?= $row['plateNumber']; ?>" 
-                                            data-toggle="tooltip" 
-                                            title="Edit <?= $row['brand']; ?>!" 
-                                            data-placement="top">
-                                              <i class="fa fa-edit fw-fa text-primary" aria-hidden="true"></i> Edit
-                                            </button>
-                                            <button class="dropdown-item delete-truck-btn" data-toggle="modal" 
-                                            data-target="#delete_truck" 
-                                            data-id="<?= $row['id']; ?>" 
-                                            data-brand="<?= $row['brand']; ?>" 
-                                            data-toggle="tooltip" 
-                                            title="Delete <?= $row['brand']; ?>!" 
-                                            data-placement="top">
-                                              <i class="fa fa-trash fw-fa text-danger" aria-hidden="true"></i> Delete
-                                            </button>
-                                          </div>
-                                        </div>
-
-                                            <!-- <a class="btn btn-sm btn-outline-success edit-truck-btn" href="#edit_truck" data-toggle="modal" data-id="<?= $row['id']; ?>" data-brand="<?= $row['brand']; ?>" data-model="<?= $row['model']; ?>" data-capacity="<?= $row['capacity']; ?>" data-platenumber="<?= $row['plateNumber']; ?>" data-toggle="tooltip" title="Edit <?= $row['brand']; ?>!" data-placement="top">
-                                                <i class="fa fa-edit fw-fa" aria-hidden="true"></i>
-                                            </a>
-
-                                            <a class="btn btn-sm btn-outline-danger delete-truck-btn" href="#delete_truck" data-toggle="modal" data-id="<?= $row['id']; ?>" data-brand="<?= $row['brand']; ?>" data-toggle="tooltip" title="Delete <?= $row['brand']; ?>!" data-placement="top">
-                                                <i class="fa fa-trash fw-fa" aria-hidden="true"></i>
-                                            </a> -->
-
-                                        </td>
-                                    </tr>
-                            <?php
-                                    $no++;
-                                }
-                            } else {
-                                echo "<h5> No Record Found </h5>";
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+                                </tbody>
+                            </table>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <!-- DataTables End-->
+                            <!-- DataTables End-->
 
                 </div>
                 <!-- Issued end -->
@@ -540,7 +536,7 @@ $(document).ready(function() {
 include('../includes/scripts.php');
 include('../includes/footer.php');
 } else {
-    header("Location: ../login.php");
-    exit();
+header("Location: ../login.php");
+exit();
 }
 ?>

@@ -1,13 +1,10 @@
 <?php
 session_start();
 if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'staff') {
-    // Regenerate the session ID
-    session_regenerate_id(true);
 
-    // Include the necessary files and establish database connection
-    include('../includes/header.php');
-    include('../includes/navbar_staff.php');
-    require '../db_conn.php';
+include('../includes/header.php');
+include('../includes/navbar_staff.php');
+require '../db_conn.php';
 ?>
 
 <!-- Begin Page Content -->
@@ -17,7 +14,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
     <div class="d-sm-flex align-items-center justify-content-between mb-1 mt-1">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent p-0">
-                <li class="breadcrumb-item"><a href="driver_dashboard.php" class="text-secondary"
+                <li class="breadcrumb-item"><a href="staff_dashboard.php" class="text-secondary"
                         style="color: #026601; text-decoration: none;">Dashboard</a></li>
                 <li class="breadcrumb-item"><span class="text-gray-700">Garbage Trucks</span></li>
                 <li class="breadcrumb-item active text-gray-900" aria-current="page">Maintenance</li>
@@ -254,7 +251,7 @@ $(document).ready(function() {
 include('../includes/scripts.php');
 include('../includes/footer.php');
 } else {
-    header("Location: ../login.php");
-    exit();
+header("Location: ../login.php");
+exit();
 }
 ?>

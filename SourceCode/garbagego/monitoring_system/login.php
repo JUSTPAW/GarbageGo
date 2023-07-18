@@ -120,19 +120,19 @@ if (isset($_GET['error'])) {
                                     <div class="">
                                         <div class="container">
                                             <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-4">   
+                                                <div class="col-lg-4 col-md-12 col-sm-12">   
                                                 
                                                     <img src="images/icon.png" class="card-img-top img-fluid mx-auto d-block image-animated rounded" alt="..." style="width: auto; height: 70px;">
                                                 </div>
-                                                <div class="col-lg-8 col-md-8 col-sm-8">
+                                                <div class="col-lg-8 col-md-12 col-sm-12">
                                                     
-                                                    <h1 class="h3 text-gray-900 mt-2">Welcome back</h1>
+                                                    <h1 class="h4 text-gray-900 mt-2">Welcome back</h1>
                                                     <h1 class="small text-gray-900">Please login to your Account.</h1>
                                                 </div>
                                             </div>
                                         </div>
-                                        <form class="user" action="staff_auth.php" method="post" id="login-form">
-                                            <div class="form-group mt-5">
+                                        <form class="user" action="login_auth.php" method="post" id="login-form">
+                                            <div class="form-group mt-3">
                                                 <input type="text" name="uname" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Username">
                                             </div>
 

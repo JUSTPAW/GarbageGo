@@ -42,6 +42,9 @@
 
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> -->
 <!-- styles for export options -->
+
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.css' rel='stylesheet' />
+
 <style>
 div.dt-button-collection {
     width: auto;
@@ -82,6 +85,7 @@ div.dt-button-collection h3.not-top-heading {
   }
   .form-group select{
     padding-top: 0.7rem;
+    padding-left: 0.5rem;
   }
   .form-group label {
     position: absolute;
@@ -103,7 +107,7 @@ div.dt-button-collection h3.not-top-heading {
     opacity: 0.75;
     color: green;
     left: 1.15rem;
-    bottom: 0.80rem; /* Remove left margin */
+    bottom: 0.99rem; /* Remove left margin */
   }
 </style>
 
