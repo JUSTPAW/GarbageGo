@@ -5,6 +5,29 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
 include('../includes/header.php');
 include('../includes/navbar_driver.php');
 require '../db_conn.php';
+
+// Check if the user is logged in as staff
+if ($_SESSION['role'] !== 'driver') {
+    // Redirect to the login page with an error message
+    header("Location: ../login.php?error=Invalid access!");
+    exit();
+}
+
+// Display the SweetAlert2 success message if available
+if (isset($_GET['success'])) {
+    $successMessage = $_GET['success'];
+    echo '<script>
+        window.onload = function() {
+            Swal.fire({
+                icon: "success",
+                title: "Successful Login",
+                text: "' . $successMessage . '",
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "OK"
+            });
+        };
+    </script>';
+}
 ?>
 
 <!-- Begin Page Content -->

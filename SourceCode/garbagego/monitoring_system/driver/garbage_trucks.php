@@ -14,7 +14,7 @@ require '../db_conn.php';
         <div class="d-sm-flex align-items-center justify-content-between mb-1 mt-1">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent p-0">
-                    <li class="breadcrumb-item"><a href="admin_dashboard.php" class="text-secondary" style="color: #026601; text-decoration: none;">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="driver_dashboard.php" class="text-secondary" style="color: #026601; text-decoration: none;">Dashboard</a></li>
                     <li class="breadcrumb-item"><span class="text-gray-700">Waste Collection</span></li>
                     <li class="breadcrumb-item active text-gray-900" aria-current="page">Garbage Trucks</li>
                 </ol>
@@ -53,6 +53,9 @@ require '../db_conn.php';
                                 <div class="form-group mt-2 col-md-12">
                                     <input type="text" class="form-control" id="plateNumber" name="plateNumber" placeholder=" " required>
                                      <label for="plateNumber" class="text-gray">Plate Number</label>
+                                </div>
+                               <div class="form-group mt-2 col-md-12">
+                                    <input type="hidden" class="form-control" id="driver_id" name="driver_id" value="<?php echo $_SESSION['id']; ?>" required>
                                 </div>
                             </div>
                     </div>
@@ -167,7 +170,7 @@ require '../db_conn.php';
                         <tbody>
                             <?php
                             $no = 1;
-                            $query = "SELECT * FROM garbage_trucks";
+                            $query = "SELECT * FROM garbage_trucks WHERE driver_id = " . $_SESSION['id'];
                             $query_run = mysqli_query($conn, $query);
 
                             if (mysqli_num_rows($query_run) > 0) {

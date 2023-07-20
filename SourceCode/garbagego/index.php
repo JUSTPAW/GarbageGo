@@ -709,6 +709,10 @@
         </div>
 
       </div>
+      <br>
+      <br>
+      <br>
+      <br>
     </section><!-- End Gallery Section -->
 
     <!-- ======= Frequently Asked Questioins Section ======= -->
@@ -777,6 +781,7 @@
         </ul>
 
       </div>
+      <br>
     </section><!-- End Frequently Asked Questioins Section -->
 
     <!-- ======= Contact Section ======= -->
@@ -789,9 +794,10 @@
         </div>
 
       </div>
-
-      <div>
-        <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3870.6814994712945!2d120.64794477154786!3d14.036884160563734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd965876db9f9f%3A0x51e9d5852e54372!2sLian%20Municipal%20Hall!5e0!3m2!1sen!2sph!4v1686568237854!5m2!1sen!2sph" frameborder="0" allowfullscreen></iframe>
+      <div class="icon-box" data-aos="zoom-in" data-aos-delay="100">
+        <div>
+          <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3870.6814994712945!2d120.64794477154786!3d14.036884160563734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd965876db9f9f%3A0x51e9d5852e54372!2sLian%20Municipal%20Hall!5e0!3m2!1sen!2sph!4v1686568237854!5m2!1sen!2sph" frameborder="0" allowfullscreen></iframe>
+        </div>
       </div>
 
       <div class="container">
@@ -802,25 +808,31 @@
 
           <div class="row">
             <div class="col-md-4">
-              <div class="info-box">
-                <i class="bx bx-map"></i>
-                <h3>Our Address</h3>
-                <p>J. P. Rizal St, Lian, Batangas</p>
-                <br>
+              <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+                <div class="info-box">
+                  <i class="bx bx-map"></i>
+                  <h3>Our Address</h3>
+                  <p>J. P. Rizal St, Lian, Batangas</p>
+                  <br>
+                </div>
+               </div>
+            </div>
+            <div class="col-md-4">
+              <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+                <div class="info-box">
+                  <i class="bx bx-envelope"></i>
+                  <h3>Email Us</h3>
+                  <p>info@example.com<br>contact@example.com</p>
+                </div>
               </div>
             </div>
             <div class="col-md-4">
-              <div class="info-box">
-                <i class="bx bx-envelope"></i>
-                <h3>Email Us</h3>
-                <p>info@example.com<br>contact@example.com</p>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="info-box">
-                <i class="bx bx-phone-call"></i>
-                <h3>Call Us</h3>
-                <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+              <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+                <div class="info-box">
+                  <i class="bx bx-phone-call"></i>
+                  <h3>Call Us</h3>
+                  <p>+1 5589 55488 55<br>+1 6678 254445 41</p>
+                </div>
               </div>
             </div>
           </div>
@@ -903,11 +915,11 @@
           <div class="col-lg-3 col-md-6 footer-links">
             <h4>Useful Links</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#history">History</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#staff">Office Staffs</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#faq">FAQ'S</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#gallery">Gallery</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#contact">Contacts</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a class="scrollto" href="#history">History</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a class="scrollto" href="#staff">Office Staffs</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a class="scrollto" href="#faq">FAQ'S</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a class="scrollto" href="#gallery">Gallery</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a class="scrollto" href="#contact">Contacts</a></li>
             </ul>
           </div>
 
@@ -915,8 +927,8 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="d-flex  justify-content-center align-items-center">
-                  <img src="assets/img/lian_logo.png" class="img-fluid mx-2" alt="" style="max-width: 100px; height: auto;">
-                  <img src="assets/img/menro_logo.png" class="img-fluid mx-2" alt="" style="max-width: 100px; height: auto;">
+                  <img src="assets/img/lian_logo.png" class="img-fluid mx-2" alt="" style="max-width: 110px; height: auto;">
+                  <img src="assets/img/menro_logo.png" class="img-fluid mx-2" alt="" style="max-width: 120px; height: auto;">
                   <img src="assets/img/batangas_logo.png" class="img-fluid mx-2" alt="" style="max-width: 100px; height: auto;">
                 </div>
               </div>

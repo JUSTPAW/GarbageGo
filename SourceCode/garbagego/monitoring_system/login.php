@@ -75,7 +75,7 @@
 
     </style>
     
- <?php
+<?php
 // Check for error and success messages in the URL
 if (isset($_GET['error'])) {
     $errorMessage = $_GET['error'];
@@ -105,6 +105,7 @@ if (isset($_GET['error'])) {
         </script>';
 }
 ?>
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-5 col-lg-5 col-md-8 col-sm-12">
@@ -124,7 +125,7 @@ if (isset($_GET['error'])) {
                                                 
                                                     <img src="images/icon.png" class="card-img-top img-fluid mx-auto d-block image-animated rounded" alt="..." style="width: auto; height: 70px;">
                                                 </div>
-                                                <div class="col-lg-8 col-md-12 col-sm-12">
+                                                <div class="col-lg-8 col-md-12 col-sm-12 text-center">
                                                     
                                                     <h1 class="h4 text-gray-900 mt-2">Welcome back</h1>
                                                     <h1 class="small text-gray-900">Please login to your Account.</h1>
@@ -132,7 +133,7 @@ if (isset($_GET['error'])) {
                                             </div>
                                         </div>
                                         <form class="user" action="login_auth.php" method="post" id="login-form">
-                                            <div class="form-group mt-3">
+                                            <div class="form-group mt-5">
                                                 <input type="text" name="uname" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Username">
                                             </div>
 

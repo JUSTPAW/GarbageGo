@@ -59,7 +59,6 @@ require '../db_conn.php';
     <div id="Collections" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Waste Collections</h6>
-            <a class="collapse-item" href="map.php">Map</a>
             <a class="collapse-item" href="schedule.php">Schedule</a>
             <a class="collapse-item" href="locations.php">Locations</a>
         </div>
@@ -77,6 +76,21 @@ require '../db_conn.php';
             <a class="collapse-item" href="garbage_trucks.php">Garbage Trucks</a>
             <a class="collapse-item" href="fuels.php">Fuel</a>
             <a class="collapse-item" href="maintenance.php">Maintenance</a>
+        </div>
+    </div>
+</li>
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Tracking"
+        aria-expanded="true" aria-controls="Tracking">
+        <i class="fas fa-fw fa-location-arrow"></i>
+        <span>Tracking</span>
+    </a>
+    <div id="Tracking" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Tracking</h6>
+            <a class="collapse-item" href="current_location.php">Current Location</a>
+            <a class="collapse-item" href="route.php">Route Optimization</a>
+            <a class="collapse-item" href="tra.php">Traffic Management</a>
         </div>
     </div>
 </li>

@@ -194,7 +194,7 @@ if (isset($_GET['error'])) {
                                                 
                                                     <img src="images/icon.png" class="card-img-top img-fluid mx-auto d-block image-animated rounded" alt="..." style="width: auto; height: 70px;">
                                                 </div>
-                                                <div class="col-lg-9 col-md-8 col-sm-8">
+                                                <div class="col-lg-9 col-md-8 col-sm-8 text-center">
                                                     
                                                      <h1 class="h4 text-gray-900 mt-2 d-none d-sm-block">MENRO Lian Employee Registration</h1>
                                                     <h1 class="h6 text-gray-900 mt-2 d-sm-none">Employee Registration</h1>

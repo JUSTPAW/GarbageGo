@@ -51,21 +51,21 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
                 $_SESSION['id'] = $row['id'];
                 $_SESSION['user_name'] = $row['user_name'];
                 $_SESSION['role'] = $role;
-                $successMessage = "Login successful as staff.";
+                $successMessage = "Welcome " . $row['firstName'] . " " . $row['lastName'] . "!";
                 header("Location: staff/staff_dashboard.php?success=" . urlencode($successMessage));
                 exit();
             } else if ($role === 'driver') {
                 $_SESSION['id'] = $row['id'];
                 $_SESSION['user_name'] = $row['user_name'];
                 $_SESSION['role'] = $role;
-                $successMessage = "Login successful as driver.";
+                $successMessage = "Welcome " . $row['firstName'] . " " . $row['lastName'] . "!";
                 header("Location: driver/driver_dashboard.php?success=" . urlencode($successMessage));
                 exit();
             } else if ($role === 'admin') {
                 $_SESSION['id'] = $row['id'];
                 $_SESSION['user_name'] = $row['user_name'];
                 $_SESSION['role'] = $role;
-                $successMessage = "Login successful as admin.";
+                $successMessage = "Welcome " . $row['firstName'] . " " . $row['lastName'] . "!";
                 header("Location: admin/admin_dashboard.php?success=" . urlencode($successMessage));
                 exit();
             } else {
