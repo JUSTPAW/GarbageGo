@@ -1,62 +1,94 @@
 <?php
-function calculateTankBalance($initialBalance, $kilometersDriven, $fuelEfficiency) {
-    // Calculate fuel consumption
-    $fuelConsumption = $kilometersDriven / $fuelEfficiency;
+session_start();
+if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'driver') {
+    include('../includes/header.php');
+    include('../includes/navbar_driver.php');
+    require '../db_conn.php';
 
-    // Subtract fuel consumption from initial balance
-    $updatedBalance = $initialBalance - $fuelConsumption;
-
-    // Return the updated tank balance
-    return $updatedBalance;
-}
+    // Fetch data from the database
+    $driver_id = $_SESSION['id'];
+    $query = "SELECT fuelType, SUM(fuelAmount) AS totalFuel FROM fuel_slips WHERE driver_id = $driver_id GROUP BY fuelType";
+    $result = mysqli_query($conn, $query);
+    $data = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $data[] = $row;
+    }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Fuel Tank Balance Calculator for Garbage Trucks</title>
-    <!-- Bootstrap 4 CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container">
-        <h1>Fuel Tank Balance Calculator for Garbage Trucks</h1>
-        <form method="POST" action="">
-            <div class="form-group">
-                <label for="initialBalance">Initial Tank Balance (liters)</label>
-                <input type="number" class="form-control" id="initialBalance" name="initialBalance" required>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <div class="container mt-4">
+        <div class="card shadow">
+            <div class="card-body">
+                <div id="chartdiv" style="width: 100%; height: 500px;"></div>
             </div>
-            <div class="form-group">
-                <label for="kilometersDriven">Kilometers Driven</label>
-                <input type="number" class="form-control" id="kilometersDriven" name="kilometersDriven" required>
-            </div>
-            <div class="form-group">
-                <label for="fuelEfficiency">Fuel Efficiency (L/km) for Garbage Trucks</label>
-                <input type="number" step="0.01" class="form-control" id="fuelEfficiency" name="fuelEfficiency" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Calculate</button>
-        </form>
-
-        <?php
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Retrieve form inputs
-            $initialBalance = $_POST['initialBalance'];
-            $kilometersDriven = $_POST['kilometersDriven'];
-            $fuelEfficiency = $_POST['fuelEfficiency'];
-
-            // Calculate tank balance using the function
-            $updatedBalance = calculateTankBalance($initialBalance, $kilometersDriven, $fuelEfficiency);
-
-            // Calculate the percentage of tank balance remaining
-            $percentageRemaining = ($updatedBalance / $initialBalance) * 100;
-
-            // Display the updated tank balance with progress bar
-            echo "<h3>Updated Tank Balance: {$updatedBalance} liters</h3>";
-            echo '<div class="progress">';
-            echo '<div class="progress-bar" role="progressbar" style="width: ' . $percentageRemaining . '%" aria-valuenow="' . $percentageRemaining . '" aria-valuemin="0" aria-valuemax="100">' . $percentageRemaining . '%</div>';
-            echo '</div>';
-        }
-        ?>
+        </div>
     </div>
-</body>
-</html>
+</div>
+</div>
+
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/plugins/export/export.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/plugins/scrollbar/scrollbar.js"></script>
+<script>
+am4core.ready(function() {
+    am4core.options.commercialLicense = true;
+    // Create the chart instance
+    var chart = am4core.create("chartdiv", am4charts.XYChart);
+
+    // Add data to the chart
+    chart.data = <?php echo json_encode($data); ?>;
+
+    // Create axes
+    let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+    categoryAxis.dataFields.category = "fuelType";
+    categoryAxis.renderer.minGridDistance = 30; // Set minimum grid distance to avoid overlapping labels
+    categoryAxis.renderer.labels.template.wrap = true; // Wrap labels to fit into available space
+
+    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+    // Create series
+    var series = chart.series.push(new am4charts.ColumnSeries());
+    series.dataFields.valueY = "totalFuel";
+    series.dataFields.categoryX = "fuelType";
+    series.name = "Fuel Consumption";
+
+    // Enable export
+    chart.exporting.menu = new am4core.ExportMenu();
+    chart.exporting.menu.container = document.getElementById("chartdiv");
+    chart.exporting.filePrefix = "chart";
+
+    // Style export menu buttons as Bootstrap "info" buttons
+    chart.exporting.menu.items.forEach(function(item) {
+        if (item.menu) {
+            item.menu.forEach(function(subItem) {
+                subItem.className = "btn btn-info"; // Change the class to "btn btn-info"
+            });
+        } else {
+            item.className = "btn btn-info"; // Change the class to "btn btn-info"
+        }
+    });
+
+    // Add X and Y scrollbar
+    chart.scrollbarX = new am4core.Scrollbar();
+    chart.scrollbarX.parent = chart.bottomAxesContainer; // Horizontal scrollbar at the bottom
+    chart.scrollbarX.align = "center";
+
+    chart.scrollbarY = new am4core.Scrollbar();
+    chart.scrollbarY.parent = chart.leftAxesContainer; // Vertical scrollbar on the left side
+    chart.scrollbarY.align = "left";
+    chart.scrollbarY.valign = "middle";
+});
+</script>
+
+<!-- End of Page Content -->
+<?php
+include('../includes/scripts.php');
+include('../includes/footer.php');
+} else {
+    header("Location: ../login.php");
+    exit();
+}
+?>

@@ -2,14 +2,14 @@
 session_start();
 if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
 
-require '../db_conn.php';
+    require '../db_conn.php';
 
     if (isset($_POST['delete_staff_id'])) {
-        $crewId = $_POST['delete_staff_id'];
-        $crewId = mysqli_real_escape_string($conn, $crewId);
+        $staffId = $_POST['delete_staff_id'];
+        $staffId = mysqli_real_escape_string($conn, $staffId);
 
-        // Perform the necessary delete operation using the $crewId
-        $deleteQuery = "DELETE FROM staffs WHERE id = $crewId";
+        // Perform the necessary delete operation using the $staffId
+        $deleteQuery = "DELETE FROM staffs WHERE id = $staffId";
         $deleteResult = mysqli_query($conn, $deleteQuery);
 
         if ($deleteResult) {
@@ -17,7 +17,7 @@ require '../db_conn.php';
             header('Location: staffs.php');
             exit();
         } else {
-            $_SESSION['message_danger'] = "Error deleting staffs.";
+            $_SESSION['message_danger'] = "Error deleting staff.";
             header('Location: staffs.php');
             exit();
         }
@@ -52,6 +52,16 @@ require '../db_conn.php';
         $city = mysqli_real_escape_string($conn, $city);
         $barangay = mysqli_real_escape_string($conn, $barangay);
         $street = mysqli_real_escape_string($conn, $street);
+
+        // Check if the plate number already exists
+        $checkQuery = "SELECT * FROM staffs WHERE phone = '$phone'";
+        $checkResult = mysqli_query($conn, $checkQuery);
+        if (mysqli_num_rows($checkResult) > 0) {
+            // Error message
+            $_SESSION['message_danger'] = "Staff with phone number $phone already exists.";
+            header('Location: staffs.php');
+            exit(); // Stop further execution
+        }
 
         // Perform the database insertion
         $query = "INSERT INTO staffs (firstName, middleName, lastName, position, birthday, gender, phone, email, province, city, barangay, street) 
@@ -101,6 +111,16 @@ require '../db_conn.php';
         $city = mysqli_real_escape_string($conn, $city);
         $barangay = mysqli_real_escape_string($conn, $barangay);
         $street = mysqli_real_escape_string($conn, $street);
+
+        // Check if the updated plate number already exists for a different truck
+        $checkQuery = "SELECT * FROM staffs WHERE phone = '$phone' AND id != '$staffId'";
+        $checkResult = mysqli_query($conn, $checkQuery);
+        if (mysqli_num_rows($checkResult) > 0) {
+            // Error message
+            $_SESSION['message_danger'] = "Staff with phone number $phone already exists.";
+            header('Location: staffs.php');
+            exit(); // Stop further execution
+        }
 
         // Perform the database update
         $query = "UPDATE staffs SET 

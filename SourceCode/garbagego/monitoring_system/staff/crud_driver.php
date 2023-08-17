@@ -4,21 +4,21 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
 
     require '../db_conn.php';
 
-    if (isset($_POST['delete_crew_id'])) {
-        $crewId = $_POST['delete_crew_id'];
-        $crewId = mysqli_real_escape_string($conn, $crewId);
+    if (isset($_POST['delete_driver_id'])) {
+        $driverId = $_POST['delete_driver_id'];
+        $driverId = mysqli_real_escape_string($conn, $driverId);
 
-        // Perform the necessary delete operation using the $crewId
-        $deleteQuery = "DELETE FROM crew_members WHERE id = $crewId";
+        // Perform the necessary delete operation using the $driverId
+        $deleteQuery = "DELETE FROM drivers WHERE id = $driverId";
         $deleteResult = mysqli_query($conn, $deleteQuery);
 
         if ($deleteResult) {
-            $_SESSION['message'] = "Crew member deleted successfully.";
-            header('Location: crew_members.php');
+            $_SESSION['message'] = "Driver deleted successfully.";
+            header('Location: drivers.php');
             exit();
         } else {
-            $_SESSION['message_danger'] = "Error deleting crew member.";
-            header('Location: crew_members.php');
+            $_SESSION['message_danger'] = "Error deleting driver.";
+            header('Location: drivers.php');
             exit();
         }
     }
@@ -38,6 +38,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
         $city = $_POST['city'];
         $barangay = $_POST['barangay'];
         $street = $_POST['street'];
+        $staff_id = $_POST['staff_id'];
 
         // Escape special characters in variables
         $firstName = mysqli_real_escape_string($conn, $firstName);
@@ -52,10 +53,21 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
         $city = mysqli_real_escape_string($conn, $city);
         $barangay = mysqli_real_escape_string($conn, $barangay);
         $street = mysqli_real_escape_string($conn, $street);
+        $staff_id = mysqli_real_escape_string($conn, $staff_id);
+
+        // Check if the plate number already exists
+        $checkQuery = "SELECT * FROM drivers WHERE phone = '$phone'";
+        $checkResult = mysqli_query($conn, $checkQuery);
+        if (mysqli_num_rows($checkResult) > 0) {
+            // Error message
+            $_SESSION['message_danger'] = "Driver with phone number $phone already exists.";
+            header('Location: drivers.php');
+            exit(); // Stop further execution
+        }
 
         // Perform the database insertion
-        $query = "INSERT INTO drivers (firstName, middleName, lastName, position, birthday, gender, phone, email, province, city, barangay, street) 
-                  VALUES ('$firstName', '$middleName', '$lastName', '$position', '$birthday', '$gender', '$phone', '$email', '$province', '$city', '$barangay', '$street')";
+        $query = "INSERT INTO drivers (firstName, middleName, lastName, position, birthday, gender, phone, email, province, city, barangay, street, staff_id) 
+                  VALUES ('$firstName', '$middleName', '$lastName', '$position', '$birthday', '$gender', '$phone', '$email', '$province', '$city', '$barangay', '$street', '$staff_id')";
         $result = mysqli_query($conn, $query);
 
         if ($result) {
@@ -102,6 +114,16 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
         $barangay = mysqli_real_escape_string($conn, $barangay);
         $street = mysqli_real_escape_string($conn, $street);
 
+        // Check if the updated plate number already exists for a different truck
+        $checkQuery = "SELECT * FROM drivers WHERE phone = '$phone' AND id != '$driverId'";
+        $checkResult = mysqli_query($conn, $checkQuery);
+        if (mysqli_num_rows($checkResult) > 0) {
+            // Error message
+            $_SESSION['message_danger'] = "Driver with phone number $phone already exists.";
+            header('Location: drivers.php');
+            exit(); // Stop further execution
+        }
+
         // Perform the database update
         $query = "UPDATE drivers SET 
                     firstName='$firstName', 
@@ -137,7 +159,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['
     }
 
 } else {
-header("Location: ../admin_login.php");
+header("Location: ../login.php");
 exit();
 }
 ?>

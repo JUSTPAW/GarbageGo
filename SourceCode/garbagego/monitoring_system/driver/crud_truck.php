@@ -23,6 +23,28 @@ require '../db_conn.php';
         }
     }
 
+    if (isset($_POST['select_truck'])) {
+    // Get the selected garbage truck ID from the form
+    $selectedTruckID = $_POST['select_truck_id'];
+
+    // Get the user's ID from the session
+    $userID = $_SESSION['id'];
+
+    // Update the drivers_id in the selected garbage truck row with the user's ID
+    $query_update_driver = "UPDATE garbage_trucks SET driver_id = $userID WHERE id = $selectedTruckID";
+    $result_update_driver = mysqli_query($conn, $query_update_driver);
+
+    if ($result_update_driver) {
+        $_SESSION['message'] = "Garbage truck selected successfully.";
+            header('Location: garbage_trucks.php');
+            exit();
+    } else {
+        $_SESSION['message_danger'] = "Error selecting garbage truck.";
+            header('Location: garbage_trucks.php');
+            exit();
+    }
+}
+
     if (isset($_POST['add_truck'])) {
     $brand = $_POST['brand'];
     $model = $_POST['model'];
@@ -70,6 +92,7 @@ require '../db_conn.php';
     $model = $_POST['edit_model'];
     $capacity = $_POST['edit_capacity'];
     $plateNumber = $_POST['edit_plateNumber'];
+    $driver_id = $_POST['edit_driver_id'];
 
     // Escape special characters in variables
     $truck_id = mysqli_real_escape_string($conn, $truck_id);
@@ -77,6 +100,7 @@ require '../db_conn.php';
     $model = mysqli_real_escape_string($conn, $model);
     $capacity = mysqli_real_escape_string($conn, $capacity);
     $plateNumber = mysqli_real_escape_string($conn, $plateNumber);
+    $driver_id = mysqli_real_escape_string($conn, $driver_id);
 
     // Check if the updated plate number already exists for a different truck
     $checkQuery = "SELECT * FROM garbage_trucks WHERE plateNumber = '$plateNumber' AND id != '$truck_id'";
@@ -89,7 +113,7 @@ require '../db_conn.php';
     }
 
     // Perform the database update
-    $query = "UPDATE garbage_trucks SET brand='$brand', model='$model', capacity='$capacity', plateNumber='$plateNumber' WHERE id='$truck_id'";
+    $query = "UPDATE garbage_trucks SET brand='$brand', model='$model', capacity='$capacity', plateNumber='$plateNumber', driver_id='$driver_id' WHERE id='$truck_id'";
     $result = mysqli_query($conn, $query);
 
     if ($result) {

@@ -22,8 +22,87 @@ require '../db_conn.php';
             <a href="" class="btn btn-sm btn-info shadow-sm mb-3"><i class="fas fa-download fa-sm text-white"></i> Generate Report</a>
         </div>
 
-        <?php include('message.php'); ?>
-        <?php include('message_danger.php'); ?>
+        <script>
+            <?php
+            // Check if the session message exists and show it as a SweetAlert
+            if (isset($_SESSION['message'])) {
+                echo "Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: '{$_SESSION['message']}',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        customClass: {
+                            popup: 'my-sweetalert',
+                        }
+                    });";
+                unset($_SESSION['message']); // Clear the session message after displaying it
+            }
+
+            if (isset($_SESSION['message_danger'])) {
+                echo "Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: '{$_SESSION['message_danger']}',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        customClass: {
+                            popup: 'my-sweetalert',
+                        }
+                    });";
+                unset($_SESSION['message_danger']); // Clear the session message after displaying it
+            }
+            ?>
+        </script>
+
+        <!-- Select Truck Modal -->
+        <div class="modal fade" id="select_truck" tabindex="-1" role="dialog" aria-labelledby="selectTruckModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title font-weight-bold text-gray-800" id="selectTruckModalLabel">Select Garbage Truck</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="crud_truck.php" method="POST">
+                            <div class="form-row">
+                                <div class="form-group mt-2 col-md-12">
+                                      <select class="form-control" id="select_truck_id" name="select_truck_id" required>
+                                        <option value=""> </option>
+                                        <?php
+                                        // Fetch truck data from the "garbage_trucks" table
+                                        $query_trucks = "SELECT * FROM garbage_trucks";
+                                        $query_run_trucks = mysqli_query($conn, $query_trucks);
+
+                                        if (mysqli_num_rows($query_run_trucks) > 0) {
+                                            foreach ($query_run_trucks as $truck) {
+                                                // Check if the driver_id is null or 0
+                                                if ($truck['driver_id'] === null || $truck['driver_id'] == 0) {
+                                                    // Combine brand and plate number with proper formatting
+                                                    $truckInfo = $truck['brand'] . ' (Plate Number: ' . $truck['plateNumber'] . ')';
+
+                                                    // Output the formatted truck info as the option value
+                                                    echo '<option value="' . $truck['id'] . '">' . $truckInfo . '</option>';
+                                                }
+                                            }
+                                        }
+                                        ?>
+                                      </select>
+                                      <label for="select_truck_id" class="text-gray">Garbage Truck</label>
+                                </div>
+                            </div> <!-- Closing div tag for "form-row" -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" name="select_truck" class="btn btn-info">Select</button>
+                            </div>
+                        </form> <!-- Closing form tag -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <!-- Add Truck Modal -->
         <div class="modal fade" id="add_truck" tabindex="-1" role="dialog" aria-labelledby="addTruckModalLabel" aria-hidden="true">
@@ -54,9 +133,7 @@ require '../db_conn.php';
                                     <input type="text" class="form-control" id="plateNumber" name="plateNumber" placeholder=" " required>
                                      <label for="plateNumber" class="text-gray">Plate Number</label>
                                 </div>
-                               <div class="form-group mt-2 col-md-12">
                                     <input type="hidden" class="form-control" id="driver_id" name="driver_id" value="<?php echo $_SESSION['id']; ?>" required>
-                                </div>
                             </div>
                     </div>
                     <div class="modal-footer">
@@ -99,6 +176,35 @@ require '../db_conn.php';
                                     <input type="text" class="form-control" id="edit_plateNumber" name="edit_plateNumber" placeholder=" " required>
                                     <label for="edit_plateNumber" class="text-gray">Plate Number</label>
                                 </div>
+                                <div class="form-group mt-2 col-md-12">
+                                      <select class="form-control" id="edit_driver_id" name="edit_driver_id" required>
+                                        <option value=""> </option>
+                                        <option value="GarbageTruck">Unselect</option>
+                                        <?php
+                                        // Fetch driver data from the "drivers" table
+                                        $query_drivers = "SELECT * FROM drivers";
+                                        $query_run_drivers = mysqli_query($conn, $query_drivers);
+
+                                        if (mysqli_num_rows($query_run_drivers) > 0) {
+                                            foreach ($query_run_drivers as $driver) {
+                                                // Check if the driver's id matches the value stored in $_SESSION['id']
+                                                if ($driver['id'] == $_SESSION['id']) {
+                                                    // Combine first name, middle name, and last name with proper formatting
+                                                    $fullName = $driver['firstName'] . ' ';
+                                                    if (!empty($driver['middleName'])) {
+                                                        $fullName .= substr($driver['middleName'], 0, 1) . '. ';
+                                                    }
+                                                    $fullName .= $driver['lastName'];
+
+                                                    // Output the formatted name as the option value
+                                                    echo '<option value="' . $driver['id'] . '">' . $fullName . '</option>';
+                                                }
+                                            }
+                                        }
+                                        ?>
+                                      </select>
+                                      <label for="edit_driver_id" class="text-gray">Driver</label>
+                                </div>
                             </div>
 
                             <input type="hidden" id="edit_truck_id" name="edit_truck_id">
@@ -139,11 +245,20 @@ require '../db_conn.php';
         <!-- DataTables Start-->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <div class="d-sm-flex align-items-center justify-content-between py-2">
+                <div class="d-sm-flex py-2">
                     <h6 class="m-0 font-weight-bold text-info">List of Garbage Truck(s)</h6>
-                    <a href="#add_truck" data-toggle="modal" class="btn btn-sm btn-info shadow-sm"><i class="fa fa-plus fa-sm text-white mr-1"></i>Add Garbage Truck</a>
+                    <div class="ml-auto">
+                        <a href="#select_truck" data-toggle="modal" class="btn btn-sm btn-secondary shadow-sm">
+                            <i class="fa fa-arrow-circle-down fa-sm text-white mr-1"></i>Select Garbage Truck
+                        </a>
+                        <a href="#add_truck" data-toggle="modal" class="btn btn-sm btn-info shadow-sm">
+                            <i class="fa fa-plus fa-sm text-white mr-1"></i>Add Garbage Truck
+                        </a>
+                    </div>
                 </div>
             </div>
+
+
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="example" class="display nowrap table table-bordered table-hover" style="width:100%;">
@@ -194,7 +309,8 @@ require '../db_conn.php';
                                             data-brand="<?= $row['brand']; ?>" 
                                             data-model="<?= $row['model']; ?>" 
                                             data-capacity="<?= $row['capacity']; ?>" 
-                                            data-platenumber="<?= $row['plateNumber']; ?>" 
+                                            data-platenumber="<?= $row['plateNumber']; ?>"
+                                            data-driver_id="<?= $row['driver_id']; ?>" 
                                             data-toggle="tooltip" 
                                             title="Edit <?= $row['brand']; ?>!" 
                                             data-placement="top">
@@ -211,15 +327,6 @@ require '../db_conn.php';
                                             </button>
                                           </div>
                                         </div>
-
-                                            <!-- <a class="btn btn-sm btn-outline-success edit-truck-btn" href="#edit_truck" data-toggle="modal" data-id="<?= $row['id']; ?>" data-brand="<?= $row['brand']; ?>" data-model="<?= $row['model']; ?>" data-capacity="<?= $row['capacity']; ?>" data-platenumber="<?= $row['plateNumber']; ?>" data-toggle="tooltip" title="Edit <?= $row['brand']; ?>!" data-placement="top">
-                                                <i class="fa fa-edit fw-fa" aria-hidden="true"></i>
-                                            </a>
-
-                                            <a class="btn btn-sm btn-outline-danger delete-truck-btn" href="#delete_truck" data-toggle="modal" data-id="<?= $row['id']; ?>" data-brand="<?= $row['brand']; ?>" data-toggle="tooltip" title="Delete <?= $row['brand']; ?>!" data-placement="top">
-                                                <i class="fa fa-trash fw-fa" aria-hidden="true"></i>
-                                            </a> -->
-
                                         </td>
                                     </tr>
                             <?php
@@ -245,12 +352,14 @@ require '../db_conn.php';
             var model = $(this).data('model');
             var capacity = $(this).data('capacity');
             var plateNumber = $(this).data('platenumber');
+            var driverId = $(this).data('driver_id');
 
             $('#edit_truck_id').val(truckId);
             $('#edit_brand').val(brand);
             $('#edit_model').val(model);
             $('#edit_capacity').val(capacity);
             $('#edit_plateNumber').val(plateNumber);
+            $('#edit_driver_id').val(driverId);
         });
     });
 </script>
@@ -265,21 +374,44 @@ require '../db_conn.php';
         });
 
         $('#delete_truck_form').submit(function(e) {
-                    e.preventDefault();
-                    var truckId = $('#delete_truck_id').val();
-                    $.ajax({
-                        type: "POST",
-                        url: "crud_truck.php",
-                        data: {
-                            delete_truck_id: truckId
-                        },
-                        success: function(response) {
-                            // Reload the page to see the message
-                            location.reload();
+            e.preventDefault();
+            var truckId = $('#delete_truck_id').val();
+            $.ajax({
+                type: "POST",
+                url: "crud_truck.php", // Adjust this URL to the correct PHP file for truck deletions
+                data: {
+                    delete_truck_id: truckId
+                },
+                success: function(response) {
+                    console.log("Delete response:", response);
+
+                    // Hide the deleted row from the table
+                    $('#row_' + truckId).hide();
+
+                    // Show a success message with SweetAlert2 toast
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Deleted!',
+                        text: 'The truck has been deleted successfully.',
+                        showConfirmButton: false,
+                        timer: 2000, // 2 seconds duration for the toast
+                        customClass: {
+                            popup: 'my-sweetalert',
                         }
                     });
-                });
+
+                    // Refresh the page after a delay (e.g., 2 seconds)
+                    setTimeout(function() {
+                        location.reload();
+                    }, 2000); // 2000 milliseconds = 2 seconds
+                },
+                error: function(error) {
+                    // Handle the error response if needed
+                    console.log("Delete error:", error);
+                }
             });
+        });
+    });
 </script>
 
         <!-- End of Page Content -->

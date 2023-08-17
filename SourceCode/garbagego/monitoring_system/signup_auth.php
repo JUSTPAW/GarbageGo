@@ -57,6 +57,9 @@ if (
     } else if (empty($re_pass)) {
         header("Location: signup.php?error=Re Password is required&$user_data");
         exit();
+     } else if (empty($role)) {
+        header("Location: signup.php?error=Re Password is required&$user_data");
+        exit();
     } else if ($pass !== $re_pass) {
         header("Location: signup.php?error=The confirmation password does not match&$user_data");
         exit();
@@ -76,8 +79,19 @@ if (
         $phone = mysqli_real_escape_string($conn, $phone);
         $email = mysqli_real_escape_string($conn, $email);
 
+        // Check if the entered username is already in use
+        $sql_username_check = "SELECT user_name FROM staffs WHERE user_name='$uname' UNION SELECT user_name FROM drivers WHERE user_name='$uname'";
+        $result_username_check = mysqli_query($conn, $sql_username_check);
+
+        if (mysqli_num_rows($result_username_check) > 0) {
+            // Username is already in use
+            header("Location: signup.php?error=Username is already taken.&$user_data");
+            exit();
+        }
+
         // Check if the entered personal details match any existing employee in staffs or drivers table
-        $sql_check = "SELECT * FROM staffs WHERE firstname='$firstName' AND lastname='$lastName' AND middlename='$middleName' AND phone='$phone' UNION SELECT * FROM drivers WHERE firstname='$firstName' AND lastname='$lastName' AND middlename='$middleName' AND phone='$phone'";
+        $sql_check = "SELECT firstname, lastname, middlename, phone FROM staffs WHERE firstname='$firstName' AND lastname='$lastName' AND middlename='$middleName' AND phone='$phone' UNION SELECT firstname, lastname, middlename, phone FROM drivers WHERE firstname='$firstName' AND lastname='$lastName' AND middlename='$middleName' AND phone='$phone'";
+
         $result_check = mysqli_query($conn, $sql_check);
 
         if (mysqli_num_rows($result_check) > 0) {

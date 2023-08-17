@@ -40,10 +40,12 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> -->
-<!-- styles for export options -->
-
     <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.css' rel='stylesheet' />
+    <link rel="preload" href="https://fonts.gstatic.com/s/nunito/v25/XRXV3I6Li01BKofINeaB.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder@1.13.0/dist/Control.Geocoder.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
 
 <style>
 div.dt-button-collection {
@@ -72,43 +74,50 @@ div.dt-button-collection h3 {
 div.dt-button-collection h3.not-top-heading {
     margin-top: 10px;
 }
-</style>
 
-<!-- styles for inputs -->
-<style>
-  .form-group {
-    position: relative;
-  }
-  .form-group input,
-  .form-group textarea {
-    padding-top: 1.10rem; /* Reduced padding on the top */
-  }
-  .form-group select{
-    padding-top: 0.7rem;
-    padding-left: 0.5rem;
-  }
-  .form-group label {
-    position: absolute;
-    top: 0.5rem; /* Added top padding */
-    left: 1.3rem; /* Added left padding */
-    pointer-events: none;
-    transition: all 0.3s;
-    transform-origin: 0 0;
-    margin-bottom: 0.5rem; /* Added margin-bottom */
-  }
-  .form-group input:focus + label,
-  .form-group input:not(:placeholder-shown):not(:focus) + label,
-  .form-group select:focus + label,
-  .form-group select:valid + label,
-  .form-group textarea:focus + label,
-  .form-group textarea:not(:placeholder-shown):not(:focus) + label {
-    transform: translateY(-100%) scale(0.75);
-    font-size: 0.95rem; /* Increase font size */
-    opacity: 0.75;
-    color: green;
-    left: 1.15rem;
-    bottom: 0.99rem; /* Remove left margin */
-  }
+.form-group {
+  position: relative;
+}
+.form-group input,
+.form-group textarea {
+  padding-top: 1.10rem; /* Reduced padding on the top */
+}
+.form-group select{
+  padding-top: 0.7rem;
+  padding-left: 0.5rem;
+}
+.form-group input[type="file"]{
+  padding-top: 0.3rem;
+  padding-left: 0.5rem;
+}
+.form-group label {
+  position: absolute;
+  top: 0.5rem; /* Added top padding */
+  left: 1.3rem; /* Added left padding */
+  pointer-events: none;
+  transition: all 0.3s;
+  transform-origin: 0 0;
+  margin-bottom: 0.5rem; /* Added margin-bottom */
+}
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown):not(:focus) + label,
+.form-group select:focus + label,
+.form-group select:valid + label,
+.form-group select:disabled + label,
+.form-group textarea:focus + label,
+.form-group input[type="file"] + label,
+.form-group textarea:not(:placeholder-shown):not(:focus) + label {
+  transform: translateY(-100%) scale(0.75);
+  font-size: 0.95rem; /* Increase font size */
+  opacity: 0.75;
+  color: green;
+  left: 1.15rem;
+  bottom: 0.99rem; /* Remove left margin */
+}
+
+.my-sweetalert {
+    padding-bottom: 40px; /* You can adjust the padding value as needed */
+}
 </style>
 
 

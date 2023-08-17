@@ -44,7 +44,7 @@ require '../db_conn.php';
     <div id="Employees" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Employees:</h6>
-            <a class="collapse-item" href="staffs.php">Office Staffs</a>
+            <a class="collapse-item" href="staffs.php">Staffs</a>
             <a class="collapse-item" href="drivers.php">Drivers</a>
             <a class="collapse-item" href="crew_members.php">Crew Members</a>
         </div>
@@ -59,7 +59,7 @@ require '../db_conn.php';
     <div id="Collections" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Waste Collections</h6>
-            <a class="collapse-item" href="schedule.php">Schedule</a>
+            <a class="collapse-item" href="schedules.php">Schedule</a>
             <a class="collapse-item" href="locations.php">Locations</a>
         </div>
     </div>
@@ -103,11 +103,7 @@ require '../db_conn.php';
 <div class="sidebar-heading">
     Others
 </div>
-<li class="nav-item">
-    <a class="nav-link" href="accounts.php">
-        <i class="fas fa-fw fa-user"></i>
-        <span>Accounts</span></a>
-</li>
+
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Documents"
         aria-expanded="true" aria-controls="Documents">
@@ -124,7 +120,6 @@ require '../db_conn.php';
         </div>
     </div>
 </li>
-
 <!-- Nav Messages - Tables -->
 <li class="nav-item">
     <a class="nav-link" href="chats.php">
@@ -154,24 +149,24 @@ require '../db_conn.php';
     </a>
 
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-info" href="../logout.php">Logout</a>
-                </div>
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <!-- Updated this line to include an onclick event that redirects to the logout page -->
+                <a class="btn btn-info" href="../logout.php" onclick="window.location.href='../logout.php';">Logout</a>
             </div>
         </div>
-    </div>  
+    </div>
+</div> 
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column" >
@@ -305,32 +300,23 @@ require '../db_conn.php';
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
             <span class="mr-2 mt-2 d-none d-lg-inline text-info small text-uppercase">
-                <?php
-                require '../db_conn.php';
-                $user_name = mysqli_real_escape_string($conn, $_SESSION['user_name']); // sanitize the input
-                $sql = "SELECT firstName, middlename, lastName, image FROM admins WHERE user_name = '$user_name'";
-                $result = mysqli_query($conn, $sql); // execute the query
-
-                if (mysqli_num_rows($result) > 0) {
-                    $row = mysqli_fetch_assoc($result);
-                    $firstName = $row['firstName'];
-                    $middleName = $row['middlename']; // Corrected column name
-                    $lastName = $row['lastName'];
-                    $formattedName = ($firstName) . ' ' . strtoupper(substr($middleName, 0, 1)) . '.' . ' ' . ($lastName);
-                    echo $formattedName;
-                } else {
-                    echo "User not found";
-                }
-                ?>
+                <?php echo $_SESSION['firstName'] . ' ' . $_SESSION['lastName']; ?>
             </span>
+            <?php
+            $user_name = $_SESSION['user_name'];
+            $sql = "SELECT image FROM admins WHERE user_name = '$user_name'";
+            $result = mysqli_query($conn, $sql);
 
-                <?php
-                    if (isset($row['image']) && !empty($row['image'])) {
-                        $profile_picture = "../uploads/" . $row['image'];
-                    } else {
-                        $profile_picture = "../images/admin.png";
-                    }
-                ?>
+            if ($result && mysqli_num_rows($result) === 1) {
+                $row = mysqli_fetch_assoc($result);
+
+                if (!isset($row['image']) || empty($row['image'])) {
+                    $profile_picture = "../images/user.png";
+                } else {
+                    $profile_picture = "../uploads/" . $row['image'];
+                }
+            }
+            ?>
                 <img src="<?= $profile_picture ?>" alt="Profile Picture" class="img-profile rounded-circle">
             </a>
 

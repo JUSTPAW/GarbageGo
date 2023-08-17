@@ -14,12 +14,8 @@ require '../db_conn.php';
 
         if ($deleteResult) {
             $_SESSION['message'] = "Crew member deleted successfully.";
-            header('Location: crew_members.php');
-            exit();
         } else {
             $_SESSION['message_danger'] = "Error deleting crew member.";
-            header('Location: crew_members.php');
-            exit();
         }
     }
 
@@ -38,6 +34,7 @@ require '../db_conn.php';
         $city = $_POST['city'];
         $barangay = $_POST['barangay'];
         $street = $_POST['street'];
+        $staff_id = $_POST['staff_id'];
 
         // Escape special characters in variables
         $firstName = mysqli_real_escape_string($conn, $firstName);
@@ -52,10 +49,21 @@ require '../db_conn.php';
         $city = mysqli_real_escape_string($conn, $city);
         $barangay = mysqli_real_escape_string($conn, $barangay);
         $street = mysqli_real_escape_string($conn, $street);
+        $staff_id = mysqli_real_escape_string($conn, $staff_id);
+
+        // Check if the plate number already exists
+        $checkQuery = "SELECT * FROM crew_members WHERE phone = '$phone'";
+        $checkResult = mysqli_query($conn, $checkQuery);
+        if (mysqli_num_rows($checkResult) > 0) {
+            // Error message
+            $_SESSION['message_danger'] = "Crew Member with phone number $phone already exists.";
+            header('Location: crew_members.php');
+            exit(); // Stop further execution
+        }
 
         // Perform the database insertion
-        $query = "INSERT INTO crew_members (firstName, middleName, lastName, position, birthday, gender, phone, email, province, city, barangay, street) 
-                  VALUES ('$firstName', '$middleName', '$lastName', '$position', '$birthday', '$gender', '$phone', '$email', '$province', '$city', '$barangay', '$street')";
+        $query = "INSERT INTO crew_members (firstName, middleName, lastName, position, birthday, gender, phone, email, province, city, barangay, street, staff_id) 
+                  VALUES ('$firstName', '$middleName', '$lastName', '$position', '$birthday', '$gender', '$phone', '$email', '$province', '$city', '$barangay', '$street', '$staff_id')";
         $result = mysqli_query($conn, $query);
 
         if ($result) {
@@ -102,6 +110,16 @@ require '../db_conn.php';
         $barangay = mysqli_real_escape_string($conn, $barangay);
         $street = mysqli_real_escape_string($conn, $street);
 
+        // Check if the updated plate number already exists for a different truck
+        $checkQuery = "SELECT * FROM crew_members WHERE phone = '$phone' AND id != '$crewId'";
+        $checkResult = mysqli_query($conn, $checkQuery);
+        if (mysqli_num_rows($checkResult) > 0) {
+            // Error message
+            $_SESSION['message_danger'] = "Crew member with phone number $phone already exists.";
+            header('Location: crew_members.php');
+            exit(); // Stop further execution
+        }
+
         // Perform the database update
         $query = "UPDATE crew_members SET 
                     firstName='$firstName', 
@@ -138,7 +156,7 @@ require '../db_conn.php';
 
 
 } else {
-header("Location: ../login.php");
+header("Location: ../admin_login.php");
 exit();
 }
 ?>

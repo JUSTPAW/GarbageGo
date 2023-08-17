@@ -22,8 +22,38 @@ require '../db_conn.php';
             <a href="" class="btn btn-sm btn-info shadow-sm mb-3"><i class="fas fa-download fa-sm text-white"></i> Generate Report</a>
         </div>
 
-        <?php include('message.php'); ?>
-        <?php include('message_danger.php'); ?>
+        <script>
+            <?php
+            // Check if the session message exists and show it as a SweetAlert
+            if (isset($_SESSION['message'])) {
+                echo "Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: '{$_SESSION['message']}',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        customClass: {
+                            popup: 'my-sweetalert',
+                        }
+                    });";
+                unset($_SESSION['message']); // Clear the session message after displaying it
+            }
+
+            if (isset($_SESSION['message_danger'])) {
+                echo "Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: '{$_SESSION['message_danger']}',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        customClass: {
+                            popup: 'my-sweetalert',
+                        }
+                    });";
+                unset($_SESSION['message_danger']); // Clear the session message after displaying it
+            }
+            ?>
+        </script>
 
         <!-- Add Truck Modal -->
         <div class="modal fade" id="add_truck" tabindex="-1" role="dialog" aria-labelledby="addTruckModalLabel" aria-hidden="true">
@@ -53,6 +83,31 @@ require '../db_conn.php';
                                 <div class="form-group mt-2 col-md-12">
                                     <input type="text" class="form-control" id="plateNumber" name="plateNumber" placeholder=" " required>
                                      <label for="plateNumber" class="text-gray">Plate Number</label>
+                                </div>
+                                <div class="form-group mt-2 col-md-12">
+                                      <select class="form-control" id="driver_id" name="driver_id" required>
+                                        <option value=""> </option>
+                                        <?php
+                                        // Fetch driver data from the "drivers" table
+                                        $query_drivers = "SELECT * FROM drivers";
+                                        $query_run_drivers = mysqli_query($conn, $query_drivers);
+
+                                        if (mysqli_num_rows($query_run_drivers) > 0) {
+                                            foreach ($query_run_drivers as $driver) {
+                                                // Combine first name, middle name, and last name with proper formatting
+                                                $fullName = $driver['firstName'] . ' ';
+                                                if (!empty($driver['middleName'])) {
+                                                    $fullName .= substr($driver['middleName'], 0, 1) . '. ';
+                                                }
+                                                $fullName .= $driver['lastName'];
+
+                                                // Output the formatted name as the option value
+                                                echo '<option value="' . $driver['id'] . '">' . $fullName . '</option>';
+                                            }
+                                        }
+                                        ?>
+                                      </select>
+                                      <label for="driver_id" class="text-gray">Driver</label>
                                 </div>
                             </div>
                     </div>
@@ -95,6 +150,31 @@ require '../db_conn.php';
                                 <div class="form-group mt-2 col-md-12">
                                     <input type="text" class="form-control" id="edit_plateNumber" name="edit_plateNumber" placeholder=" " required>
                                     <label for="edit_plateNumber" class="text-gray">Plate Number</label>
+                                </div>
+                                <div class="form-group mt-2 col-md-12">
+                                      <select class="form-control" id="edit_driver_id" name="edit_driver_idedit_driver_id" required>
+                                        <option value=""> </option>
+                                        <?php
+                                        // Fetch driver data from the "drivers" table
+                                        $query_drivers = "SELECT * FROM drivers";
+                                        $query_run_drivers = mysqli_query($conn, $query_drivers);
+
+                                        if (mysqli_num_rows($query_run_drivers) > 0) {
+                                            foreach ($query_run_drivers as $driver) {
+                                                // Combine first name, middle name, and last name with proper formatting
+                                                $fullName = $driver['firstName'] . ' ';
+                                                if (!empty($driver['middleName'])) {
+                                                    $fullName .= substr($driver['middleName'], 0, 1) . '. ';
+                                                }
+                                                $fullName .= $driver['lastName'];
+
+                                                // Output the formatted name as the option value
+                                                echo '<option value="' . $driver['id'] . '">' . $fullName . '</option>';
+                                            }
+                                        }
+                                        ?>
+                                      </select>
+                                      <label for="edit_driver_id" class="text-gray">Driver</label>
                                 </div>
                             </div>
 
@@ -139,7 +219,7 @@ require '../db_conn.php';
             <div class="card-header py-3">
                 <div class="d-sm-flex align-items-center justify-content-between py-2">
                     <h6 class="m-0 font-weight-bold text-info">List of Garbage Truck(s)</h6>
-                    <a href="#add_truck" data-toggle="modal" class="btn btn-sm btn-info shadow-sm"><i class="fa fa-plus fa-sm text-white mr-1"></i>Add Garbage Truck</a>
+                    <!-- <a href="#add_truck" data-toggle="modal" class="btn btn-sm btn-info shadow-sm"><i class="fa fa-plus fa-sm text-white mr-1"></i>Add Garbage Truck</a> -->
                 </div>
             </div>
             <div class="card-body">
@@ -148,27 +228,29 @@ require '../db_conn.php';
                         <thead class='thead-light text-gray-900'>
                           <tr style="text-align:center">
                             <th style="text-align: center;">No.</th>
+                            <th style="text-align: center;">Driver</th>
                             <th style="text-align: center;">Brand</th>
                             <th style="text-align: center;">Model</th>
                             <th style="text-align: center;">Capacity</th>
                             <th style="text-align: center;">Plate Number</th>
-                            <th class="no-export" width="12%" style="text-align: center;">Actions</th>
+                            <!-- <th class="no-export" width="12%" style="text-align: center;">Actions</th> -->
                           </tr>
                         </thead>
                         <tfoot class='thead-light text-gray-700'>
                           <tr style="text-align:center">
                             <th style="text-align: center;">No.</th>
+                            <th style="text-align: center;">Driver</th>
                             <th style="text-align: center;">Brand</th>
                             <th style="text-align: center;">Model</th>
                             <th style="text-align: center;">Capacity</th>
                             <th style="text-align: center;">Plate Number</th>
-                            <th class="no-export" width="12%" style="text-align: center;">Actions</th>
+                            <!-- <th class="no-export" width="12%" style="text-align: center;">Actions</th> -->
                           </tr>
                         </tfoot>
                         <tbody>
                             <?php
                             $no = 1;
-                            $query = "SELECT * FROM garbage_trucks";
+                            $query = "SELECT garbage_trucks.*, drivers.firstName, drivers.middleName, drivers.lastName FROM garbage_trucks LEFT JOIN drivers ON garbage_trucks.driver_id = drivers.id";
                             $query_run = mysqli_query($conn, $query);
 
                             if (mysqli_num_rows($query_run) > 0) {
@@ -176,11 +258,25 @@ require '../db_conn.php';
                                     ?>
                                     <tr style="text-align:center">
                                         <td><?php echo $no; ?></td>
-                                        <td><?= $row['brand']; ?></td>
-                                        <td><?= $row['model']; ?></td>
-                                        <td><?= $row['capacity']; ?></td>
-                                        <td><?= $row['plateNumber']; ?></td>
-                                        <td>
+                                        <?php
+                                        $firstName = $row['firstName'];
+                                        $middleName = $row['middleName'];
+                                        $lastName = $row['lastName'];
+
+                                        if ($firstName && $middleName) {
+                                            $formattedName = ucwords($firstName) . ' ' . strtoupper(substr($middleName, 0, 1)) . '.' . ' ' . ucwords($lastName);
+                                        } elseif ($firstName) {
+                                            $formattedName = ucwords($firstName) . ' ' . ucwords($lastName);
+                                        } else {
+                                            $formattedName = '-';
+                                        }
+                                        ?>
+                                        <td><?= $formattedName; ?></td>
+                                        <td><?= $row['brand'] ?: '-'; ?></td>
+                                        <td><?= $row['model'] ?: '-'; ?></td>
+                                        <td><?= $row['capacity'] ?: '-'; ?></td>
+                                        <td><?= $row['plateNumber'] ?: '-'; ?></td>
+                                        <!-- <td>
                                         <div class="dropdown">
                                           <button class="btn btn-sm btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Actions
@@ -192,7 +288,8 @@ require '../db_conn.php';
                                             data-brand="<?= $row['brand']; ?>" 
                                             data-model="<?= $row['model']; ?>" 
                                             data-capacity="<?= $row['capacity']; ?>" 
-                                            data-platenumber="<?= $row['plateNumber']; ?>" 
+                                            data-platenumber="<?= $row['plateNumber']; ?>"
+                                            data-driver_id="<?= $row['driver_id']; ?>" 
                                             data-toggle="tooltip" 
                                             title="Edit <?= $row['brand']; ?>!" 
                                             data-placement="top">
@@ -209,16 +306,7 @@ require '../db_conn.php';
                                             </button>
                                           </div>
                                         </div>
-
-                                            <!-- <a class="btn btn-sm btn-outline-success edit-truck-btn" href="#edit_truck" data-toggle="modal" data-id="<?= $row['id']; ?>" data-brand="<?= $row['brand']; ?>" data-model="<?= $row['model']; ?>" data-capacity="<?= $row['capacity']; ?>" data-platenumber="<?= $row['plateNumber']; ?>" data-toggle="tooltip" title="Edit <?= $row['brand']; ?>!" data-placement="top">
-                                                <i class="fa fa-edit fw-fa" aria-hidden="true"></i>
-                                            </a>
-
-                                            <a class="btn btn-sm btn-outline-danger delete-truck-btn" href="#delete_truck" data-toggle="modal" data-id="<?= $row['id']; ?>" data-brand="<?= $row['brand']; ?>" data-toggle="tooltip" title="Delete <?= $row['brand']; ?>!" data-placement="top">
-                                                <i class="fa fa-trash fw-fa" aria-hidden="true"></i>
-                                            </a> -->
-
-                                        </td>
+                                        </td> -->
                                     </tr>
                             <?php
                                     $no++;
@@ -243,12 +331,14 @@ require '../db_conn.php';
             var model = $(this).data('model');
             var capacity = $(this).data('capacity');
             var plateNumber = $(this).data('platenumber');
+            var driverId = $(this).data('driver_id');
 
             $('#edit_truck_id').val(truckId);
             $('#edit_brand').val(brand);
             $('#edit_model').val(model);
             $('#edit_capacity').val(capacity);
             $('#edit_plateNumber').val(plateNumber);
+            $('#edit_driver_id').val(driverId);
         });
     });
 </script>
@@ -263,26 +353,51 @@ require '../db_conn.php';
         });
 
         $('#delete_truck_form').submit(function(e) {
-                    e.preventDefault();
-                    var truckId = $('#delete_truck_id').val();
-                    $.ajax({
-                        type: "POST",
-                        url: "crud_truck.php",
-                        data: {
-                            delete_truck_id: truckId
-                        },
-                        success: function(response) {
-                            // Reload the page to see the message
-                            location.reload();
+            e.preventDefault();
+            var truckId = $('#delete_truck_id').val();
+            $.ajax({
+                type: "POST",
+                url: "crud_truck.php", // Adjust this URL to the correct PHP file for truck deletions
+                data: {
+                    delete_truck_id: truckId
+                },
+                success: function(response) {
+                    console.log("Delete response:", response);
+
+                    // Hide the deleted row from the table
+                    $('#row_' + truckId).hide();
+
+                    // Show a success message with SweetAlert2 toast
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Deleted!',
+                        text: 'The truck has been deleted successfully.',
+                        showConfirmButton: false,
+                        timer: 2000, // 2 seconds duration for the toast
+                        customClass: {
+                            popup: 'my-sweetalert',
                         }
                     });
-                });
+
+                    // Refresh the page after a delay (e.g., 2 seconds)
+                    setTimeout(function() {
+                        location.reload();
+                    }, 2000); // 2000 milliseconds = 2 seconds
+                },
+                error: function(error) {
+                    // Handle the error response if needed
+                    console.log("Delete error:", error);
+                }
             });
+        });
+    });
 </script>
 
+
+        <!-- End of Page Content -->
 <?php
-include('../includes/footer.php');
 include('../includes/scripts.php');
+include('../includes/footer.php');
 } else {
 header("Location: ../login.php");
 exit();

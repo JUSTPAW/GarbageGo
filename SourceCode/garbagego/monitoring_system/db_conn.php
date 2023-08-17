@@ -1,4 +1,3 @@
-
 <?php
 
 $sname= "localhost";
@@ -10,6 +9,17 @@ $db_name = "u457140180_garbagego";
 
 $conn = mysqli_connect($sname, $unmae, $password, $db_name);
 
+// For Localhost
+
 if (!$conn) {
 	echo "Connection failed!";
 }
+// For Hostiger Server
+
+// if (!$conn) {
+//     echo "Connection failed!";
+// } else {
+//     mysqli_query($conn, "SET time_zone = '+08:00'");
+// }
+
+?>

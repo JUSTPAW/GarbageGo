@@ -250,22 +250,22 @@ if (isset($_GET['error'])) {
 
                                                 <!-- Step 2: Personal Details -->
                                                 <div class="step" id="step2">
-                                                    <div class="form-group row">
+                                                    <div class="form-group row mb-md-0 mb-sm-3">
                                                         <div class="col-sm-4">
-                                                            <input type="text" name="firstName" class="form-control form-control-user mb-3" id="exampleInputFirstName" placeholder="First Name">
+                                                            <input type="text" name="firstName" class="form-control form-control-user mb-3" id="exampleInputFirstName" placeholder="First Name" required>
                                                         </div>
                                                         <div class="col-sm-4">
-                                                            <input type="text" name="middleName" class="form-control form-control-user mb-3" id="exampleInputMiddleName" placeholder="Middle Name">
+                                                            <input type="text" name="middleName" class="form-control form-control-user mb-3" id="exampleInputMiddleName" placeholder="Middle Name" required>
                                                         </div>
                                                         <div class="col-sm-4">
-                                                            <input type="text" name="lastName" class="form-control form-control-user" id="exampleInputLastName" placeholder="Last Name">
+                                                            <input type="text" name="lastName" class="form-control form-control-user" id="exampleInputLastName" placeholder="Last Name" required>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="tel" name="phone" class="form-control form-control-user" id="exampleInputPhone" placeholder="Phone Number">
+                                                        <input type="tel" name="phone" class="form-control form-control-user" id="exampleInputPhone" placeholder="Phone Number" required maxlength="11">
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="email" name="email" class="form-control form-control-user mb-3" id="exampleInputEmail" placeholder="Email Address">
+                                                        <input type="email" name="email" class="form-control form-control-user mb-3" id="exampleInputEmail" placeholder="Email Address" required>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-6 mt-2">
@@ -281,17 +281,17 @@ if (isset($_GET['error'])) {
                                                 <div class="step" id="step3">
                                                     <div class="form-group">
                                                         <input type="text" id="user_name" name="user_name" class="form-control form-control-user" placeholder="Username" onkeyup="checkUsernameAvailability()">
-                                                        <div id="username-message"></div>
+                                                        <div id="username-message"></div required>
                                                     </div>
                                                     <div class="form-group">
                                                         <input type="password" name="password" class="form-control form-control-user" id="password" placeholder="Password"
-                                                        onkeyup="checkPasswordStrength()">
+                                                        onkeyup="checkPasswordStrength()" required>
                                                        <div id="password-strength" class="password-strength"></div>
                                                        <div id="password-suggestions" class="password-suggestions"></div>
 
                                                     </div>
                                                     <div class="form-group">
-                                                        <input type="password" name="confirm_password" class="form-control form-control-user" id="confirm_password" placeholder="Confirm Password" onkeyup="checkPasswordMatch()">
+                                                        <input type="password" name="confirm_password" class="form-control form-control-user" id="confirm_password" placeholder="Confirm Password" onkeyup="checkPasswordMatch()" required>
                                                        <div id="password-match-message" class="small"></div>
                                                     </div>
                                                     <div class="row">

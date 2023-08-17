@@ -103,6 +103,32 @@ if (isset($_GET['error'])) {
                 });
             };
         </script>';
+} else if (isset($_SESSION['message'])) {
+    $successMessage = $_GET['message'];
+    echo '<script>
+            window.onload = function() {
+                Swal.fire({
+                    icon: "success",
+                    title: "Success",
+                    text: "' . $successMessage . '",
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK"
+                });
+            };
+        </script>';
+} else if (isset($_SESSION['message_danger'])) {
+    $successMessage = $_GET['message_danger'];
+    echo '<script>
+            window.onload = function() {
+                Swal.fire({
+                    icon: "success",
+                    title: "Success",
+                    text: "' . $successMessage . '",
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK"
+                });
+            };
+        </script>';
 }
 ?>
 
